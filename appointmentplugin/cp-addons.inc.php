@@ -157,7 +157,7 @@ $nonce = wp_create_nonce( 'cpappb_actions_list' );
 </div>
 
 <!-- Disabled Add Ons -->
-<h2><?php _e('Add Ons available only with the Developer version of the plugin','appointment-hour-booking'); ?></h2>
+<h2><?php _e('The following Add Ons are included in the commercial versions of the plugin:','appointment-hour-booking'); ?></h2>
 
 <div class="ahb-addons-container ahb-disabled-addons">
 	<div class="ribbon"><span>Upgrade</span></div>
@@ -219,6 +219,27 @@ $nonce = wp_create_nonce( 'cpappb_actions_list' );
 			<label><input type="checkbox" disabled>WooCommerce</label>
 			<p>The add-on allows integrate the forms with WooCommerce products</p>
 		</div>
+		<div class="ahb-addon">
+			<label><input type="checkbox" disabled>myCred: Integration with myCred credit payments</label>
+			<p>The add-on adds support for <a href="https://wordpress.org/plugins/mycred/" target="_blank">myCred plugin</a> payments</p>
+		</div>        
+	</div>
+</div>
+<div class="ahb-to-top"><a href="#top">&uarr; Top</a></div>
+
+
+<div class="ahb-addons-container ahb-disabled-addons">
+	<div class="ribbon"><span>Upgrade</span></div>
+	<h2>Integration with External Calendars</h2>
+	<div class="ahb-addons-group">  
+		<div class="ahb-addon">
+			<label><input type="checkbox" disabled>iCal Automatic Import</label>
+			<p>The add-on adds support for importing iCal files from external websites/services</p>
+		</div>
+		<div class="ahb-addon">
+			<label><input type="checkbox" disabled>Google Calendar API</label>
+			<p>The add-on adds support for Google Calendar API integration</p>
+		</div>       
 	</div>
 </div>
 <div class="ahb-to-top"><a href="#top">&uarr; Top</a></div>
@@ -228,28 +249,36 @@ $nonce = wp_create_nonce( 'cpappb_actions_list' );
 	<h2>Improvements</h2>
 	<div class="ahb-addons-group">
 		<div class="ahb-addon">
-			<label><input type="checkbox" disabled>Appointment Reminders</label>
-			<p>The add-on adds the reminder emails/notifications for appointments feature</p>
+			<label><input type="checkbox" disabled>Appointment Cancellation</label>
+			<p>The add-on adds support for cancellation links into the notification emails</p>
 		</div>
 		<div class="ahb-addon">
 			<label><input type="checkbox" disabled>Appointment Follow-up</label>
 			<p>The add-on adds the follow-up emails/notifications for appointments feature</p>
 		</div>        
 		<div class="ahb-addon">
-			<label><input type="checkbox" disabled>Appointment Cancellation</label>
-			<p>The add-on adds support for cancellation links into the notification emails</p>
-		</div>
-        <div class="ahb-addon">
-			<label><input type="checkbox" disabled>Timezone Conversion</label>
-			<p>The add-on applies the timezone conversion to display the time-slots in the customer timezone</p>
-		</div>
+			<label><input type="checkbox" disabled>Appointment Reminders</label>
+			<p>The add-on adds the reminder emails/notifications for appointments feature</p>
+		</div>        
 		<div class="ahb-addon">
 			<label><input type="checkbox" disabled>Coupon codes</label>
 			<p>The add-on adds support for coupons / discounts codes</p>
 		</div>  
         <div class="ahb-addon">
+			<label><input type="checkbox" disabled>Data Lookup</label>
+			<p>The add-on enables data lookup in previous bookings to auto-fill fields</p>
+		</div>         
+        <div class="ahb-addon">
 			<label><input type="checkbox" disabled>Deposit Payments</label>
 			<p>The add-on enables the option to accept payment deposit as fixed amount or percent of the booking cost</p>
+		</div> 
+        <div class="ahb-addon">
+			<label><input type="checkbox" disabled>Double opt-in email verification</label>
+			<p>Double opt-in email verification link to mark the booking as approved</p>
+		</div>         
+        <div class="ahb-addon">
+			<label><input type="checkbox" disabled>Edition / Booking modification for customers</label>
+			<p>The add-on allows customers to modify/edit bookings</p>
 		</div>         
         <div class="ahb-addon">
             <label><input type="checkbox" disabled>Frontend List: Grouped by Date Add-on</label>
@@ -258,27 +287,43 @@ $nonce = wp_create_nonce( 'cpappb_actions_list' );
 		<div class="ahb-addon">
 			<label><input type="checkbox" disabled>Limit the number of appointments per user</label>
 			<p>The add-on adds support for limiting the number of appointments per user</p>
-		</div>        
-		<div class="ahb-addon">
-			<label><input type="checkbox" disabled>iCal Automatic Import</label>
-			<p>The add-on adds support for importing iCal files from external websites/services</p>
 		</div>
-		<div class="ahb-addon">
-			<label><input type="checkbox" disabled>Google Calendar API</label>
-			<p>The add-on adds support for Google Calendar API integration</p>
-		</div>        
         <div class="ahb-addon">
-            <label><input type="checkbox" disabled>Status Modification Emails</label>
-            <p>The add-on allows to define emails to be sent when the booking status is changed from the bookings list or by a payment add-on</p>
-        </div>        
+            <label><input type="checkbox" disabled>Password for making bookings</label>
+            <p>The add-on is for requiring a password to make a booking.</p>
+        </div>           
+        <div class="ahb-addon">
+            <label><input type="checkbox" disabled>QRCode Image - Barcode</label>
+            <p>Generates a QRCode image for each booking.</p>
+        </div>         
 		<div class="ahb-addon">
-			<label><input type="checkbox" disabled>Uploads</label>
-			<p>The add-on allows to add the uploaded files to the Media Library, and the support for new mime types</p>
+			<label><input type="checkbox" disabled>Schedude Calendar Contents Customization</label>
+			<p>The add-on allow to customize the content displayed on the schedule calendar for each form.</p>
 		</div>
+        <div class="ahb-addon">
+            <label><input type="checkbox" disabled>Shared Availability between Calendars</label>
+            <p>The add-on allow to share the booked times between calendars (for blocking booked times)"</p>
+        </div>                
 		<div class="ahb-addon">
 			<label><input type="checkbox" disabled>Signature Fields</label>
 			<p>The add-on allows to replace form fields with "Signature" fields</p>
 		</div>
+        <div class="ahb-addon">
+            <label><input type="checkbox" disabled>Status Modification Emails</label>
+            <p>The add-on allows to define emails to be sent when the booking status is changed from the bookings list or by a payment add-on</p>
+        </div>           
+        <div class="ahb-addon">
+			<label><input type="checkbox" disabled>Timezone Conversion</label>
+			<p>The add-on applies the timezone conversion to display the time-slots in the customer timezone</p>
+		</div>        
+		<div class="ahb-addon">
+			<label><input type="checkbox" disabled>Uploads</label>
+			<p>The add-on allows to add the uploaded files to the Media Library, and the support for new mime types</p>
+		</div>      
+        <div class="ahb-addon">
+			<label><input type="checkbox" disabled>User Calendar Creation</label>
+			<p>The add-on creates and assign a calendar for each new registered user</p>
+		</div>        
 	</div>
 </div>
 <div class="ahb-to-top"><a href="#top">&uarr; Top</a></div>
@@ -303,6 +348,10 @@ $nonce = wp_create_nonce( 'cpappb_actions_list' );
 			<label><input type="checkbox" disabled>WebHook</label>
 			<p>The add-on allows put the submitted information to a webhook URL, and integrate the forms with the Zapier service</p>
 		</div>
+        <div class="ahb-addon">
+			<label><input type="checkbox" disabled>Zoom.us Meetings Integration</label>
+			<p>Automatically creates a Zoom.us meeting for the booked time</p>
+		</div>         
 	</div>
 </div>
 <div class="ahb-to-top"><a href="#top">&uarr; Top</a></div>

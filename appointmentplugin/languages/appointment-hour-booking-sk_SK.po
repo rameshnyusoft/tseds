@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointment Hour Booking\n"
 "POT-Creation-Date: 2019-01-18 14:38+0100\n"
-"PO-Revision-Date: 2019-09-20 00:15+0200\n"
+"PO-Revision-Date: 2020-06-26 16:24+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sk_SK\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Basepath: ..\n"
-"X-Generator: Poedit 2.2.3\n"
+"X-Generator: Poedit 2.3.1\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;_e;__\n"
 "X-Poedit-SearchPath-0: .\n"
 
@@ -21,11 +21,11 @@ msgstr ""
 
 #: addons/applimit.addon.php:298
 msgid "Number of allowed appointments exceeded."
-msgstr ""
+msgstr "Počet povolených objednávok prekročený."
 
 #: addons/authnet.addon.php:109
 msgid "Enable Authorize.net SIM?"
-msgstr ""
+msgstr "Umožniť Authorize.net SIM?"
 
 #: addons/authnet.addon.php:111 addons/mollie.addon.php:62
 #: addons/paypal.addon.php:74 addons/paypalpro.addon.php:80
@@ -35,7 +35,7 @@ msgstr ""
 #: cp-admin-int.inc.php:542 cp-admin-int.inc.php:573 cp-admin-int.inc.php:621
 #: cp-admin-int.inc.php:691 cp-settings.inc.php:136
 msgid "No"
-msgstr ""
+msgstr "Nie"
 
 #: addons/authnet.addon.php:112 addons/frontend-lists.addon.php:273
 #: addons/mollie.addon.php:63 addons/paypal.addon.php:75
@@ -46,7 +46,7 @@ msgstr ""
 #: cp-admin-int.inc.php:572 cp-admin-int.inc.php:620 cp-admin-int.inc.php:692
 #: cp-main-class.inc.php:301 cp-settings.inc.php:137
 msgid "Yes"
-msgstr ""
+msgstr "Áno"
 
 #: addons/authnet.addon.php:113 addons/mollie.addon.php:64
 #: addons/paypal.addon.php:76 addons/paypalpro.addon.php:82
@@ -54,7 +54,7 @@ msgstr ""
 #: addons/sagepayments.addon.php:85 addons/skrill.addon.php:71
 #: addons/stripe.addon.php:82 addons/targetpay.ideal.addon.php:67
 msgid "Optional: This payment method + Pay Later (submit without payment)"
-msgstr ""
+msgstr "Možnosť: Táto platobná metóda + Zaplať neskôr (potvrď bez platby)"
 
 #: addons/authnet.addon.php:114 addons/mollie.addon.php:65
 #: addons/paypal.addon.php:77 addons/paypalpro.addon.php:83
@@ -62,7 +62,7 @@ msgstr ""
 #: addons/sagepayments.addon.php:86 addons/skrill.addon.php:72
 #: addons/stripe.addon.php:83 addons/targetpay.ideal.addon.php:68
 msgid "Optional: This payment method + Other payment methods (enabled)"
-msgstr ""
+msgstr "Možnosť: Táto platobná metóda + Iná metóda platby (povolená)"
 
 #: addons/authnet.addon.php:115 addons/mollie.addon.php:66
 #: addons/paypal.addon.php:78 addons/paypalpro.addon.php:84
@@ -70,73 +70,73 @@ msgstr ""
 #: addons/sagepayments.addon.php:87 addons/skrill.addon.php:73
 #: addons/stripe.addon.php:84 addons/targetpay.ideal.addon.php:69
 msgid "Optional: This payment method + Other payment methods  + Pay Later "
-msgstr ""
+msgstr "Možnosť: Táto platobná metóda + Iná metóda platby + Platba neskôr"
 
 #: addons/authnet.addon.php:120
 msgid "Mode:"
-msgstr ""
+msgstr "Režim:"
 
 #: addons/authnet.addon.php:122
 msgid "Prodution"
-msgstr ""
+msgstr "Produkcia"
 
 #: addons/authnet.addon.php:123
 msgid "Test"
-msgstr ""
+msgstr "Test"
 
 #: addons/authnet.addon.php:128
 msgid "API Username"
-msgstr ""
+msgstr "API username"
 
 #: addons/authnet.addon.php:132
 msgid "API Key"
-msgstr ""
+msgstr "API Key"
 
 #: addons/authnet.addon.php:137
 msgid "Receipt URL:"
-msgstr ""
+msgstr "Potvrdenka URL:"
 
 #: addons/authnet.addon.php:143 addons/paypal.addon.php:88
 #: addons/skrill.addon.php:83
 msgid "Cancel URL:"
-msgstr ""
+msgstr "Zrušenie URL:"
 
 #: addons/authnet.addon.php:153 addons/paypalpro.addon.php:542
 #: addons/sagepay.addon.php:134
 msgid "First Name"
-msgstr ""
+msgstr "Meno"
 
 #: addons/authnet.addon.php:157 addons/paypalpro.addon.php:551
 #: addons/sagepay.addon.php:138
 msgid "Last Name"
-msgstr ""
+msgstr "Priezvisko"
 
 #: addons/authnet.addon.php:161
 msgid "Company"
-msgstr ""
+msgstr "Firma"
 
 #: addons/authnet.addon.php:165 addons/paypalpro.addon.php:622
 #: addons/sagepay.addon.php:142
 msgid "Address"
-msgstr ""
+msgstr "Adresa"
 
 #: addons/authnet.addon.php:169 addons/paypalpro.addon.php:627
 #: addons/sagepay.addon.php:146
 msgid "City"
-msgstr ""
+msgstr "Mesto"
 
 #: addons/authnet.addon.php:173
 msgid "State/Province"
-msgstr ""
+msgstr "Okres"
 
 #: addons/authnet.addon.php:177 addons/paypalpro.addon.php:657
 #: addons/sagepay.addon.php:154
 msgid "Country"
-msgstr ""
+msgstr "Krajina"
 
 #: addons/authnet.addon.php:181 addons/sagepay.addon.php:158
 msgid "Zip/Postal Code"
-msgstr ""
+msgstr "PSČ"
 
 #: addons/authnet.addon.php:185 cp-admin-int-message-list.inc.php:150
 #: cp-admin-int-schedule.inc.php:80
@@ -145,74 +145,72 @@ msgstr "E-mail"
 
 #: addons/authnet.addon.php:189
 msgid "Phone"
-msgstr ""
+msgstr "Telefón"
 
 #: addons/authnet.addon.php:193
 msgid "Fax"
-msgstr ""
+msgstr "Fax"
 
 #: addons/authnet.addon.php:217
 msgid ""
 "The add-on adds support for Authorize.net Server Integration Method payments"
 msgstr ""
+"Doplnok pridáva podporu pre Authorize.net Server Integráciu metódy platby"
 
 #: addons/authnet.addon.php:339
 msgid "Pay with Authorize.net"
-msgstr ""
+msgstr "Platba cez Authorize.net"
 
 #: addons/cancellation.addon.php:159
 msgid "The add-on adds support for cancellation links for bookings"
-msgstr ""
+msgstr "Doplnok pridáva podporu pre link na Zrušenie objednania"
 
 #: addons/cancellation.addon.php:264
 msgid "Cancellation"
-msgstr ""
+msgstr "Zrušenie"
 
 #: addons/cancellation.addon.php:266
-#, fuzzy
-#| msgid "Please enter the security code"
 msgid "Please enter the following security code to confirm the cancellation:"
-msgstr "Prosím, zadajte bezpečnostný kód"
+msgstr ""
+"Prosím, zadajte bezpečnostný kód na potvrdenie zrušenia (pre nový kód klik):"
 
 #: addons/cancellation.addon.php:269 cp-public-int.inc.php:29
 msgid "Please enter the security code"
-msgstr "Prosím, zadajte bezpečnostný kód"
+msgstr "Prosím, zadajte bezpečnostný kód  - KLIK v obrázku pre nový kód"
 
 #: addons/cancellation.addon.php:271
 msgid "Cancel Booking"
-msgstr ""
+msgstr "Zruš Objednanie"
 
 # RevTran=Please enter the verification code captcha.
 #: addons/cancellation.addon.php:273
-#, fuzzy
-#| msgid "Please enter the captcha verification code."
 msgid "Incorrect verification code"
-msgstr "Prosím, zadajte overovací kód captcha."
+msgstr "Nesprávny overovací kód captcha (KLIK v obrázku pre nový kód)"
 
 #: addons/clickatell.addon.php:63
 msgid "Clickatell enabled"
-msgstr ""
+msgstr "Clickatell povolený"
 
 #: addons/clickatell.addon.php:67
 msgid "Account API Key"
-msgstr ""
+msgstr "API kľúč účtu"
 
 #: addons/clickatell.addon.php:71
 msgid "Authentication Token"
-msgstr ""
+msgstr "Autentifikačný token"
 
 #: addons/clickatell.addon.php:75
 msgid "From Phone Number"
-msgstr ""
+msgstr "z Tel. čísla"
 
 #: addons/clickatell.addon.php:80
 msgid "To Phone Number"
-msgstr ""
+msgstr "na Tel. číslo"
 
 #: addons/clickatell.addon.php:83
 msgid ""
 "For sending multiple messages, separate the phone numbers by comma symbols."
-msgstr ""
+msgstr "Ak chcete poslať viac správ, čísla oddeľte čiarkou bez medzery."
 
 # RevTran=Administration
 #: addons/clickatell.addon.php:87 addons/clickatell.addon.php:103
@@ -226,29 +224,31 @@ msgid ""
 "It is possible to use the same <a href=\"https://form2email.dwbooster.com/"
 "faq#q81\" target=\"_blank\">special tags</a> than in notifications emails."
 msgstr ""
+"Je možné využiť rovnaké <a href=\"https://form2email.dwbooster.com/faq#q81\" "
+"target=\"_blank\">zvláštne tagy</a> ako v notifikačných emailoch."
 
 #: addons/clickatell.addon.php:94
 msgid "Copy to the users"
-msgstr ""
+msgstr "Kopírovať užívateľom"
 
 #: addons/clickatell.addon.php:96
 msgid "To Phone fields"
-msgstr ""
+msgstr "Telefónne záznamy"
 
 #: addons/clickatell.addon.php:99
 msgid ""
 "For sending multiple messages, separate the phone fields by comma symbols."
-msgstr ""
+msgstr "Ak chcete poslať viac správ, čísla oddeľte čiarkou bez medzery."
 
 #: addons/clickatell.addon.php:128
 msgid ""
 "The add-on allows to send notification messages (SMS) via Clickatell after "
 "submitting the form"
-msgstr ""
+msgstr "Doplnok umožňuje poslať SMS cez Clickatell po vyplnení formulára"
 
 #: addons/coupons.addon.php:107
 msgid "The add-on adds support for coupons / discounts codes"
-msgstr ""
+msgstr "Doplnok podporuje kupóny a zľavové kódy"
 
 # RevTran=Coupon Code
 #: addons/coupons.addon.php:184
@@ -260,178 +260,180 @@ msgid ""
 "The add-on allows to displays list (schedule) of bookings grouped by date in "
 "the frontend"
 msgstr ""
+"Doplnok umožňuje zobraziť Zoznam/Rozvrh objednaní, zoskupených podľa dátumu, "
+"vo FrontEnde"
 
 #: addons/frontend-lists.addon.php:158 cp-admin-int-schedule.inc.php:76
 msgid "Date"
-msgstr ""
+msgstr "Dátum"
 
 #: addons/frontend-lists.addon.php:207
 msgid "No bookings found"
-msgstr ""
+msgstr "Žiadne objednania"
 
 #: addons/frontend-lists.addon.php:212
 msgid "Are you sure you want to delete this item?"
-msgstr ""
+msgstr "Ste si istý, že chcete vymazať túto položku ?"
 
 #: addons/frontend-lists.addon.php:264 cp-main-class.inc.php:200
 #: cp-main-class.inc.php:292
 msgid "Approved"
-msgstr ""
+msgstr "Schválené"
 
 #: addons/frontend-lists.addon.php:281
 msgid "delete"
-msgstr ""
+msgstr "vymaž"
 
 #: addons/icalexport.addon.php:82
 msgid "iCal timezone difference vs server time"
-msgstr ""
+msgstr "iCAL rozdiel časovej zóny oproti serverovému času"
 
 #: addons/icalexport.addon.php:93
 msgid "Observe daylight saving time?"
-msgstr ""
+msgstr "Zohľadniť letný čas?"
 
 #: addons/icalexport.addon.php:101
 msgid "Daylight saving time zone"
-msgstr ""
+msgstr "Letný čas - zóna"
 
 #: addons/icalexport.addon.php:109
 msgid "Attach iCal file to notification emails?"
-msgstr ""
+msgstr "Prilož iCal súbor do notifikačného e-mailu?"
 
 #: addons/icalexport.addon.php:119
 msgid "iCal entry summary"
-msgstr ""
+msgstr "iCal prvotný sumár"
 
 #: addons/icalexport.addon.php:126
 msgid "iCal entry description"
-msgstr ""
+msgstr "iCal vstupný popis"
 
 #: addons/icalexport.addon.php:151
 msgid "The add-on adds support for exporting iCal files."
-msgstr ""
+msgstr "Doplnok podporuje export iCal súborov."
 
 #: addons/icalimport.addon.php:97
 msgid ""
 "The add-on adds support for importing iCal files from external websites/"
 "services"
-msgstr ""
+msgstr "Doplnok podporuje import iCal súborov z externej webovej služby"
 
 #: addons/icalimport.addon.php:213 cp-main-class.inc.php:1071
 msgid "Appointments"
-msgstr ""
+msgstr "Objednania"
 
 #: addons/mailchimp.addon.php:83
 msgid "API KEY"
-msgstr ""
+msgstr "API kľúč"
 
 #: addons/mailchimp.addon.php:85
 msgid "Get Lists"
-msgstr ""
+msgstr "Zoznam"
 
 #: addons/mailchimp.addon.php:88
 msgid "List ID"
-msgstr ""
+msgstr "Zoznam ID"
 
 #: addons/mailchimp.addon.php:92
 msgid "Get Fields and Groups"
-msgstr ""
+msgstr "Polia a skupiny"
 
 #: addons/mailchimp.addon.php:99
 msgid "Form Fields"
-msgstr ""
+msgstr "Polia Formulára"
 
 #: addons/mailchimp.addon.php:116 addons/mailchimp.addon.php:170
 msgid "There are not fields selected"
-msgstr ""
+msgstr "Máte nevybrané polia"
 
 #: addons/mailchimp.addon.php:122
 msgid "Groups"
-msgstr ""
+msgstr "Skupiny"
 
 #: addons/mailchimp.addon.php:147 addons/mailchimp.addon.php:171
 msgid "There are not groups selected"
-msgstr ""
+msgstr "Žiadna skupina nie je vybraná"
 
 #: addons/mailchimp.addon.php:154
 msgid "Status If New"
-msgstr ""
+msgstr "Stav Ak nový"
 
 #: addons/mailchimp.addon.php:157
 msgid "Pending"
-msgstr ""
+msgstr "Trvá"
 
 #: addons/mailchimp.addon.php:158
 msgid "Subscribed"
-msgstr ""
+msgstr "Objednaný"
 
 #: addons/mailchimp.addon.php:166
 msgid "Invalid API KEY"
-msgstr ""
+msgstr "Zlý API kľúč"
 
 #: addons/mailchimp.addon.php:167
 msgid "Select a List"
-msgstr ""
+msgstr "Vyber Zoznam"
 
 #: addons/mailchimp.addon.php:168
 msgid "Select a List ID"
-msgstr ""
+msgstr "Vyber ID zoznamu"
 
 #: addons/mailchimp.addon.php:169
 msgid "Create at least a list in your MailChimp account"
-msgstr ""
+msgstr "Vytvor aspoň jeden zoznam v tvojom účte MailChimp"
 
 #: addons/mailchimp.addon.php:190
 msgid ""
 "The add-on creates MailChimp List members with the submitted information"
-msgstr ""
+msgstr "Doplnok vytvorí MailChimp zoznam členov s dodanými informáciami"
 
 #: addons/mailchimp.addon.php:363
 msgid "Please select..."
-msgstr ""
+msgstr "Vyber..."
 
 #: addons/mollie.addon.php:60
 msgid "Enable iDeal-Mollie? (if enabled PayPal Standard is disabled)"
-msgstr ""
+msgstr "Povoliť iDeal-Mollie? (ak povolené, tak Paypal Standard je zakázaný)"
 
 #: addons/mollie.addon.php:71
 msgid "Mollie API Key"
-msgstr ""
+msgstr "Mollie API kľúč"
 
 #: addons/mollie.addon.php:75 addons/targetpay.ideal.addon.php:78
 msgid "If payment fails return to this page"
-msgstr ""
+msgstr "Ak zlyhá platba, späť na túto stránku"
 
 #: addons/mollie.addon.php:99
 msgid "The add-on adds support for iDeal via Mollie payments"
-msgstr ""
+msgstr "Doplnok pridáva podporu iDeal cez Mollie platby"
 
 #: addons/mollie.addon.php:195
 msgid "Pay with iDeal/Mollie"
-msgstr ""
+msgstr "Platba s iDeal/Mollie"
 
 #: addons/paypal.addon.php:72
 msgid "Enable PayPal Standard Payments?"
-msgstr ""
+msgstr "Povoliť PayPal Standard platby?"
 
 #: addons/paypal.addon.php:83
 msgid "PayPal Standard Email"
-msgstr ""
+msgstr "PayPal Standard email"
 
 #: addons/paypal.addon.php:94 addons/skrill.addon.php:89
 msgid "Currency:"
-msgstr ""
+msgstr "Mena:"
 
 #: addons/paypal.addon.php:129
 msgid "Paypal language"
-msgstr ""
+msgstr "PayPal jazyk"
 
 #: addons/paypal.addon.php:133 addons/paypalpro.addon.php:117
 msgid "Paypal Mode"
-msgstr ""
+msgstr "PayPal režim"
 
 #: addons/paypal.addon.php:161
 msgid "The add-on adds support for PayPal Standard payments"
-msgstr ""
+msgstr "Doplnok pridáva podporu pre PayPal Standard platby"
 
 #: addons/paypal.addon.php:224
 msgid "Pay with PayPal"
@@ -496,7 +498,7 @@ msgstr ""
 
 #: addons/paypalpro.addon.php:125
 msgid "Default Country"
-msgstr ""
+msgstr "Nastavená krajina"
 
 #: addons/paypalpro.addon.php:398
 msgid ""
@@ -549,10 +551,9 @@ msgid "Captcha verification is missing."
 msgstr ""
 
 #: addons/recaptcha.addon.php:223
-#, fuzzy
-#| msgid "Incorrect captcha code. Please try again."
 msgid "Captcha verification failed. Please try again."
-msgstr "Nesprávny captcha kód. Skúste to prosím znova."
+msgstr ""
+"Nesprávny captcha kód, Skúste to prosím znova, KLIK v obrázku pre nový kód."
 
 #: addons/redsys.addon.php:86
 msgid "Enable TPV?"
@@ -658,13 +659,11 @@ msgstr ""
 
 #: addons/sagepayments.addon.php:131
 msgid "ZIP:"
-msgstr ""
+msgstr "PSČ:"
 
 #: addons/sagepayments.addon.php:135
-#, fuzzy
-#| msgid "Email"
 msgid "Email:"
-msgstr "E-mail"
+msgstr "E-mail:"
 
 #: addons/sagepayments.addon.php:139
 msgid "Telephone:"
@@ -908,15 +907,15 @@ msgstr ""
 
 #: addons/woocommerce.addon.php:417
 msgid "Activate the summary"
-msgstr ""
+msgstr "Aktivuj Súhrn"
 
 #: addons/woocommerce.addon.php:425
 msgid "Summary title"
-msgstr ""
+msgstr "Názov Súhrnu"
 
 #: addons/woocommerce.addon.php:433
 msgid "Summary"
-msgstr ""
+msgstr "Súhrn"
 
 #: controllers/elementor/cp-elementor-widget.inc.php:54
 msgid "CodePeople"
@@ -925,15 +924,15 @@ msgstr ""
 #: controllers/elementor/elementorwidget_class.inc.php:82
 #: cp-main-class.inc.php:623 cp-main-class.inc.php:625
 msgid "Insert Appointment Hour Booking"
-msgstr ""
+msgstr "Vlož Objednanie"
 
 #: controllers/elementor/elementorwidget_class.inc.php:96
 msgid "Select Form"
-msgstr ""
+msgstr "Vyber Formulár"
 
 #: cp-addons.inc.php:129
 msgid "Appointment Hour Booking - Add Ons"
-msgstr ""
+msgstr "OBJEDNANIE - Doplnky"
 
 #: cp-addons.inc.php:135 cp-admin-int-add-booking.inc.php:36
 #: cp-admin-int-message-list.inc.php:93 cp-admin-int-message-list.inc.php:201
@@ -942,19 +941,19 @@ msgstr ""
 #: cp-admin-int.inc.php:69 cp-admin-int.inc.php:774
 #: cp-publish-wizzard.inc.php:35
 msgid "Return to the calendars list"
-msgstr ""
+msgstr "Späť na zoznam kalendárov"
 
 #: cp-addons.inc.php:144
 msgid "Active Add Ons"
-msgstr ""
+msgstr "Aktívne doplnky"
 
 #: cp-addons.inc.php:161
 msgid "Top"
-msgstr ""
+msgstr "Hore"
 
 #: cp-admin-int-add-booking.inc.php:33 cp-admin-int-list.inc.php:221
 msgid "Add Booking"
-msgstr ""
+msgstr "Pridaj Objednanie"
 
 #: cp-admin-int-add-booking.inc.php:40
 msgid ""
@@ -962,265 +961,271 @@ msgid ""
 "and payment process are disabled in order to allow the website manager "
 "easily adding bookings."
 msgstr ""
+"Táto stránka je určená na zadanie Objednania zo strany admina - Lekára. "
+"Captcha a platobné procesy sú vynechané z dôvodu jednoduchosti pridávania."
 
 #: cp-admin-int-list.inc.php:92
 msgid "Access verification error. Cannot update settings."
-msgstr ""
+msgstr "Chyba prístupového overenia. Nemôžem upraviť nastavenia."
 
 #: cp-admin-int-list.inc.php:96
 msgid "License ID updated"
-msgstr ""
+msgstr "Licenčné ID aktualizované"
 
 #: cp-admin-int-list.inc.php:185
 msgid "New Calendar"
-msgstr ""
+msgstr "Nový Kalendár"
 
 #: cp-admin-int-list.inc.php:186
 msgid "Calendar Name"
-msgstr ""
+msgstr "Kalendár Názov"
 
 #: cp-admin-int-list.inc.php:187
 msgid "Add New"
-msgstr ""
+msgstr "Pridaj Nový"
 
 #: cp-admin-int-list.inc.php:192
 msgid "Calendars List"
-msgstr ""
+msgstr "Zoznam Kalendárov"
 
 #: cp-admin-int-list.inc.php:199 cp-admin-int-message-list.inc.php:148
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #: cp-admin-int-list.inc.php:199
 msgid "Form Name"
-msgstr ""
+msgstr "Názov Formulára"
 
 #: cp-admin-int-list.inc.php:199 cp-admin-int-message-list.inc.php:153
 msgid "Options"
-msgstr ""
+msgstr "Možnosti"
 
 #: cp-admin-int-list.inc.php:199
 msgid "Shortcode for Pages and Posts"
-msgstr ""
+msgstr "Kód pre stránky a články"
 
 #: cp-admin-int-list.inc.php:215
 msgid "Rename"
-msgstr ""
+msgstr "Premenuj"
 
 #: cp-admin-int-list.inc.php:216 cp-admin-int.inc.php:58
 msgid "Edit"
-msgstr ""
+msgstr "Uprav"
 
 #: cp-admin-int-list.inc.php:217
 msgid "Publish"
-msgstr ""
+msgstr "Zverejni"
 
 #: cp-admin-int-list.inc.php:219 cp-admin-int-message-list.inc.php:90
 msgid "Booking Orders"
-msgstr ""
+msgstr "Poradie objednávok"
 
 #: cp-admin-int-list.inc.php:220 cp-admin-int-schedule.inc.php:26
 msgid "Schedule"
-msgstr ""
+msgstr "Rozvrh"
 
 #: cp-admin-int-list.inc.php:222 cp-admin-int-report.inc.php:111
 msgid "Stats"
-msgstr ""
+msgstr "Štatistiky"
 
 #: cp-admin-int-list.inc.php:224
 msgid "Clone"
-msgstr ""
+msgstr "Klonuj"
 
 #: cp-admin-int-list.inc.php:225
 msgid "Delete"
-msgstr ""
+msgstr "Vymaž"
 
 #: cp-admin-int-list.inc.php:311
 msgid "Plugin License"
-msgstr ""
+msgstr "Licencia pluginu"
 
 #: cp-admin-int-list.inc.php:316
 msgid "License ID"
-msgstr ""
+msgstr "ID licencie"
 
 #: cp-admin-int-list.inc.php:318
 msgid "Website ID"
-msgstr ""
+msgstr "ID web stránky"
 
 #: cp-admin-int-list.inc.php:321
 msgid "License Status"
-msgstr ""
+msgstr "Licenčný stav"
 
 #: cp-admin-int-list.inc.php:324
 msgid "Click to display the License Status."
-msgstr ""
+msgstr "Kliknite pre zobrazenie Licenčného stavu."
 
 #: cp-admin-int-list.inc.php:327
 msgid "Save Changes"
-msgstr ""
+msgstr "Ulož zmeny"
 
 #: cp-admin-int-list.inc.php:333 cp-admin-int.inc.php:781
 msgid "Request Custom Modifications"
-msgstr ""
+msgstr "Požiadavka na klientskú úpravu"
 
 #: cp-admin-int-list.inc.php:333 cp-admin-int.inc.php:781
 #: cp-main-class.inc.php:568
 msgid "Help"
-msgstr ""
+msgstr "Pomoc"
 
 #: cp-admin-int-message-list.inc.php:25
 msgid "Manually updated"
-msgstr ""
+msgstr "Manuálne upravené"
 
 #: cp-admin-int-message-list.inc.php:103 cp-admin-int-report.inc.php:126
 msgid "Search for"
-msgstr ""
+msgstr "Hľadaj"
 
 #: cp-admin-int-message-list.inc.php:104 cp-admin-int-report.inc.php:127
 #: cp-admin-int-schedule.inc.php:47
 msgid "From"
-msgstr ""
+msgstr "Od"
 
 #: cp-admin-int-message-list.inc.php:105 cp-admin-int-report.inc.php:128
 #: cp-admin-int-schedule.inc.php:48
 msgid "To"
-msgstr ""
+msgstr "Do"
 
 #: cp-admin-int-message-list.inc.php:106 cp-admin-int-report.inc.php:129
 #: cp-admin-int-schedule.inc.php:54
 msgid "Item"
-msgstr ""
+msgstr "Položka"
 
 #: cp-admin-int-message-list.inc.php:107 cp-admin-int-report.inc.php:130
 #: cp-admin-int-schedule.inc.php:55
 msgid "All Items"
-msgstr ""
+msgstr "Všetky položky"
 
 #: cp-admin-int-message-list.inc.php:115 cp-admin-int-report.inc.php:138
 #: cp-admin-int-schedule.inc.php:63
 msgid "Export to CSV"
-msgstr ""
+msgstr "Export do CSV"
 
 #: cp-admin-int-message-list.inc.php:116 cp-admin-int-report.inc.php:139
 #: cp-admin-int-schedule.inc.php:64
 msgid "Filter"
-msgstr ""
+msgstr "Filter"
 
 #: cp-admin-int-message-list.inc.php:135
 msgid "&laquo; Previous"
-msgstr ""
+msgstr "&laquo; Predošlý"
 
 #: cp-admin-int-message-list.inc.php:136
 msgid "Next &raquo;"
-msgstr ""
+msgstr "Ďalší &raquo;"
 
 #: cp-admin-int-message-list.inc.php:149
 msgid "Submission Date"
-msgstr ""
+msgstr "Dátum potvrdenia"
 
 #: cp-admin-int-message-list.inc.php:152 cp-admin-int-schedule.inc.php:49
 msgid "Paid Status"
-msgstr ""
+msgstr "Stav platieb"
 
 #: cp-admin-int-message-list.inc.php:182 cp-admin-int-schedule.inc.php:79
 msgid "Paid"
-msgstr ""
+msgstr "Zaplatené"
 
 #: cp-admin-int-report.inc.php:148
 msgid "Submissions per day"
-msgstr ""
+msgstr "Potvrdení za deň"
 
 #: cp-admin-int-report.inc.php:154
 msgid "Submissions per day in the selected date range."
-msgstr ""
+msgstr "Potvrdení za deň v danom rozsahu."
 
 #: cp-admin-int-report.inc.php:154
 msgid "Days from"
-msgstr ""
+msgstr "Dní od"
 
 #: cp-admin-int-report.inc.php:161
 msgid "Submissions per hour"
-msgstr ""
+msgstr "Potvrdení za hodinu"
 
 #: cp-admin-int-report.inc.php:167
 msgid "Total submissions per hour in the selected date range."
-msgstr ""
+msgstr "Celkovo potvrdených za hodinu vo vybranom rozsahu."
 
 #: cp-admin-int-report.inc.php:167
 msgid "Hours from 0 to 23"
-msgstr ""
+msgstr "Hodiny od 0 do 23"
 
 #: cp-admin-int-report.inc.php:184
 msgid "Select field for the report"
-msgstr ""
+msgstr "Vyber polia na report"
 
 #: cp-admin-int-report.inc.php:197
 msgid "Report of values for"
-msgstr ""
+msgstr "Reportuj hodnoty pre"
 
 #: cp-admin-int-report.inc.php:221
 msgid ""
 "Number of times that appears each value. Percent in relation to the total of "
 "submissions."
 msgstr ""
+"Počet koľko krát sa každá hodnota zobrazí. Percentá vo vzťahuk celkovým "
+"potvrdeniam."
 
 #: cp-admin-int-report.inc.php:221
 msgid "Date range from"
-msgstr ""
+msgstr "Rozsah Dátumov"
 
 #: cp-admin-int-report.inc.php:221
 msgid "to"
-msgstr ""
+msgstr "do"
 
 #: cp-admin-int-report.inc.php:232
 msgid "Print Stats"
-msgstr ""
+msgstr "Vytlač Štatistiku"
 
 #: cp-admin-int-schedule.inc.php:31
 msgid "Change to Schedule Calendar View"
-msgstr ""
+msgstr "Zmeň na Kalendár Objednávok"
 
 #: cp-admin-int-schedule.inc.php:33
 msgid "Change to Schedule List View"
-msgstr ""
+msgstr "Zmeň na Zoznam objednávok"
 
 #: cp-admin-int-schedule.inc.php:50
 msgid "All"
-msgstr ""
+msgstr "Všetky"
 
 #: cp-admin-int-schedule.inc.php:51
 msgid "Paid only"
-msgstr ""
+msgstr "Iba Platené"
 
 #: cp-admin-int-schedule.inc.php:53 cp-admin-int.inc.php:314
 msgid "Booking Status"
-msgstr ""
+msgstr "Stav Objednania"
 
 #: cp-admin-int-schedule.inc.php:77
 msgid "Slot"
-msgstr ""
+msgstr "Časový Blok"
 
 #: cp-admin-int-schedule.inc.php:78
 msgid "Service"
-msgstr ""
+msgstr "Služba"
 
 #: cp-admin-int-schedule.inc.php:82
 msgid "Status"
-msgstr ""
+msgstr "Stav"
 
 #: cp-admin-int-schedule.inc.php:102
 msgid "Print"
-msgstr ""
+msgstr "Tlač"
 
 #: cp-admin-int-schedule.inc.php:112
 msgid ""
 "The purpose of this page is to <strong>display the bookings/schedule in a "
 "calendar view</strong>. You can add bookings from the public booking form or"
 msgstr ""
+"Účel tejto stránky je <strong> zobraziť objednania/rozvrh v kalendárovom "
+"pohľade <strong>. Môžete pridať objednanie z verejného formulára alebo"
 
 #: cp-admin-int-schedule.inc.php:112
 msgid "add bookings from the dashboard"
-msgstr ""
+msgstr "pridajte objednanie z admin panela"
 
 #: cp-admin-int-schedule.inc.php:112
 msgid ""
@@ -1228,214 +1233,220 @@ msgid ""
 "and filter options switch to the \"<strong>List View</strong>\" with the "
 "button above this text."
 msgstr ""
+"a potom sa objednanie objaví v tomto kalendári. <br /> Na exportovanie "
+"súboru .CSV, tlač alebo filtrovanie sa prepnite na stránku \"<strong>Zoznam</"
+"strong>\" tlačidlom nad týmto textom."
 
 #: cp-admin-int.inc.php:68
 msgid "Save Changes and Return"
-msgstr ""
+msgstr "Ulož a Späť"
 
 #: cp-admin-int.inc.php:77
 msgid "Editor"
-msgstr ""
+msgstr "Editor"
 
 #: cp-admin-int.inc.php:81
 msgid "General Settings"
-msgstr ""
+msgstr "Všeobecné nastavenia"
 
 #: cp-admin-int.inc.php:85
 msgid "Notification Emails"
-msgstr ""
+msgstr "Notifikačné Emaily"
 
 #: cp-admin-int.inc.php:89
 msgid "Antispam"
-msgstr ""
+msgstr "Antispam"
 
 #: cp-admin-int.inc.php:93
 msgid "Reports"
-msgstr ""
+msgstr "Reporty"
 
 #: cp-admin-int.inc.php:97
 msgid "Add Ons"
-msgstr ""
+msgstr "Doplnky"
 
 #: cp-admin-int.inc.php:179
 msgid "Add a Field"
-msgstr ""
+msgstr "Pridaj Pole"
 
 #: cp-admin-int.inc.php:180
 msgid "Field Settings"
-msgstr ""
+msgstr "Nastavenie Poľa"
 
 #: cp-admin-int.inc.php:181
 msgid "Form Settings"
-msgstr ""
+msgstr "Nastavenie Formulára"
 
 #: cp-admin-int.inc.php:205
 msgid "Labels and Texts"
-msgstr ""
+msgstr "Názvy a Texty"
 
 #: cp-admin-int.inc.php:208
 msgid "Button Labels"
-msgstr ""
+msgstr "Názvy Tlačidiel"
 
 #: cp-admin-int.inc.php:213
 msgid "Submit button label (text)"
-msgstr ""
+msgstr "Tlačidlo Potvrď (text)"
 
 #: cp-admin-int.inc.php:217
 msgid "Page {0} of {0} (text"
-msgstr ""
+msgstr "Strana {0} z {0} (text)"
 
 #: cp-admin-int.inc.php:223
 msgid "Previous page button label (text)"
-msgstr ""
+msgstr "Predošlá strana názov tlačidla (text)"
 
 #: cp-admin-int.inc.php:226
 msgid "Next page button label (text)"
-msgstr ""
+msgstr "Ďalšia strana názov tlačidla (text)"
 
 #: cp-admin-int.inc.php:237
 msgid "Error messages for validation rules"
-msgstr ""
+msgstr "Chybová hláška pre schvaľovacie pravidlá"
 
 #: cp-admin-int.inc.php:242
 msgid "\"is required\" text"
-msgstr ""
+msgstr "\"vyžadované\" text"
 
 #: cp-admin-int.inc.php:246
 msgid "\"is email\" text"
-msgstr ""
+msgstr "\"je email\" text"
 
 #: cp-admin-int.inc.php:252
 msgid "\"is valid captcha\" text"
-msgstr ""
+msgstr "\"je správny captcha\" text"
 
 #: cp-admin-int.inc.php:255
 msgid "\"is valid date (mm/dd/yyyy)\" text"
-msgstr ""
+msgstr "\"je správny dátum (mm/dd/yyyy)\" text"
 
 #: cp-admin-int.inc.php:259
 msgid "\"is valid date (dd/mm/yyyy)\" text"
-msgstr ""
+msgstr "\"je správny dátum (dd/mm/yyyy)\" text"
 
 #: cp-admin-int.inc.php:263
 msgid "\"is number\" text"
-msgstr ""
+msgstr "\"je číslo\" text"
 
 #: cp-admin-int.inc.php:269
 msgid "\"only digits\" text"
-msgstr ""
+msgstr "\"iba čísla\" text"
 
 #: cp-admin-int.inc.php:273
 msgid "\"under maximum\" text"
-msgstr ""
+msgstr "\"menej ako max\" text"
 
 #: cp-admin-int.inc.php:279
 msgid "\"over minimum\" text"
-msgstr ""
+msgstr "\" viac ako min\" text"
 
 #: cp-admin-int.inc.php:283
 msgid "\"Max appointments allowed messsage\" text"
-msgstr ""
+msgstr "\"Max povolených objednaní správa\" text"
 
 #: cp-admin-int.inc.php:292
 msgid "Next Step - General Settings >"
-msgstr ""
+msgstr "Ďalší krok - Všeobecné nastavenia >"
 
 #: cp-admin-int.inc.php:293 cp-admin-int.inc.php:468 cp-admin-int.inc.php:604
 #: cp-admin-int.inc.php:676 cp-admin-int.inc.php:739 cp-admin-int.inc.php:765
 msgid "Save and Publish"
-msgstr ""
+msgstr "Ulož a Publikuj"
 
 #: cp-admin-int.inc.php:294 cp-admin-int.inc.php:469 cp-admin-int.inc.php:605
 #: cp-admin-int.inc.php:677 cp-admin-int.inc.php:740 cp-admin-int.inc.php:766
 msgid "Save and Return"
-msgstr ""
+msgstr "Ulož a Späť"
 
 #: cp-admin-int.inc.php:304 cp-admin-int.inc.php:307
 msgid "Confirmation / Thank you page"
-msgstr ""
+msgstr "Potvrdenie / Ďakovná stránka"
 
 #: cp-admin-int.inc.php:309
 msgid ""
 "Address / URL of the page where the user will be redirected after submiting "
 "the booking form"
 msgstr ""
+"Adresa / URL stránky, kde bude užívateľ presmerovaný po potvrdení formulára"
 
 #: cp-admin-int.inc.php:317
 msgid "Default status of new bookings"
-msgstr ""
+msgstr "Prednastavený stav nového Objednania"
 
 #: cp-admin-int.inc.php:319
 msgid ""
 "Only \"Approved\" items are taken in account for the availability "
 "verification."
-msgstr ""
+msgstr "Iba \"Schválené\" položky sú brané do úvahy pre overenie dostupnosti."
 
 #: cp-admin-int.inc.php:322
 msgid "Default status of paid bookings"
-msgstr ""
+msgstr "Prednastavený stav platby"
 
 #: cp-admin-int.inc.php:324
 msgid ""
 "If a payment add-on is enabled the booking will be changed to this status "
 "after the payment."
 msgstr ""
+"Ak je platobný doplnok povolený, stav rezervácie sa zmení na tento stav po "
+"platbe."
 
 #: cp-admin-int.inc.php:330
 msgid "Global Calendar Settings"
-msgstr ""
+msgstr "Všeobecné Nastavenia Kalendára"
 
 #: cp-admin-int.inc.php:333
 msgid "Date Format"
-msgstr ""
+msgstr "Formát Dátumu"
 
 #: cp-admin-int.inc.php:348
 msgid "Calendar Language"
-msgstr ""
+msgstr "Jazyk Kalendára"
 
 #: cp-admin-int.inc.php:431
 msgid "Payment Integration Settings"
-msgstr ""
+msgstr "Nastavenie integrácie platieb"
 
 #: cp-admin-int.inc.php:435
 msgid "Product name at payment page"
-msgstr ""
+msgstr "Názov produktu a stránka platieb"
 
 #: cp-admin-int.inc.php:439
 msgid "Label of \"Pay Later\" option (if enabled)"
-msgstr ""
+msgstr "Názov pre \"Zaplať neskôr\" možnosť (ak povolené)"
 
 #: cp-admin-int.inc.php:443
 msgid "Note: To enable a payment method enable first the related addon."
-msgstr ""
+msgstr "Poznámka: Ak chcete umožniť platobnú metódu, najprv povoľte doplnok."
 
 #: cp-admin-int.inc.php:446
 msgid "Users with access to the messages list"
-msgstr ""
+msgstr "Užívatelia s prístupom k zoznamu správ"
 
 #: cp-admin-int.inc.php:450
 msgid "Select users with access (CTRL+click for multiple selection)"
-msgstr ""
+msgstr "Vyber užívateľov s prístupom (CTRL + klik pre viac násobný výber)"
 
 #: cp-admin-int.inc.php:467
 msgid "Next Step - Notification Emails >"
-msgstr ""
+msgstr "Ďalší krok - Notifikačné emaily >"
 
 #: cp-admin-int.inc.php:475
 msgid "From / To Email Addresses"
-msgstr ""
+msgstr "Od / Do emailové adresy"
 
 #: cp-admin-int.inc.php:480
 msgid "Send email \"From\""
-msgstr ""
+msgstr "Pošli email \"Od\""
 
 #: cp-admin-int.inc.php:484
 msgid "From fixed email address indicated below - Recommended option"
-msgstr ""
+msgstr "z pevnej emailovej adresy, ktorá je nižšie - Doporučená voľba"
 
 #: cp-admin-int.inc.php:485
 msgid "From the email address indicated by the custome"
-msgstr ""
+msgstr "z emailovej adresy zadanej užívateľom"
 
 #: cp-admin-int.inc.php:488
 msgid ""
@@ -1454,11 +1465,11 @@ msgstr ""
 
 #: cp-admin-int.inc.php:496
 msgid "\"From\" email (for fixed \"from\" addresses)"
-msgstr ""
+msgstr "\"od\" email (pre pevnú \"od\" adresu)"
 
 #: cp-admin-int.inc.php:500
 msgid "Send email \"To\""
-msgstr ""
+msgstr "Pošli email \"Komu\""
 
 #: cp-admin-int.inc.php:504
 msgid "To the fixed email(s) address(es) indicated below - Recommended option"
@@ -1497,144 +1508,140 @@ msgstr ""
 
 #: cp-admin-int.inc.php:533 cp-admin-int.inc.php:582 cp-admin-int.inc.php:717
 #: cp-settings.inc.php:160
-#, fuzzy
-#| msgid "Subject"
 msgid "Email subject"
-msgstr "Predmet"
+msgstr "Predmet e-mailu"
 
 #: cp-admin-int.inc.php:537
 msgid "Include additional information?"
-msgstr ""
+msgstr "Doplniť ďalšie info?"
 
 #: cp-admin-int.inc.php:548 cp-admin-int.inc.php:586 cp-admin-int.inc.php:721
 #: cp-settings.inc.php:164
 msgid "Email format?"
-msgstr ""
+msgstr "Formát emailu?"
 
 #: cp-admin-int.inc.php:552 cp-admin-int.inc.php:590 cp-admin-int.inc.php:725
 #: cp-settings.inc.php:168
 msgid "Plain Text (default)"
-msgstr ""
+msgstr "Plain text (default)"
 
 #: cp-admin-int.inc.php:553 cp-admin-int.inc.php:591 cp-admin-int.inc.php:726
 #: cp-settings.inc.php:169
 msgid "HTML (use html in the textarea below)"
-msgstr ""
+msgstr "HTML (použi html v textovom priestore nižšie)"
 
 #: cp-admin-int.inc.php:564
 msgid "Email Copy to the User / Customer"
-msgstr ""
+msgstr "Kópia emailu užívateľovi / klientovi"
 
 #: cp-admin-int.inc.php:568
 msgid "Send confirmation/thank you message to user?"
-msgstr ""
+msgstr "Poslať potvrdenie/poďakovanie užívateľovi?"
 
 #: cp-admin-int.inc.php:578
 msgid "Email field on the form"
-msgstr ""
+msgstr "Pole emailu na formulári"
 
 #: cp-admin-int.inc.php:603
 msgid "Next Step - Antispam >"
-msgstr ""
+msgstr "Ďalší krok - Antispam >"
 
 #: cp-admin-int.inc.php:612
 msgid "Captcha Verification"
-msgstr ""
+msgstr "Captcha overovanie"
 
 # RevTran=Please enter the verification code captcha.
 #: cp-admin-int.inc.php:616
-#, fuzzy
-#| msgid "Please enter the captcha verification code."
 msgid "Use Captcha Verification?"
-msgstr "Prosím, zadajte overovací kód captcha."
+msgstr "Použiť Captcha overeovania?"
 
 #: cp-admin-int.inc.php:627
 msgid "Width"
-msgstr ""
+msgstr "Šírka"
 
 #: cp-admin-int.inc.php:629
 msgid "Height"
-msgstr ""
+msgstr "Výška"
 
 #: cp-admin-int.inc.php:631
 msgid "Chars"
-msgstr ""
+msgstr "Znaky"
 
 #: cp-admin-int.inc.php:636
 msgid "Min font size"
-msgstr ""
+msgstr "Min veľkosť písma"
 
 #: cp-admin-int.inc.php:638
 msgid "Max font size"
-msgstr ""
+msgstr "Max veľkosť písma"
 
 #: cp-admin-int.inc.php:641
 msgid "Preview"
-msgstr ""
+msgstr "Náhľad"
 
 #: cp-admin-int.inc.php:649
 msgid "Noise"
-msgstr ""
+msgstr "Poznámka"
 
 #: cp-admin-int.inc.php:651
 msgid "Noise Length"
-msgstr ""
+msgstr "Dĺžka poznámky"
 
 #: cp-admin-int.inc.php:657
 msgid "Background"
-msgstr ""
+msgstr "Pozadie"
 
 #: cp-admin-int.inc.php:659
 msgid "Border"
-msgstr ""
+msgstr "Rám"
 
 #: cp-admin-int.inc.php:661
 msgid "Font"
-msgstr ""
+msgstr "Písmo"
 
 #: cp-admin-int.inc.php:675
 msgid "Next Step - Reports >"
-msgstr ""
+msgstr "Ďalší krok - Reporty >"
 
 #: cp-admin-int.inc.php:683
 msgid "Automatic Reports: Send submissions in CSV format via email"
-msgstr ""
+msgstr "Automatické reporty: Pošli potvrdenie v .CSV formáte cez email"
 
 #: cp-admin-int.inc.php:687 cp-settings.inc.php:133
 msgid "Enable Reports?"
-msgstr ""
+msgstr "Povoliť Reporty?"
 
 #: cp-admin-int.inc.php:697 cp-settings.inc.php:140
 msgid "Send report every"
-msgstr ""
+msgstr "Poslať report každý"
 
 #: cp-admin-int.inc.php:698
 msgid "days (Put a 0 to send the report immediately after each submission)"
-msgstr ""
+msgstr "dni (Zadaj 0 na okamžité poslanie po každom potvrdení)"
 
 #: cp-admin-int.inc.php:701
 msgid "Send report after this hour (server time)"
-msgstr ""
+msgstr "Pošli report po tejto hodine (serverový čas)"
 
 #: cp-admin-int.inc.php:713
 msgid "Send the report to the following email addresses (comma separated)"
-msgstr ""
+msgstr "Pošli report na tieto emailové adresy (oddeľ čiarkou)"
 
 #: cp-admin-int.inc.php:731
 msgid "Email Text (CSV file will be attached with the submissions)"
-msgstr ""
+msgstr "Text Emailu (CSV súbor bude priložený s potvrdením)"
 
 #: cp-admin-int.inc.php:738
 msgid "Next Step - Add Ons >"
-msgstr ""
+msgstr "Ďalší krok - Doplnky >"
 
 #: cp-admin-int.inc.php:751
 msgid "<h2>Add-Ons Settings:</h2><hr />"
-msgstr ""
+msgstr "<h2>Doplnky - nastavenie:</h2><hr />"
 
 #: cp-admin-int.inc.php:757
 msgid "You can optionally"
-msgstr ""
+msgstr "Prípadne môžete"
 
 #: cp-admin-int.inc.php:757
 msgid "activate add ons in the add ons section"
@@ -1652,69 +1659,71 @@ msgstr ""
 
 #: cp-admin-int.inc.php:781
 msgid "Free Support"
-msgstr ""
+msgstr "Podpora"
 
 #: cp-main-class.inc.php:199
 msgid "[All]"
-msgstr ""
+msgstr "[Všetko]"
 
 #: cp-main-class.inc.php:409
 msgid "cancel"
-msgstr ""
+msgstr "zruš"
 
 #: cp-main-class.inc.php:410
 msgid "Cost"
-msgstr ""
+msgstr "Náklady"
 
 #: cp-main-class.inc.php:564
 msgid "Request custom changes"
-msgstr ""
+msgstr "Požiadavka na užívateľské zmeny"
 
 #: cp-main-class.inc.php:566
 msgid "Settings"
-msgstr ""
+msgstr "Nastavenia"
 
 #: cp-main-class.inc.php:623 cp-main-class.inc.php:625
 msgid "Insert  Appointment Hour Booking"
-msgstr ""
+msgstr "Vlož  Objednávanie"
 
 #: cp-public-int.inc.php:27
 msgid "Security Code"
-msgstr "Bezpečnostný kód"
+msgstr "Bezpečnostný kód Captcha"
 
 #: cp-publish-wizzard.inc.php:3
 msgid "Publish Appointment Hour Booking Form"
-msgstr ""
+msgstr "Publikuj Objednávací formulár"
 
 #: cp-publish-wizzard.inc.php:48
 msgid "Great! Form successfully published"
-msgstr ""
+msgstr "Úspešne publikovaný formulár"
 
 #: cp-publish-wizzard.inc.php:49
 msgid "The booking form was placed into the page"
-msgstr ""
+msgstr "Objednávací Formulár bol umiestený na webe"
 
 #: cp-publish-wizzard.inc.php:50
 msgid "Now you can:"
-msgstr ""
+msgstr "Teraz môžete:"
 
 #: cp-publish-wizzard.inc.php:52
 msgid "View the Published Booking Form"
-msgstr ""
+msgstr "Náhľad zverejneného objednávacieho formulára"
 
 #: cp-publish-wizzard.inc.php:54
 msgid ""
 "Note: If the calendar was published in a new page or post it will be a "
 "'draft', you have to publish the page/post in the future if needed."
 msgstr ""
+"Poznámka: Ak bol kalendár zverejnený na novej stránke alebo v článku ako "
+"náhľad, musíte po úpravách zverejniť, publikovať formulár."
 
 #: cp-publish-wizzard.inc.php:56
 msgid "Edit the booking form settings and calendar availability"
-msgstr ""
+msgstr "Uprav objednávací formulár a dostupnosť kalendára"
 
 #: cp-publish-wizzard.inc.php:70
 msgid "Select calendar"
-msgstr ""
+msgstr "Vyber kalendár"
 
 #: cp-publish-wizzard.inc.php:82
 msgid "Where to publish it?"
@@ -1767,7 +1776,7 @@ msgstr ""
 
 #: cp-publish-wizzard.inc.php:124 cp-publish-wizzard.inc.php:207
 msgid "Insert "
-msgstr ""
+msgstr "Vlož "
 
 #: cp-publish-wizzard.inc.php:125
 msgid ""
@@ -1781,11 +1790,11 @@ msgstr ""
 
 #: cp-publish-wizzard.inc.php:161
 msgid "Publish Calendar"
-msgstr ""
+msgstr "Publikuj Kalendár"
 
 #: cp-publish-wizzard.inc.php:205
 msgid "Note"
-msgstr ""
+msgstr "Poznámka"
 
 #: cp-publish-wizzard.inc.php:208
 msgid ""
@@ -1795,11 +1804,11 @@ msgstr ""
 
 #: cp-settings.inc.php:112
 msgid "Appointment Hour Booking - General Settings"
-msgstr ""
+msgstr "OBJEDNANIE -  Všeobecné nastavenia"
 
 #: cp-settings.inc.php:118
 msgid "Email Report Settings"
-msgstr ""
+msgstr "Nastavenia emailov pre reporty"
 
 #: cp-settings.inc.php:119 cp-settings.inc.php:187
 msgid "Troubleshoot Area"
@@ -1825,23 +1834,23 @@ msgstr ""
 
 #: cp-settings.inc.php:140
 msgid "days"
-msgstr ""
+msgstr "dní"
 
 #: cp-settings.inc.php:142
 msgid "Send after this hour (server time)"
-msgstr ""
+msgstr "Odošli v tejto hodine (serverový čas)"
 
 #: cp-settings.inc.php:152
 msgid "Send email from"
-msgstr ""
+msgstr "Pošli email od"
 
 #: cp-settings.inc.php:156
 msgid "Send to email(s)"
-msgstr ""
+msgstr "Pošli na email(y)"
 
 #: cp-settings.inc.php:174
 msgid "Email Text (CSV file will be attached"
-msgstr ""
+msgstr "Text emailu (.CSV súbor bude priložený)"
 
 #: cp-settings.inc.php:181
 msgid ""
@@ -1851,7 +1860,7 @@ msgstr ""
 
 #: cp-settings.inc.php:188
 msgid "Important!"
-msgstr ""
+msgstr "Dôležité!"
 
 #: cp-settings.inc.php:188
 msgid ""
@@ -1879,7 +1888,7 @@ msgstr ""
 
 #: cp-settings.inc.php:208
 msgid "Character encoding"
-msgstr ""
+msgstr "Enkódovanie znakov"
 
 #: cp-settings.inc.php:212
 msgid "Keep current charset (Recommended)"
@@ -1945,11 +1954,11 @@ msgstr ""
 
 #: cp_admin_int_edition.inc.php:24
 msgid "Customization"
-msgstr ""
+msgstr "Úprava"
 
 #: cp_admin_int_edition.inc.php:24
 msgid "Edit Page"
-msgstr ""
+msgstr "Editácia"
 
 msgid "This field is required."
 msgstr "Toto pole je povinné."
@@ -1959,7 +1968,7 @@ msgid "Please enter a valid email address."
 msgstr "Zadajte platnú adresu."
 
 msgid "Please enter a valid captcha code."
-msgstr "Zadajte prosím platný captcha kód."
+msgstr "Zadajte prosím platný captcha kód (KLIK v obrázku pre nový kód)."
 
 # RevTran=Please enter a valid date in the following format (mm \\/dd \\/yyyy)
 msgid "Please enter a valid date with this format(mm/dd/yyyy)"
@@ -1983,58 +1992,241 @@ msgid "Please enter a value greater than or equal to {0}."
 msgstr "Prosím, zadajte hodnotu väčšiu alebo rovné {0}."
 
 msgid "Quantity"
-msgstr ""
+msgstr "Množstvo"
 
 msgid "Please enter no more than {0} characters."
-msgstr ""
+msgstr "Prosím nepíšte viac ako {0} znakov."
 
 msgid "Please enter at least {0} characters."
-msgstr ""
+msgstr "Prosím vyplňte najmenej {0} znakov."
 
 msgid "No more slots available."
-msgstr ""
+msgstr "Žiadne časové bloky dostupné."
 
-msgid "Selected time isn't longer available. Please select a different time."
-msgstr ""
+msgid "Selected time is no longer available. Please select a different time."
+msgstr "Vybraný čas nie je k dispozícii, vyberte iný čas."
 
 msgid "Cancelled"
-msgstr ""
+msgstr "Zrušené"
 
 msgid "Cancelled by customer"
-msgstr ""
+msgstr "Zrušené Pacientom"
 
 msgid "Rejected"
-msgstr ""
+msgstr "Odvolané"
 
 msgid "Attended"
-msgstr ""
+msgstr "Navštívené"
 
 msgid "Sunday"
-msgstr ""
+msgstr "Nedeľa"
 
 msgid "Monday"
-msgstr ""
+msgstr "Pondelok"
 
 msgid "Tuesday"
-msgstr ""
+msgstr "Utorok"
 
 msgid "Wednesday"
-msgstr ""
+msgstr "Streda"
 
 msgid "Thursday"
-msgstr ""
+msgstr "Štvrtok"
 
 msgid "Friday"
-msgstr ""
+msgstr "Piatok"
 
 msgid "Saturday"
-msgstr ""
+msgstr "Sobota"
 
 msgid "Administrator options"
-msgstr ""
+msgstr "Admin možnosti"
 
 msgid "Send notification emails for this booking"
-msgstr ""
+msgstr "Pošli notifikačný e-mail po objednaní"
 
 msgid "No appointments found with the selected filters"
+msgstr "Žiadne Objednania s týmto Filtrom"
+
+msgid "Discount code"
 msgstr ""
+
+msgid "Please upload a valid file type"
+msgstr ""
+
+msgid "Every"
+msgstr "Každý"
+
+msgid "Weekly on weekdays"
+msgstr "Týždenne, všetky dni"
+
+msgid "Weekly on Monday, Wednesday, Friday"
+msgstr "Týždenne, Pondelok, Stredu, Piatok"
+
+msgid "Weekly on Tuesday, Thursday"
+msgstr "Týždenne, Utorok, Štvrtok"
+
+msgid "weeks"
+msgstr "týždne"
+
+msgid "on day"
+msgstr "deň"
+
+msgid "on the"
+msgstr "v"
+
+msgid "months"
+msgstr "mesiace"
+
+msgid "on"
+msgstr "na"
+
+msgid "Annually"
+msgstr "Ročne"
+
+msgid "years"
+msgstr "roky"
+
+msgid "Once"
+msgstr "Raz"
+
+msgid "until"
+msgstr "do"
+
+msgid "and repeated on"
+msgstr "opakovane v"
+
+msgid "Starts on"
+msgstr "Začať v"
+
+msgid "Ends after a number of occurrences"
+msgstr "Ukonč po počte výskytov"
+
+msgid "day of the week"
+msgstr "deň v týždni"
+
+msgid "day of the month"
+msgstr "deň v mesiaci"
+
+msgid "Repeat by"
+msgstr "Opakovať"
+
+msgid "Repeat on"
+msgstr "Opakovať"
+
+msgid "Repeat every"
+msgstr "Opakovať každý"
+
+msgid "Repeats"
+msgstr "Opakovanie"
+
+msgid "Every weekday (Monday to Friday)"
+msgstr ""
+
+msgid "Every Monday, Wednesday, and Friday"
+msgstr ""
+
+msgid "Every Tuesday, and Thursday"
+msgstr "Každý Utorok, a Štvrtok"
+
+msgid "Add available slots"
+msgstr "Pridaj dostupné časy"
+
+msgid "Jan"
+msgstr ""
+
+msgid "Feb"
+msgstr ""
+
+msgid "Mar"
+msgstr ""
+
+msgid "Apr"
+msgstr ""
+
+msgid "May"
+msgstr "Máj"
+
+msgid "Jun"
+msgstr "Jún"
+
+msgid "Jul"
+msgstr "Júl"
+
+msgid "Aug"
+msgstr ""
+
+msgid "Sep"
+msgstr ""
+
+msgid "Oct"
+msgstr "Okt"
+
+msgid "Nov"
+msgstr ""
+
+msgid "Dec"
+msgstr ""
+
+msgid "first"
+msgstr "prvý"
+
+msgid "second"
+msgstr "druhý"
+
+msgid "third"
+msgstr "tretí"
+
+msgid "fourth"
+msgstr "štvrtý"
+
+msgid "last"
+msgstr "posledný"
+
+msgid "Repeat"
+msgstr "Opakuj"
+
+msgid "times"
+msgstr "krát"
+
+msgid "after"
+msgstr "po"
+
+msgid "Ends"
+msgstr "Končí"
+
+msgid "occurrences"
+msgstr "výskyty"
+
+msgid "or"
+msgstr "alebo"
+
+msgid "SU"
+msgstr "NE"
+
+msgid "MO"
+msgstr "PO"
+
+msgid "TU"
+msgstr "UT"
+
+msgid "WE"
+msgstr "ST"
+
+msgid "TH"
+msgstr "ŠT"
+
+msgid "FR"
+msgstr "PI"
+
+msgid "SA"
+msgstr "SO"
+
+msgid "Online Demo"
+msgstr ""
+
+msgid "I Need Help"
+msgstr "Potrebujem pomoc"
+
+msgid "Upgrade Plugin"
+msgstr "Aktualizuj Doplnok"

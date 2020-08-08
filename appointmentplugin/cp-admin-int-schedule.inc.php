@@ -12,8 +12,19 @@ if ( !is_admin() || (!$current_user_access && !@in_array($current_user->ID, unse
     exit;
 }
 
+$firstday = 0;
 if ($this->item != 0)
+{
     $myform = $wpdb->get_results( $wpdb->prepare('SELECT * FROM '.$wpdb->prefix.$this->table_items .' WHERE id=%d' ,$this->item) );
+    $raw_form_str = cpappb_cleanJSON( $myform[0]->form_structure );
+    $form_data = json_decode( $raw_form_str );
+    foreach($form_data[0] as $item)
+    if ($item->ftype == 'fapp')
+    {
+        $firstday = $item->firstDay;
+        break;
+    }
+}
 
 $default_from = date("Y-m-d",strtotime("today -10 days"));
 $default_to = date("Y-m-d",strtotime("today +30 days"));
@@ -32,6 +43,8 @@ $dto = ($rawto ? date("Y-m-d", strtotime($rawto)) : $default_to);
 
 $dfrom_formatted = $this->format_date($dfrom);
 $dto_formatted = $this->format_date($dto);
+
+
 
 ?>
 
@@ -57,19 +70,25 @@ $dto_formatted = $this->format_date($dto);
         <input type="hidden" name="page" value="<?php echo $this->menu_parameter; ?>" />
         <input type="hidden" name="cal" value="<?php echo intval($this->item); ?>" />
         <input type="hidden" name="schedule" value="1" />
-		<nobr><label><?php _e('From','appointment-hour-booking'); ?>:</label> <input type="text" id="dfrom" name="dfrom" value="<?php echo esc_attr($dfrom_formatted); ?>" >&nbsp;&nbsp;</nobr>
-		<nobr><label><?php _e('To','appointment-hour-booking'); ?>:</label> <input type="text" id="dto" name="dto" value="<?php echo esc_attr($dto_formatted); ?>" >&nbsp;&nbsp;</nobr>
+		<nobr><label><?php _e('From','appointment-hour-booking'); ?>:</label> <input autocomplete="off" type="text" id="dfrom" name="dfrom" value="<?php echo esc_attr($dfrom_formatted); ?>" >&nbsp;&nbsp;</nobr>
+		<nobr><label><?php _e('To','appointment-hour-booking'); ?>:</label> <input autocomplete="off" type="text" id="dto" name="dto" value="<?php echo esc_attr($dto_formatted); ?>" >&nbsp;&nbsp;</nobr>
         <nobr><?php _e('Paid Status','appointment-hour-booking'); ?>: <select id="paid" name="paid">
          <option value=""><?php _e('All','appointment-hour-booking'); ?></option>
          <option value="1" <?php if (@$_GET["paid"]) echo ' selected'; ?>><?php _e('Paid only','appointment-hour-booking'); ?></option>
       </select></nobr>
         <nobr><?php _e('Booking Status','appointment-hour-booking'); ?>: <?php $this->render_status_box('status', (!isset($_GET["status"])?'-1':sanitize_text_field($_GET["status"])), true); ?></nobr>
 		<nobr><label><?php _e('Item','appointment-hour-booking'); ?>:</label> <select id="cal" name="cal">
-          <option value="0">[<?php _e('All Items','appointment-hour-booking'); ?>]</option>
+          <?php if ($current_user_access) { ?> <option value="0">[<?php _e('All Items','appointment-hour-booking'); ?>]</option><?php } ?>
    <?php
     $myrows = $wpdb->get_results( "SELECT * FROM ".$wpdb->prefix.$this->table_items );                                                                     
-    foreach ($myrows as $item)  
-         echo '<option value="'.intval($item->id).'"'.(intval($item->id)==intval($this->item)?" selected":"").'>'.esc_html($item->form_name).'</option>'; 
+    $saved_id = $this->item;
+    foreach ($myrows as $item)
+    {
+        $this->setId($item->id);
+        if ($current_user_access || @in_array($current_user->ID, unserialize($this->get_option("cp_user_access",""))))        
+           echo '<option value="'.intval($item->id).'"'.(intval($item->id)==intval($saved_id)?" selected":"").'>'.esc_html($item->form_name).'</option>'; 
+    }
+    $this->setId($saved_id);
    ?>
     </select></nobr>
        <div style="float:right">
@@ -91,10 +110,11 @@ $dto_formatted = $this->format_date($dto);
   <div class="cpappb_field_0 cpappb_field_header"><?php _e('Date','appointment-hour-booking'); ?></div>
   <div class="cpappb_field_1 cpappb_field_header"><?php _e('Slot','appointment-hour-booking'); ?></div>
   <div class="cpappb_field_2 cpappb_field_header"><?php _e('Service','appointment-hour-booking'); ?></div>
-  <div class="cpappb_field_3 cpappb_field_header"><?php _e('Paid','appointment-hour-booking'); ?></div>
-  <div class="cpappb_field_4 cpappb_field_header"><?php _e('Email','appointment-hour-booking'); ?></div>
-  <div class="cpappb_field_5 cpappb_field_header"><?php _e('Data','appointment-hour-booking'); ?></div>
-  <div class="cpappb_field_6 cpappb_field_header"><?php _e('Status','appointment-hour-booking'); ?></div>
+  <div class="cpappb_field_3 cpappb_field_header"><?php _e('Qty','appointment-hour-booking'); ?></div>
+  <div class="cpappb_field_4 cpappb_field_header"><?php _e('Paid','appointment-hour-booking'); ?></div>
+  <div class="cpappb_field_5 cpappb_field_header"><?php _e('Email','appointment-hour-booking'); ?></div>
+  <div class="cpappb_field_6 cpappb_field_header"><?php _e('Data','appointment-hour-booking'); ?></div>
+  <div class="cpappb_field_7 cpappb_field_header"><?php _e('Status','appointment-hour-booking'); ?></div>
   <div class="cpapp_break"></div>
  </div> 
  <div class="cpapp_break"></div>
@@ -102,7 +122,7 @@ $dto_formatted = $this->format_date($dto);
 
 echo $this->filter_list( array(
                                'calendar' => ($this->item != 0 ? $this->item : ''),
-                               'fields' => 'DATE,TIME,SERVICE,paid,email,data,cancelled',
+                               'fields' => 'DATE,TIME,SERVICE,quantity,paid,email,data,cancelled',
 	    	                   'from' => $dfrom,
 	    	                   'to' => $dto,
                                'paidonly' => sanitize_text_field(@$_GET["paid"]),
@@ -176,7 +196,7 @@ function cpwptimeslotsbk_mv_autodetect_language()
           viewWeek:true,
           viewMonth:true,
           viewNMonth:true,
-          viewList:false,
+          viewList:true,
           viewdefault:"week",
           numberOfMonths:12,
           showtooltip:false,
@@ -184,7 +204,7 @@ function cpwptimeslotsbk_mv_autodetect_language()
           shownavigate:false,
           url:"",
           target:0,
-          start_weekday:0,
+          start_weekday: <?php echo intval($firstday); ?>,
           language:"en-GB",
           cssStyle:"cupertino",
           edition:true,
@@ -197,7 +217,7 @@ function cpwptimeslotsbk_mv_autodetect_language()
           userAdd:false,
           userEdit:false,
           userDel:false,
-          userEditOwner:true,
+          userEditOwner:false,
           userDelOwner:false,
           showtooltipdwm:true,
           userOwner:0 ,cellheight:62 , palette:0, paletteDefault:"F00", paletteFull:["FFF","FCC","FC9","FF9","FFC","9F9","9FF","CFF","CCF","FCF","CCC","F66","F96","FF6","FF3","6F9","3FF","6FF","99F","F9F","BBB","F00","F90","FC6","FF0","3F3","6CC","3CF","66C","C6C","999","C00","F60","FC3","FC0","3C0","0CC","36F","63F","C3C","666","900","C60","C93","990","090","399","33F","60C","939","333","600","930","963","660","060","366","009","339","636","000","300","630","633","330","030","033","006","309","303"]});
@@ -215,7 +235,7 @@ function cpwptimeslotsbk_mv_autodetect_language()
  function do_dexapp_print()
  {
       w=window.open();
-      w.document.write("<style>.cpappb_field_header {font-weight: bold;background-color: #dcdcdc;}.cpapp_break { clear: both; }.cpappb_field_0, .cpappb_field_1,.cpappb_field_2, .cpappb_field_3,.cpappb_field_4, .cpappb_field_5,.cpappb_field_6, .cpappb_field_7,.cpappb_field_7, .cpappb_field_9,.cpappb_field_10, .cpappb_field_11{float: left; min-width: 85px;padding-right:11px;border-bottom: 1px dotted #777777;margin-left: 1px;     padding: 5px;margin: 2px;}.cpappb_field_0 {color: #44aa44;font-weight: bold; }.cpappb_field_1 {color: #aaaa44;font-weight: bold; }.cpappb_field_2{width:200px;}.cpappb_field_4{width:200px;}.cpappb_field_5{display:none;}.cpnopr{display:none;};table{border:2px solid black;width:100%;}th{border-bottom:2px solid black;text-align:left}td{padding-left:10px;border-bottom:1px solid black;}</style>"+document.getElementById('dex_printable_contents').innerHTML);
+      w.document.write("<style>.cpappb_field_header {font-weight: bold;background-color: #dcdcdc;}.cpapp_break { clear: both; }.cpappb_field_0, .cpappb_field_1,.cpappb_field_2, .cpappb_field_3,.cpappb_field_4, .cpappb_field_5,.cpappb_field_6, .cpappb_field_7,.cpappb_field_8, .cpappb_field_9,.cpappb_field_10, .cpappb_field_11{float: left; min-width: 80px;padding-right:11px;border-bottom: 1px dotted #777777;margin-left: 1px;     padding: 5px;margin: 2px;}.cpappb_field_0 {color: #44aa44;font-weight: bold; }.cpappb_field_1 {color: #aaaa44;font-weight: bold; }.cpappb_field_2{width:180px;}.cpappb_field_3{min-width: 20px;width:20px ;max-width:20px;}.cpappb_field_5{width:200px;overflow:hidden;}.cpappb_field_4,.cpappb_field_6{display:none;}.cpnopr{display:none;};table{border:2px solid black;width:100%;}th{border-bottom:2px solid black;text-align:left}td{padding-left:10px;border-bottom:1px solid black;}</style>"+document.getElementById('dex_printable_contents').innerHTML);
       w.print();
       w.close();    
  }

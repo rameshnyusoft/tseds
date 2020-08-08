@@ -119,13 +119,13 @@ else
 <div class="ahb-section-container">
 	<div class="ahb-section">
        <form action="admin.php" method="get">
-        <input type="hidden" name="page" value="<?php echo $this->menu_parameter; ?>" />
+        <input type="hidden" name="page" value="<?php echo esc_attr($this->menu_parameter); ?>" />
         <input type="hidden" name="cal" value="<?php echo intval($this->item); ?>" />
         <input type="hidden" name="report" value="1" />
         <input type="hidden" name="field" value="<?php echo esc_attr($_GET["field"]); ?>" />
 		<nobr><label><?php _e('Search for','appointment-hour-booking'); ?>:</label> <input type="text" name="search" value="<?php echo esc_attr($_GET["search"]); ?>">&nbsp;&nbsp;</nobr>
-		<nobr><label><?php _e('From','appointment-hour-booking'); ?>:</label> <input type="text" id="dfrom" name="dfrom" value="<?php echo esc_attr($_GET["dfrom"]); ?>" >&nbsp;&nbsp;</nobr>
-		<nobr><label><?php _e('To','appointment-hour-booking'); ?>:</label> <input type="text" id="dto" name="dto" value="<?php echo esc_attr($_GET["dto"]); ?>" >&nbsp;&nbsp;</nobr>
+		<nobr><label><?php _e('From','appointment-hour-booking'); ?>:</label> <input autocomplete="off" type="text" id="dfrom" name="dfrom" value="<?php echo esc_attr($_GET["dfrom"]); ?>" >&nbsp;&nbsp;</nobr>
+		<nobr><label><?php _e('To','appointment-hour-booking'); ?>:</label> <input autocomplete="off" type="text" id="dto" name="dto" value="<?php echo esc_attr($_GET["dto"]); ?>" >&nbsp;&nbsp;</nobr>
 		<nobr><label><?php _e('Item','appointment-hour-booking'); ?>:</label> <select id="cal" name="cal">
           <option value="0">[<?php _e('All Items','appointment-hour-booking'); ?>]</option>
    <?php

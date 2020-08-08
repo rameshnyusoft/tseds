@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointment Hour Booking\n"
 "POT-Creation-Date: 2019-01-18 14:42+0100\n"
-"PO-Revision-Date: 2019-09-20 00:13+0200\n"
+"PO-Revision-Date: 2020-06-03 11:14+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Basepath: ..\n"
-"X-Generator: Poedit 2.2.3\n"
+"X-Generator: Poedit 2.3.1\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;_e;__\n"
 "X-Poedit-SearchPath-0: .\n"
 
@@ -1959,7 +1959,7 @@ msgid "Please enter a valid email address."
 msgstr "Veuillez inscrire une adresse électronique valide."
 
 msgid "Please enter a valid captcha code."
-msgstr "Se il vous plait entrer un code captcha valide."
+msgstr "Veuillez saisir un code captcha valide."
 
 # RevTran=Please enter a valid date in this format (dd \\/mm \\/yyyy)
 msgid "Please enter a valid date with this format(mm/dd/yyyy)"
@@ -1993,7 +1993,7 @@ msgstr ""
 msgid "No more slots available."
 msgstr ""
 
-msgid "Selected time isn't longer available. Please select a different time."
+msgid "Selected time is no longer available. Please select a different time."
 msgstr ""
 
 msgid "Cancelled"
@@ -2036,4 +2036,19 @@ msgid "Send notification emails for this booking"
 msgstr ""
 
 msgid "No appointments found with the selected filters"
+msgstr ""
+
+msgid "Discount code"
+msgstr ""
+
+msgid "Please upload a valid file type"
+msgstr ""
+
+msgid "Online Demo"
+msgstr ""
+
+msgid "I Need Help"
+msgstr ""
+
+msgid "Upgrade Plugin"
 msgstr ""

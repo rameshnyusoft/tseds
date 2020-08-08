@@ -11,6 +11,8 @@ if ( !is_admin() || (!$current_user_access && !@in_array($current_user->ID, unse
 
 $this->item = intval($_GET["cal"]);
 
+$this->option_buffered_item = false;
+$this->option_buffered_id = -1;
 
 define('CP_APPBOOK_DEFAULT_fp_from_email', get_the_author_meta('user_email', get_current_user_id()) );
 define('CP_APPBOOK_DEFAULT_fp_destination_emails', CP_APPBOOK_DEFAULT_fp_from_email);
@@ -122,9 +124,7 @@ $nonce = wp_create_nonce( 'cpappb_actions_admin' );
            {
               // This code won't be used in most cases. This code is for preventing problems in wrong WP themes and conflicts with third party plugins.
               document.write ("<"+"script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.20/jquery-ui.min.js'></"+"script>");
-              document.write ("<"+"script type='text/javascript' src='<?php echo plugins_url('js/jQuery.stringify.js', __FILE__); ?>'></"+"script>");
-              document.write ("<"+"script type='text/javascript' src='<?php echo plugins_url('js/jquery.validate.js', __FILE__); ?>'></"+"script>");
-              document.write ("<"+"script type='text/javascript' src='<?php echo $this->get_site_url( true ).'?cp_cpappb_resources=admin'; ?>'></"+"script>");
+              document.write ("<"+"script type='text/javascript' src='<?php echo $this->get_site_url( true ).'/?cp_cpappb_resources=admin'; ?>'></"+"script>");
            }
          </script>
 
@@ -164,8 +164,8 @@ $nonce = wp_create_nonce( 'cpappb_actions_admin' );
                qs += "&max_size="+f.cv_max_font_size.value;
                qs += "&noise="+f.cv_noise.value;
                qs += "&noiselength="+f.cv_noise_length.value;
-               qs += "&bcolor="+f.cv_background.value;
-               qs += "&border="+f.cv_border.value;
+               qs += "&bcolor="+f.cv_background.value.replace('#','');
+               qs += "&border="+f.cv_border.value.replace('#','');
                qs += "&font="+f.cv_font.options[f.cv_font.selectedIndex].value;
                qs += "&r="+(randcaptcha++);
 
@@ -199,6 +199,9 @@ $nonce = wp_create_nonce( 'cpappb_actions_admin' );
 
          </div>
       </div>
+      <br  />
+      <input type="submit" value="<?php _e('Save Changes and Continue Editing','appointment-hour-booking'); ?>" class="button-primary" /> 
+<br />      
        <br />
         <div style="padding:10px;background-color:#ffffdd;border:1px dotted black;">
             <p><?php _e('<STRONG>In this version</STRONG> the form builder supports <STRONG>calendar, text, email and acceptance checkbox fields</STRONG>.','appointment-hour-booking'); ?></p>
@@ -213,14 +216,14 @@ $nonce = wp_create_nonce( 'cpappb_actions_admin' );
          </div>  
          
       <br />
-      <!--<input type="submit" value="Save Changes" class="button-primary" />-->
+      
       <!-- TEXT DEFINITIONS -->
 	  <h2><?php _e('Labels and Texts','appointment-hour-booking'); ?></h2>
 	  <hr />
 
       <h3 class='hndle' style="padding-top:5px;padding-bottom:5px;"><span><?php _e('Button Labels','appointment-hour-booking'); ?></span></h3>
       <div class="inside">
-         <table class="form-table">
+         <table class="form-table ahbsmallpadding1">
             <tr valign="top">
             <td scope="row">
              <strong><?php _e('Submit button label (text)','appointment-hour-booking'); ?>:</strong><br />
@@ -244,12 +247,12 @@ $nonce = wp_create_nonce( 'cpappb_actions_admin' );
             </tr>
          </table>
       </div>
-
+      
       <hr  size="1" />
 
       <h3 class='hndle' style="padding-top:5px;padding-bottom:5px;"><span><?php _e('Error messages for validation rules','appointment-hour-booking'); ?></span></h3>
       <div class="inside">
-         <table class="form-table">
+         <table class="form-table ahbsmallpadding1">
             <tr valign="top">
             <td scope="row">
              <strong><?php _e('"is required" text','appointment-hour-booking'); ?>:</strong><br />
@@ -300,6 +303,30 @@ $nonce = wp_create_nonce( 'cpappb_actions_admin' );
 
          </table>
       </div>
+      
+      <hr  size="1" />
+
+      <h3 class='hndle' style="padding-top:5px;padding-bottom:5px;"><span><?php _e('Other Texts','appointment-hour-booking'); ?></span></h3>
+      <div class="inside">
+         <table class="form-table ahbsmallpadding1">
+            <tr valign="top">
+            <td scope="row">
+             <strong><?php _e('"Quantity" field label','appointment-hour-booking'); ?>:</strong><br />
+             <input type="text" name="vs_text_quantity" size="40" value="<?php echo esc_attr($this->get_option_not_empty('vs_text_quantity', 'Quantity')); ?>" />
+            </td>
+            <td>
+              <strong><?php _e('"Cancel" link label','appointment-hour-booking'); ?>):</strong><br />
+              <input type="text" name="vs_text_cancel" size="40" value="<?php echo esc_attr($this->get_option_not_empty('vs_text_cancel', 'Cancel')); ?>" />
+            </td>
+            </tr>
+            <tr valign="top">
+            <td scope="row">
+             <strong><?php _e('"Cost" label','appointment-hour-booking'); ?>:</strong><br />
+             <input type="text" name="vs_text_cost" size="40" value="<?php echo esc_attr($this->get_option_not_empty('vs_text_cost', 'Cost')); ?>" /></td>
+            </tr>            
+         </table>
+      </div>     
+      
         <hr>
 		<div class="ahb-buttons-container">
 			<input type="button" value="<?php _e('Next Step - General Settings >','appointment-hour-booking'); ?>" class="button" style="float:right;margin-right:10px" onclick="ahbGoToStep(2);" />
@@ -691,10 +718,10 @@ $nonce = wp_create_nonce( 'cpappb_actions_admin' );
              <th scope="row"><?php _e('Font','appointment-hour-booking'); ?>:</th>
              <td>
                 <select name="cv_font" onchange="generateCaptcha();" >
-                  <option value="font-1.ttf"<?php if ("font-1.ttf" == $this->get_option('cv_font', CP_APPBOOK_DEFAULT_cv_font)) echo " selected"; ?>>Font 1</option>
-                  <option value="font-2.ttf"<?php if ("font-2.ttf" == $this->get_option('cv_font', CP_APPBOOK_DEFAULT_cv_font)) echo " selected"; ?>>Font 2</option>
-                  <option value="font-3.ttf"<?php if ("font-3.ttf" == $this->get_option('cv_font', CP_APPBOOK_DEFAULT_cv_font)) echo " selected"; ?>>Font 3</option>
-                  <option value="font-4.ttf"<?php if ("font-4.ttf" == $this->get_option('cv_font', CP_APPBOOK_DEFAULT_cv_font)) echo " selected"; ?>>Font 4</option>
+                  <option value="font1"<?php if ("font1" == $this->get_option('cv_font', CP_APPBOOK_DEFAULT_cv_font)) echo " selected"; ?>>Font 1</option>
+                  <option value="font2"<?php if ("font2" == $this->get_option('cv_font', CP_APPBOOK_DEFAULT_cv_font)) echo " selected"; ?>>Font 2</option>
+                  <option value="font3"<?php if ("font3" == $this->get_option('cv_font', CP_APPBOOK_DEFAULT_cv_font)) echo " selected"; ?>>Font 3</option>
+                  <option value="font4"<?php if ("font4" == $this->get_option('cv_font', CP_APPBOOK_DEFAULT_cv_font)) echo " selected"; ?>>Font 4</option>
                 </select>
              </td>
             </tr>

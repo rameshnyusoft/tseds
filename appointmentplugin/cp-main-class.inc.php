@@ -15,7 +15,7 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
     public $CP_CFPP_global_templates;
     protected $postURL;
 
-    protected $paid_statuses = array('Pending','Cancelled','Rejected');
+    protected $paid_statuses = array('Pending','Cancelled','Cancelled by customer','Rejected','Attended');
     public $shorttag = 'CP_APP_HOUR_BOOKING';
     public $blocked_by_admin_indicator = 'BLOCKED@BY.ADMIN';
 
@@ -30,7 +30,7 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
         if (!count($results))
         {
             $sql = "CREATE TABLE ".$wpdb->prefix.$this->table_messages." (
-                id mediumint(9) NOT NULL AUTO_INCREMENT,
+                id int(10) NOT NULL AUTO_INCREMENT,
                 formid INT NOT NULL,
                 time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
                 ipaddr VARCHAR(250) DEFAULT '' NOT NULL,
@@ -91,6 +91,10 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
                  vs_text_submitbtn VARCHAR(250) DEFAULT '' NOT NULL,
                  vs_text_previousbtn VARCHAR(250) DEFAULT '' NOT NULL,
                  vs_text_nextbtn VARCHAR(250) DEFAULT '' NOT NULL,                 
+                 
+                 vs_text_quantity TEXT DEFAULT '' NOT NULL,   
+                 vs_text_cancel TEXT DEFAULT '' NOT NULL,   
+                 vs_text_cost TEXT DEFAULT '' NOT NULL,   
 
                  cp_user_access text,
                  cp_user_access_settings VARCHAR(10) DEFAULT '' NOT NULL,
@@ -164,6 +168,10 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
                                       'vs_text_submitbtn' => $this->get_option('vs_text_submitbtn', 'Submit'),
                                       'vs_text_previousbtn' => $this->get_option('vs_text_previousbtn', 'Previous'),
                                       'vs_text_nextbtn' => $this->get_option('vs_text_nextbtn', 'Next'),                                      
+                                      
+                                      'vs_text_quantity' => $this->get_option_not_empty('vs_text_quantity', 'Quantity'),         
+                                      'vs_text_cancel' => $this->get_option_not_empty('vs_text_cancel', 'Cancel'),         
+                                      'vs_text_cost' => $this->get_option_not_empty('vs_text_cost', 'Cost'),         
 
                                       'rep_enable' => $this->get_option('rep_enable', 'no'),
                                       'rep_days' => $this->get_option('rep_days', '1'),
@@ -219,7 +227,10 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
         $posted_data = unserialize($events[0]->posted_data);        
         $countapps = count($posted_data["apps"]);
         for($k=0; $k<$countapps; $k++)
-             $posted_data["apps"][$k]["cancelled"] = $status;
+        {
+             $posted_data["apps"][$k]["cancelled"] = $status;         
+             $posted_data["app_status_".($k+1)] = $status;         
+        }
         $posted_data = serialize($posted_data);
         $wpdb->update ( $wpdb->prefix.$this->table_messages, array( 'posted_data' => $posted_data ), array( 'id' => $id ));
         do_action( 'cpappb_update_status', $id, $status ); 
@@ -230,21 +241,25 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
     public function filter_list($atts) {
         global $wpdb;
         extract( shortcode_atts( array(
-	    	'calendar' => '',   // accepts comma separated IDs
+	    	'calendar' => '',  // accepts comma separated IDs
 	    	'fields' => 'DATE,TIME,email',
 	    	'from' => "today",
 	    	'to' => "today +30 days",
             'paidonly' => "",
             'status' => "-1",
             'service' => "",
+            'email' => "",
             'onlycurrentuser' => ""
 	    ), $atts ) );
             
         if (!is_admin())
         {
             wp_enqueue_style('cpapp-publicstyle', plugins_url('css/stylepublic.css', __FILE__));
-            wp_enqueue_style('cpapp-custompublicstyle', $this->get_site_url( false ).'?cp_cpappb_resources=css');
+            wp_enqueue_style('cpapp-custompublicstyle', $this->fixurl($this->get_site_url( false ),'cp_cpappb_resources=css'));
         }
+        
+        if (strtolower($status) == 'approved')
+            $status = '';
         
         ob_start();
         
@@ -257,7 +272,10 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
         $calendar = explode (",",$calendar);
         foreach ($calendar as $cal)
             if (trim($cal))
+            {
                 $calquery .= ($calquery!=''?' OR ':'').'formid='.intval(trim($cal));
+                $this->setId(intval(trim($cal)));
+            }
         if ($calquery != '')
             $calquery = '('.$calquery.') AND ';
 
@@ -270,23 +288,43 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
                 $user_query = "(1=0) AND "; // if no logged in user then no current user bookings
         }
         else
-            $user_query = '';        
+            $user_query = '';  
+
+        if ($email != '')
+           $user_query .= " (notifyto='".esc_sql($email)."') AND ";        
         
         // pre-select time-slots
         $selection = array();
-        $rows = $wpdb->get_results( $wpdb->prepare("SELECT notifyto,posted_data,data FROM ".$wpdb->prefix.$this->table_messages." WHERE notifyto<>'".esc_sql($this->blocked_by_admin_indicator)."' AND ".$user_query.$calquery."time<=%s ORDER BY time DESC LIMIT 0,1000", $to_query) );
+        $rows = $wpdb->get_results( $wpdb->prepare("SELECT notifyto,posted_data,data,formid FROM ".$wpdb->prefix.$this->table_messages." WHERE notifyto<>'".esc_sql($this->blocked_by_admin_indicator)."' AND ".$user_query.$calquery."time<=%s ORDER BY time DESC LIMIT 0,10000", $to_query) );
         
         foreach($rows as $item)
         {        
             $data = unserialize($item->posted_data);
             if (!$paidonly || $data['paid'])
             {               
-                foreach($data["apps"] as $app)
-                    if ($app["date"] >= $from && $app["date"] <= $to && ($status == '-1' || $status == $app["cancelled"]) )
+                $appindex = 0;
+                if (is_array($data["apps"])) 
+                    foreach($data["apps"] as $app)
                     {
-                        if ($service == '' || $service == $app["service"])                
-                            $selection[] = array($app["date"]." ".$app["slot"], $app["date"], $app["slot"], $data, sanitize_email($item->notifyto), $item->data, $app["cancelled"], $app["service"]);
-                    }    
+                        $appindex++;
+                        if ($app["date"] >= $from && $app["date"] <= $to && ($status == '-1' || $status == $app["cancelled"]) )
+                        {
+                            if ($service == '' || $service == $app["service"])                
+                                $selection[] = array(  
+                                                     $app["date"]." ".$app["slot"], 
+                                                     $app["date"], 
+                                                     $app["slot"], 
+                                                     $data, 
+                                                     sanitize_email($item->notifyto), 
+                                                     $item->data, 
+                                                     $app["cancelled"], 
+                                                     $app["service"],
+                                                     $appindex,                       // 8
+                                                     $item->formid,                   // 9
+                                                     $app["quant"]              // 10                                                   
+                                                    );
+                        }    
+                    }
             }
         }
 
@@ -316,7 +354,7 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
                         echo $i+1;
                         break;
                     case 'weekday':
-                        echo __(date('l',strtotime($selection[$i][1])),'appointment-hour-booking');
+                        echo ucfirst(__(date('l',strtotime($selection[$i][1]))));
                         break;
                     case 'date':
                         echo $this->format_date($selection[$i][1]);
@@ -329,12 +367,15 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
                         break;  
                     case 'service':
                         echo esc_html($selection[$i][7])."&nbsp;";
-                        break;                         
+                        break;          
+                    case 'quantity':
+                        echo $selection[$i][10]."&nbsp;";
+                        break;                          
                     case 'cancelled':
                         if ($selection[$i][6] == '') 
                             echo __('Approved','appointment-hour-booking');
                         else
-                            echo esc_html($selection[$i][6]);
+                            echo esc_html(__($selection[$i][6],'appointment-hour-booking'));
                         echo '&nbsp;';
                         break;                         
                     case 'data':
@@ -409,22 +450,16 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
         {
             wp_enqueue_style('cpapp-calendarstyle', plugins_url('css/cupertino/calendar.css', __FILE__));
             wp_enqueue_style('cpapp-publicstyle', plugins_url('css/stylepublic.css', __FILE__));
-            wp_enqueue_style('cpapp-custompublicstyle', $this->get_site_url( false ).'?cp_cpappb_resources=css');
+            wp_enqueue_style('cpapp-custompublicstyle', $this->fixurl($this->get_site_url( false ),'cp_cpappb_resources=css'));
             wp_enqueue_style('wp-jquery-ui-dialog');
                     
             if ($calendar_language != '')
-                wp_enqueue_script($this->prefix.'_language_file', plugins_url('js/languages/jquery.ui.datepicker-'.$calendar_language.'.js', __FILE__),array("jquery","jquery-ui-core","jquery-ui-sortable","jquery-ui-tabs","jquery-ui-droppable","jquery-ui-button","query-stringify","jquery-ui-datepicker"));      
+                wp_enqueue_script($this->prefix.'_language_file', plugins_url('js/languages/jquery.ui.datepicker-'.$calendar_language.'.js', __FILE__),array("jquery","jquery-ui-core","jquery-ui-sortable","jquery-ui-tabs","jquery-ui-droppable","jquery-ui-button","jquery-ui-datepicker"));      
         
-            wp_deregister_script('query-stringify');
-            wp_register_script('query-stringify', plugins_url('/js/jQuery.stringify.js', __FILE__));
-
-            wp_deregister_script($this->prefix.'_validate_script');
-            wp_register_script($this->prefix.'_validate_script', plugins_url('/js/jquery.validate.js', __FILE__));
-
             wp_enqueue_script( $this->prefix.'_builder_script',
-               $this->get_site_url( false ).'?cp_cpappb_resources=public',array("jquery","jquery-ui-core","jquery-ui-datepicker","jquery-ui-widget","jquery-ui-position","jquery-ui-tooltip","jquery-ui-dialog","query-stringify",$this->prefix."_validate_script"), false, true );  
+               $this->fixurl($this->get_site_url( false ), 'cp_cpappb_resources=public'),array("jquery","jquery-ui-core","jquery-ui-datepicker","jquery-ui-widget","jquery-ui-position","jquery-ui-tooltip","jquery-ui-dialog"), false, true );  
 
-            wp_enqueue_script( $this->prefix.'_customjs', $this->get_site_url( false ).'?cp_cpappb_resources=customjs',array($this->prefix.'_builder_script'));
+            wp_enqueue_script( $this->prefix.'_customjs', $this->fixurl($this->get_site_url( false ),'cp_cpappb_resources=customjs&cal='.$this->item.'&nc=1'),array($this->prefix.'_builder_script'));
 
             wp_localize_script($this->prefix.'_builder_script', $this->prefix.'_fbuilder_config'.('_'.$this->print_counter), array('obj' =>
             '{"pub":true,"identifier":"'.('_'.$this->print_counter).'","messages": {
@@ -456,10 +491,10 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
         
         ?><!--noptimize-->
         <script type="text/javascript">
-         var cp_hourbk_cancel_label = '<?php echo str_replace("'", "\'", __("cancel",'appointment-hour-booking')); ?>';
-         var cp_hourbk_quantity_label = '<?php echo str_replace("'", "\'", __("Quantity",'appointment-hour-booking')); ?>';
-         var cp_hourbk_cost_label = '<?php echo str_replace("'", "\'", __("Cost",'appointment-hour-booking')); ?>';
-         var cp_hourbk_overlapping_label = '<?php echo str_replace("'", "\'", __("Selected time isn't longer available. Please select a different time.",'appointment-hour-booking')); ?>';
+         var cp_hourbk_cancel_label = '<?php echo str_replace("'", "\'", __( $this->get_option_not_empty('vs_text_cancel', 'Cancel') ,'appointment-hour-booking')); ?>';
+         var cp_hourbk_quantity_label = '<?php echo str_replace("'", "\'", __( $this->get_option_not_empty('vs_text_quantity', 'Quantity') ,'appointment-hour-booking')); ?>';
+         var cp_hourbk_cost_label = '<?php echo str_replace("'", "\'", __( $this->get_option_not_empty('vs_text_cost', 'Cost') ,'appointment-hour-booking')); ?>';
+         var cp_hourbk_overlapping_label = '<?php echo str_replace("'", "\'", __("Selected time is no longer available. Please select a different time.",'appointment-hour-booking')); ?>';
          var cp_hourbk_nomore_label = '<?php echo str_replace("'", "\'", __("No more slots available.",'appointment-hour-booking')); ?>';
          var cp_hourbk_avoid_overlapping = 0;
          var apphboverbooking_handler<?php echo $this->print_counter-1; ?> = false;
@@ -507,7 +542,13 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
                                 {
                                     apphboverbooking_handler<?php echo $this->print_counter-1; ?> = true;
                                     if (<?php echo $this->prefix; ?>_pform_doValidate<?php echo '_'.$this->print_counter; ?>(form))
+                                    {
+                                        $dexQuery( ".pbSubmit" ).unbind();
+                                        if ($dexQuery( ".pbSubmit" ).hasClass("nofirst"))
+                                            return false;
+                                        $dexQuery( ".pbSubmit" ).addClass("nofirst");        
                                         document.getElementById("<?php echo $this->prefix.'_pform_'.($this->print_counter); ?>").submit();
+                                    }
                                 }
 		                    }  
 		                }
@@ -619,24 +660,22 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
                  <?php $plugin_url = plugins_url('', __FILE__); ?>
                  <!--noptimize-->
                  <link href="<?php echo plugins_url('css/stylepublic.css', __FILE__); ?>" type="text/css" rel="stylesheet" />
-                 <link href="<?php echo $this->get_site_url( false ).'?cp_cpappb_resources=css'; ?>" type="text/css" rel="stylesheet" />
+                 <link href="<?php echo $this->fixurl($this->get_site_url( false ),'cp_cpappb_resources=css'); ?>" type="text/css" rel="stylesheet" />
                  <link href="<?php echo plugins_url('css/cupertino/calendar.css', __FILE__); ?>" type="text/css" rel="stylesheet" />
                  <script type='text/javascript' src='<?php echo $plugin_url.'/../../../wp-includes/js/jquery/jquery.js'; ?>'></script>
                  <script type='text/javascript' src='<?php echo $plugin_url.'/../../../wp-includes/js/jquery/ui/'.$prefix_ui.'core.min.js'; ?>'></script>
                  <script type='text/javascript' src='<?php echo $plugin_url.'/../../../wp-includes/js/jquery/ui/'.$prefix_ui.'datepicker.min.js'; ?>'></script>
                  <script type='text/javascript' src='<?php echo $plugin_url.'/../../../wp-includes/js/jquery/ui/'.$prefix_ui.'widget.min.js'; ?>'></script>
                  <script type='text/javascript' src='<?php echo $plugin_url.'/../../../wp-includes/js/jquery/ui/'.$prefix_ui.'position.min.js'; ?>'></script>
-                 <script type='text/javascript' src='<?php echo $plugin_url.'/../../../wp-includes/js/jquery/ui/'.$prefix_ui.'tooltip.min.js'; ?>'></script>
-                 <script type='text/javascript' src='<?php echo plugins_url('js/jQuery.stringify.js', __FILE__); ?>'></script>
-                 <script type='text/javascript' src='<?php echo plugins_url('js/jquery.validate.js', __FILE__); ?>'></script>
+                 <script type='text/javascript' src='<?php echo $plugin_url.'/../../../wp-includes/js/jquery/ui/'.$prefix_ui.'tooltip.min.js'; ?>'></script>                 
                  <?php if ($calendar_language != '') { ?><script type='text/javascript' src='<?php echo plugins_url('js/languages/jquery.ui.datepicker-'.$calendar_language.'.js', __FILE__); ?>'></script><?php } ?>
                  <script type='text/javascript'>
                  /* <![CDATA[ */
                  var <?php echo $this->prefix; ?>_fbuilder_config<?php echo '_'.$this->print_counter; ?> = {"obj":"{\"pub\":true,\"identifier\":\"<?php echo '_'.$this->print_counter; ?>\",\"messages\": {\n    \t                \t\"required\": \"<?php echo str_replace(array('"'),array('\\"'),$this->get_option('vs_text_is_required', CP_APPBOOK_DEFAULT_vs_text_is_required));?>\",\"maxapp\": \"<?php echo str_replace(array('"'),array('\\"'),$this->get_option('vs_text_maxapp', CP_APPBOOK_DEFAULT_vs_text_maxapp));?>\",\"language\": \"<?php echo str_replace(array('"'),array('\\"'),$calendar_language);?>\",\"date_format\": \"<?php echo str_replace(array('"'),array('\\"'),$this->get_option('date_format', 'mm/dd/yy'));?>\",\n    \t                \t\"email\": \"<?php echo str_replace(array('"'),array('\\"'),$this->get_option('vs_text_is_email', CP_APPBOOK_DEFAULT_vs_text_is_email));?>\",\n    \t                \t\"datemmddyyyy\": \"<?php echo str_replace(array('"'),array('\\"'),$this->get_option('vs_text_datemmddyyyy', CP_APPBOOK_DEFAULT_vs_text_datemmddyyyy));?>\",\n    \t                \t\"dateddmmyyyy\": \"<?php echo str_replace(array('"'),array('\\"'),$this->get_option('vs_text_dateddmmyyyy', CP_APPBOOK_DEFAULT_vs_text_dateddmmyyyy));?>\",\n    \t                \t\"number\": \"<?php echo str_replace(array('"'),array('\\"'),$this->get_option('vs_text_number', CP_APPBOOK_DEFAULT_vs_text_number));?>\",\n    \t                \t\"digits\": \"<?php echo str_replace(array('"'),array('\\"'),$this->get_option('vs_text_digits', CP_APPBOOK_DEFAULT_vs_text_digits));?>\",\n    \t                \t\"max\": \"<?php echo str_replace(array('"'),array('\\"'),$this->get_option('vs_text_max', CP_APPBOOK_DEFAULT_vs_text_max));?>\",\n    \t                \t\"min\": \"<?php echo str_replace(array('"'),array('\\"'),$this->get_option('vs_text_min', CP_APPBOOK_DEFAULT_vs_text_min));?>\",\"previous\": \"<?php echo str_replace(array('"'),array('\\"'),$previous_label); ?>\",\"next\": \"<?php echo str_replace(array('"'),array('\\"'),$next_label); ?>\"\n    \t                }}"};
                  /* ]]> */
                  </script>
-                 <script type='text/javascript' src='<?php echo $this->get_site_url( false ).'?cp_cpappb_resources=public'; ?>'></script>
-                 <script type='text/javascript' src='<?php echo $this->get_site_url( false ).'?cp_cpappb_resources=customjs'; ?>'></script>
+                 <script type='text/javascript' src='<?php echo $this->fixurl($this->get_site_url( false ) ,'cp_cpappb_resources=public'); ?>'></script>
+                 <script type='text/javascript' src='<?php echo $this->fixurl($this->get_site_url( false ) ,'cp_cpappb_resources=customjs'); ?>'></script>
                  <!--/noptimize-->
             <?php
         }
@@ -658,15 +697,15 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
 
 
     public function admin_menu() {
-        add_options_page($this->plugin_name.' Options', $this->plugin_name, 'manage_options', $this->menu_parameter, array($this, 'settings_page') );
-        add_menu_page( $this->plugin_name.' Options', $this->plugin_name, 'read', $this->menu_parameter, array($this, 'settings_page') );
-        add_submenu_page( $this->menu_parameter, 'General Settings', 'General Settings', 'edit_pages', $this->menu_parameter."_settings", array($this, 'settings_page') );
-        add_submenu_page( $this->menu_parameter, 'Add Ons', 'Add Ons', 'edit_pages', $this->menu_parameter."_addons", array($this, 'settings_page') );
-        add_submenu_page( $this->menu_parameter, 'Online Demo', 'Online Demo', 'edit_pages', $this->menu_parameter."_odemo", array($this, 'settings_page') );                
-        add_submenu_page( $this->menu_parameter, 'I Need Help', 'I Need Help', 'edit_pages', $this->menu_parameter."_support", array($this, 'settings_page') );
-        add_submenu_page( $this->menu_parameter, 'Upgrade Plugin', 'Upgrade Plugin', 'edit_pages', $this->menu_parameter."_upgrade", array($this, 'settings_page') );        
+        add_options_page($this->plugin_name.' '.__( 'Options' ,'appointment-hour-booking'), $this->plugin_name, 'manage_options', $this->menu_parameter, array($this, 'settings_page') );
+        add_menu_page( $this->plugin_name.' '.__( 'Options' ,'appointment-hour-booking'), $this->plugin_name, 'read', $this->menu_parameter, array($this, 'settings_page') );
+        add_submenu_page( $this->menu_parameter, __('General Settings' ,'appointment-hour-booking'), __('General Settings' ,'appointment-hour-booking'), 'edit_pages', $this->menu_parameter."_settings", array($this, 'settings_page') );
+        add_submenu_page( $this->menu_parameter, __('Add Ons' ,'appointment-hour-booking'), __('Add Ons' ,'appointment-hour-booking'), 'edit_pages', $this->menu_parameter."_addons", array($this, 'settings_page') );
+        add_submenu_page( $this->menu_parameter, __( 'Online Demo','appointment-hour-booking'), __('Online Demo' ,'appointment-hour-booking'), 'edit_pages', $this->menu_parameter."_odemo", array($this, 'settings_page') );                
+        add_submenu_page( $this->menu_parameter, __( 'I Need Help','appointment-hour-booking'), __('I Need Help' ,'appointment-hour-booking'), 'edit_pages', $this->menu_parameter."_support", array($this, 'settings_page') );
+        add_submenu_page( $this->menu_parameter, __('Upgrade Plugin' ,'appointment-hour-booking'), __('Upgrade Plugin' ,'appointment-hour-booking'), 'edit_pages', $this->menu_parameter."_upgrade", array($this, 'settings_page') );        
     }
-
+ 
 
     function insert_button() {
         global $wpdb;
@@ -680,13 +719,7 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
         wp_enqueue_script('jquery-ui-dialog');
         wp_enqueue_script( 'cpapphourbk_classic_editor', plugins_url('/js/insertpanel.js', __FILE__));    
         
-        $forms = array();
-        $rows = $wpdb->get_results("SELECT id,form_name FROM ".$wpdb->prefix.$this->table_items." ORDER BY form_name");
-        foreach ($rows as $item)
-           $forms[] = array (
-                            'value' => $item->id,
-                            'label' => $item->form_name,
-                            );
+        $forms = $this->getThisUserForms();
 
         wp_localize_script( 'cpapphourbk_classic_editor', 'apphourbk_formsclassic', array(
                             'forms' => $forms,
@@ -695,6 +728,36 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
         
         print '<a href="javascript:cpappbk_appointments_fpanel.open()" title="'.__('Insert Appointment Hour Booking','appointment-hour-booking').'"><img hspace="5" src="'.plugins_url('/images/cp_form.gif', __FILE__).'" alt="'.__('Insert  Appointment Hour Booking','appointment-hour-booking').'" /></a>';
     }
+    
+    
+    function getThisUserForms()
+    {
+        global $wpdb;
+        $current_user = wp_get_current_user();
+        $current_user_access = current_user_can('manage_options');
+        $rows = $wpdb->get_results("SELECT id,form_name,cp_user_access FROM ".$wpdb->prefix.$this->table_items." ORDER BY form_name");
+        $forms = array();
+        if (!$current_user_access)  // if isn't admin and has some form assigned then return only assigned forms
+        {
+            foreach ($rows as $item)
+            {
+               if (@in_array($current_user->ID, unserialize($item->cp_user_access)))
+                   $forms[] = array (
+                                    'value' => $item->id,
+                                    'label' => $item->form_name,
+                                    );                           
+            }
+        }
+        
+        if (!count($forms))
+            foreach ($rows as $item)
+               $forms[] = array (
+                                'value' => $item->id,
+                                'label' => $item->form_name,
+                                );        
+                            
+        return $forms;                    
+    }    
 
 
     public function settings_page() {
@@ -758,23 +821,12 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
         
         wp_enqueue_style('cpapp-calendarstyle', plugins_url('css/cupertino/calendar.css', __FILE__));
         wp_enqueue_style('cpapp-publicstyle', plugins_url('css/stylepublic.css', __FILE__));                   
-        wp_enqueue_style('cpapp-custompublicstyle', $this->get_site_url( false ).'?cp_cpappb_resources=css'); 
-        
-        wp_deregister_script('query-stringify');
-        wp_register_script('query-stringify', plugins_url('/js/jQuery.stringify.js', __FILE__));
-
-        wp_deregister_script($this->prefix.'_validate_script');
-        wp_register_script($this->prefix.'_validate_script', plugins_url('/js/jquery.validate.js', __FILE__));        
+        wp_enqueue_style('cpapp-custompublicstyle', $this->fixurl($this->get_site_url( false ),'cp_cpappb_resources=css')); 
+          
         wp_enqueue_script( $this->prefix.'_builder_script',
-               $this->get_site_url( false ).'?cp_cpappb_resources=public',array("jquery","jquery-ui-core","jquery-ui-datepicker","jquery-ui-widget","jquery-ui-position","jquery-ui-tooltip","query-stringify",$this->prefix."_validate_script"), false, true ); 
+               $this->fixurl($this->get_site_url( false ),'cp_cpappb_resources=public'),array("jquery","jquery-ui-core","jquery-ui-datepicker","jquery-ui-widget","jquery-ui-position","jquery-ui-tooltip"), false, true ); 
                
-        $forms = array();
-        $rows = $wpdb->get_results("SELECT id,form_name FROM ".$wpdb->prefix.$this->table_items." ORDER BY form_name");
-        foreach ($rows as $item)
-           $forms[] = array (
-                            'value' => $item->id,
-                            'label' => $item->form_name,
-                            );
+        $forms = $this->getThisUserForms();
 
         wp_localize_script( 'cpapphourbk_gutenberg_editor', 'apphourbk_forms', array(
                             'forms' => $forms,
@@ -790,7 +842,7 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
         else if ($atts["formId"])
         {
             $this->setId($atts["formId"]);
-            return '<input type="hidden" name="form_structure'.$atts["instanceId"].'" id="form_structure'.$atts["instanceId"].'" value="'.esc_attr($this->get_option('form_structure')).'" /><fieldset class="ahbgutenberg_editor" disabled><div id="fbuilder"><div id="fbuilder_'.$atts["instanceId"].'"><div id="formheader_'.$atts["instanceId"].'"></div><div id="fieldlist_'.$atts["instanceId"].'"></div></div></div></fieldset>';
+            return '<input type="hidden" name="form_structure'.$atts["instanceId"].'" id="form_structure'.$atts["instanceId"].'" value="'.str_replace("\r","",str_replace("\n","",esc_attr($this->get_option('form_structure')))).'" /><fieldset class="ahbgutenberg_editor" disabled><div id="fbuilder"><div id="fbuilder_'.$atts["instanceId"].'"><div id="formheader_'.$atts["instanceId"].'"></div><div id="fieldlist_'.$atts["instanceId"].'"></div></div></div></fieldset>';
         }
         else
             return '';
@@ -804,9 +856,8 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
             wp_register_script('bootstrap-datepicker-js', plugins_url('/js/nope.js', __FILE__));
             wp_deregister_script( 'wpsp_wp_admin_jquery7' );
             wp_register_script('wpsp_wp_admin_jquery7', plugins_url('/js/nope.js', __FILE__));            
-            wp_deregister_script('query-stringify');
-            wp_register_script('query-stringify', plugins_url('/js/jQuery.stringify.js', __FILE__));
-            wp_enqueue_script( $this->prefix.'_builder_script', $this->get_site_url( true ).'?cp_cpappb_resources=admin',array("jquery","jquery-ui-core","jquery-ui-sortable","jquery-ui-tabs","jquery-ui-droppable","jquery-ui-button","query-stringify","jquery-ui-datepicker") );
+
+            wp_enqueue_script( $this->prefix.'_builder_script', $this->get_site_url( true ).'?cp_cpappb_resources=admin',array("jquery","jquery-ui-core","jquery-ui-sortable","jquery-ui-tabs","jquery-ui-droppable","jquery-ui-button","jquery-ui-datepicker") );
 
             if (isset($_GET["calendarview"]) && $_GET["calendarview"] == '1')
                 wp_enqueue_script( 'jquery-ui-dialog' );
@@ -817,7 +868,7 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
             $calendar_language = $this->get_option('calendar_language','');    
             if ($calendar_language == '') $calendar_language = $this->autodetect_language();  
             if ($calendar_language != '')
-                wp_enqueue_script($this->prefix.'_language_file', plugins_url('js/languages/jquery.ui.datepicker-'.$calendar_language.'.js', __FILE__), array("jquery","jquery-ui-core","jquery-ui-sortable","jquery-ui-tabs","jquery-ui-droppable","jquery-ui-button","query-stringify","jquery-ui-datepicker"));            
+                wp_enqueue_script($this->prefix.'_language_file', plugins_url('js/languages/jquery.ui.datepicker-'.$calendar_language.'.js', __FILE__), array("jquery","jquery-ui-core","jquery-ui-sortable","jquery-ui-tabs","jquery-ui-droppable","jquery-ui-button","jquery-ui-datepicker"));            
         }
         if( 'post.php' != $hook  && 'post-new.php' != $hook )
             return;
@@ -1009,10 +1060,7 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
         global $wpdb;
         
 
-        load_plugin_textdomain( 'appointment-hour-booking', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
-        //$ao_options = get_option('autoptimize_js_exclude',"seal.js, js/jquery/jquery.js");
-        //if (!strpos($ao_options,'stringify.js'))
-        //   update_option('autoptimize_js_exclude',"jQuery.stringify.js,jquery.validate.js,".$ao_options);        
+        load_plugin_textdomain( 'appointment-hour-booking', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );       
         
         if(!empty($_REQUEST['cp_app_action']))
         {
@@ -1025,7 +1073,7 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
             {
                 $data = unserialize($myrows[$i]->posted_data);
                 for($k=0; $k<count($data["apps"]); $k++) 
-                    if ( (!isset($data["apps"][$k]["cancelled"]) || $data["apps"][$k]["cancelled"] == '') && 
+                    if ( (!isset($data["apps"][$k]["cancelled"]) || $data["apps"][$k]["cancelled"] == '' || $data["apps"][$k]["cancelled"] == 'Attended') && 
                         ( !isset($data["apps"][$k]["field"]) || @$data["apps"][$k]["field"] == $field || $field == '') 
                         )
                     {
@@ -1155,7 +1203,6 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
         $apps = $this->extract_appointments($form_data[0], $posted_items, $sequence);
         $price = $this->extract_total_price ($apps);
         $apptext = $this->get_appointments_text ($apps);
- 
         $excluded_items = array();
         
         foreach ($form_data[0] as $item)
@@ -1183,10 +1230,10 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
         
         // grab posted data
         //---------------------------
-        //$buffer = __('Appointments','appointment-hour-booking').":\n".$apptext."\n";
-         $buffer = __('','appointment-hour-booking')."\n".$apptext."\n"; 
-
-        $params = array();
+        $buffer = __('Appointments','appointment-hour-booking').":\n".$apptext."\n";
+        
+        $founddata = false;
+        $params = array();  
         $params["final_price"] = $price;
         $params["apps"] = $apps;
         foreach ($apps as $appitem) 
@@ -1201,9 +1248,11 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
            $params["app_starttime_".$appitem["id"]] = $this->format12hours(trim(@$slotpieces[0]), @$appitem["military"] == 0);
            $params["app_endtime_".$appitem["id"]] = $this->format12hours(trim(@$slotpieces[1]), @$appitem["military"] == 0);          
            $params["app_quantity_".$appitem["id"]] = $appitem["quant"];
+           $founddata = true;
         }
         
         $params["formid"] = $this->item;
+        $params["formname"] = $this->get_option('form_name');
         $params["referrer"] = $posted_items["refpage".$sequence];        
         foreach ($posted_items as $item => $value)
             if (isset($fields[str_replace($sequence,'',$item)]))
@@ -1216,11 +1265,9 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
                 else 
                     $value = str_replace(CP_APPBOOK_REP_ARR, "@", $value);
                 if (!in_array(str_replace($sequence,'',$item), $excluded_items))
-
-                  /******Nyusoft solution*********/
-                  //Comment $buffer .= variable because of removing email in appoinment details
-                    //$buffer .= ($fields[str_replace($sequence,'',$item)]?$fields[str_replace($sequence,'',$item)] . ": ":""). (is_array($value)?(implode(", ",$value)):($value)) . "\n\n";
+                    $buffer .= ($fields[str_replace($sequence,'',$item)]?$fields[str_replace($sequence,'',$item)] . ": ":""). (is_array($value)?(implode(", ",$value)):($value)) . "\n\n";
                 $params[str_replace($sequence,'',$item)] = $value;
+                $founddata = true;
             }
 
         foreach ($_FILES as $item => $value)
@@ -1256,18 +1303,19 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
 	    				} //else echo $movefile[ 'error' ];
 	    			}	
 	    		}
- 
-          $joinned_files_names = implode( ", ", $files_names_arr );
+	    		$joinned_files_names = implode( ", ", $files_names_arr );
 	    		$buffer .= $fields[ $item ] . ": ". $joinned_files_names . "\n\n";
 	    		$params[ $item ] = $joinned_files_names;
+                $founddata = true;
 	    		//$params[ $item."_links"] = implode( ",",  $files_links_arr );
 	    		//$params[ $item."_urls"] = implode( ",",  $files_urls_arr );
 	    	}
 	    }
+	
         $buffer_A = (defined('CPAPPHOURBK_BLOCK_TIMES_PROCESS')?__('BLOCKED BY ADMIN','appointment-hour-booking')."\n\n":'') . $buffer;
 
         if ($this->booking_form_nonce || is_admin()) 
-            $this->verify_nonce ($posted_items["anonce"], 'cpappb_actions_bookingform');
+            $this->verify_nonce ($posted_items["anonce"], 'cpappb_actions_bookingform');        
         
 	    /**
 	     * Action called before insert the data into database. 
@@ -1275,6 +1323,12 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
 	     */							
 	    do_action( 'cpappb_process_data_before_insert', $params );
 
+        if (!$founddata)
+        {
+            echo 'Empty post! No data received.';
+            exit;
+        }
+        
         // insert into database
         //---------------------------
         $current_user = wp_get_current_user();
@@ -1339,20 +1393,70 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
     }
 
     
-    public function replace_tags ($message, $params, $urlencode = false) 
+    public function replace_tags ($message, $params, $urlencode = false, $slotindex = '')  
     {
+        if ($slotindex !== '' && isset($params["apps"][$slotindex]))
+        {
+            $slotindex++;
+            $params["app_service"] = $params["app_service_".$slotindex];
+            $params["app_status"] = $params["app_status_".$slotindex];
+            $params["app_duration"] = $params["app_duration_".$slotindex];
+            $params["app_date"] = $params["app_date_".$slotindex];
+            $params["app_slot"] = $params["app_slot_".$slotindex];
+            $params["app_starttime"] = $params["app_starttime_".$slotindex];
+            $params["app_endtime"] = $params["app_endtime_".$slotindex];
+            $params["app_quantity"] = $params["app_quantity_".$slotindex];
+        }
+        
         foreach ($params as $item => $value)
         {
             if ($urlencode) 
-                $value = urlencode( (is_array($value)?'':$value) );
+                $value = urlencode( (is_array($value)?'':$value) );          
             $message = @str_replace('<'.'%'.$item.'%'.'>',(is_array($value)?(implode(", ",$value)):($value)),$message);
             $message = @str_replace('%'.$item.'%',(is_array($value)?(implode(", ",$value)):($value)),$message);
         }
+
         for ($i=0;$i<500;$i++)
         {
             $message = str_replace('<'.'%fieldname'.$i.'%'.'>',"",$message);   
             $message = str_replace('%fieldname'.$i.'%',"",$message);  
-        }  
+            $message = str_replace('<'.'%fieldname'.$i.'_block%'.'>',"",$message);   
+            $message = str_replace('%fieldname'.$i.'_endblock%',"",$message);
+            $message = str_replace('%app_date_'.$i.'%',"",$message);
+            $message = str_replace('%app_slot_'.$i.'%',"",$message);
+            $message = str_replace('%app_starttime_'.$i.'%',"",$message);
+            $message = str_replace('%app_endtime_'.$i.'%',"",$message);
+            $message = str_replace('%app_service_'.$i.'%',"",$message);
+            $message = str_replace('%app_status_'.$i.'%',"",$message);
+            $message = str_replace('%app_duration_'.$i.'%',"",$message);
+            $message = str_replace('%app_price_'.$i.'%',"",$message);
+            $message = str_replace('%app_quantity_'.$i.'%',"",$message);
+        }
+        
+        // Remove empty blocks
+	    while( preg_match( "/%\s*(.+)_block\s*%/", $message, $matches ) )
+	    {
+	    	if( empty( $params[ ''.$matches[ 1 ] ] ) )
+	    	{	
+	    		$from = strpos( $message, $matches[ 0 ] );
+	    		if( preg_match( "/%\s*(".$matches[ 1 ].")_endblock\s*%/", $message, $matches_end ) )
+	    		{ 
+	    			$lenght = strpos( $message, $matches_end[ 0 ] ) + strlen( $matches_end[ 0 ] ) - $from;
+	    		}	
+	    		else
+	    		{
+	    			$lenght = strlen( $matches[ 0 ] );
+	    		}
+	    		$message = substr_replace( $message, '', $from, $lenght );
+	    	}
+	    	else
+	    	{
+	    		$message = preg_replace( array( "/%\s*".$matches[ 1 ]."_block\s*%/", "/%\s*".$matches[ 1 ]."_endblock\s*%/"), "", $message );
+	    	}	
+	    }                     
+  
+        $message = str_replace('<'.'%email'.'%'.'>',"",$message);   
+        $message = str_replace('%email'.'%',"",$message); 
         return $message;
     }
     
@@ -1378,7 +1482,7 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
                                      'serviceindex' => $item_split[2],
                                      'service' => $field->services[ $item_split[2] ]->name,
                                      'duration' => $field->services[ $item_split[2] ]->duration,
-                                     'price' => $field->services[ $item_split[2] ]->price,
+                                     'price' => 0, //$field->services[ $item_split[2] ]->price,
                                      'date' => $item_split[0],
                                      'slot' => $item_split[1],
                                      'military' => @$field->militaryTime,
@@ -1386,7 +1490,7 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
                                      'quant' => $item_split[3]
                                      );
                 }
-                if ($fieldtotalcost < $fieldpostedcost)      // this is to support javascript price calculations                          
+                //if ($fieldtotalcost < $fieldpostedcost)      // this is to support javascript price calculations                          
                     $apps[count($apps)-1]["price"] = $fieldpostedcost;                
             }
         return $apps;    
@@ -1395,7 +1499,7 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
     
     function extract_total_price($apps)
     {
-        $price = 0;
+        $price = 0;        
         foreach($apps as $app)
             $price += floatval($app["price"]);
         return number_format($price,2,'.','');    
@@ -1416,17 +1520,14 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
                 $times = explode("-",$slot);
                 $times[0] = explode(":",$times[0]);
                 $times[1] = explode(":",$times[1]);
-                $slot = ($times[0][0]>12?$times[0][0]-12:$times[0][0]).":".$times[0][1].' '.($times[0][0]>=12?'PM':'AM') ." - ".
-                        ($times[1][0]>12?$times[1][0]-12:$times[1][0]).":".$times[1][1].' '.($times[1][0]>=12?'PM':'AM');
+                if ($option != '')
+                    $slot = ($times[0][0]>12?$times[0][0]-12:$times[0][0]).":".$times[0][1].' '.($times[0][0]>=12?'PM':'AM');
+                else
+                    $slot = ($times[0][0]>12?$times[0][0]-12:$times[0][0]).":".$times[0][1].' '.($times[0][0]>=12?'PM':'AM') ." - ".
+                            ($times[1][0]>12?$times[1][0]-12:$times[1][0]).":".$times[1][1].' '.($times[1][0]>=12?'PM':'AM');
                         
             }
-            //$text .= " - ".$this->format_date($app["date"])." ".$slot.($app["quant"]>1?' ('.$app["quant"].')':'')." (".$app["service"].")\n";
-
-            /*-----------------------------Nyusoft Solution --------------------------*/
-            // we have commented above $text variable and add new $text variable for customise email template
-            
- 
-            $text = '<p style="font-size: 15px;line-height: 20px;display:block;margin:0;color: #073048;font-weight: 400;"><strong>Date: </strong>'.$this->format_date($app["date"]).'</p>'.'<p style="font-size: 15px;line-height: 20px;display:block;margin:0;color: #073048;font-weight: 400;"><strong>Time: </strong>'.$slot.'</p>';
+            $text .= " - ".$this->format_date($app["date"])." ".$slot.($app["quant"]>1?' ('.$app["quant"].')':'')." (".$app["service"].")\n";
         }
         return $text;    
     }
@@ -1450,10 +1551,15 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
         $format = str_replace('mm', 'm', $format);
         $format = str_replace('dd', 'd', $format);
         $format = str_replace('yy', 'Y', $format);
-        $format = str_replace('DD', 'l', $format);
-        $format = str_replace('MM', 'F', $format);
+        $format = str_replace('DD', 'K', $format);
+        $format = str_replace('MM', 'Q', $format);
         
-        return date($format, strtotime($date));
+        $dconv = date($format, strtotime($date));
+        
+        $dconv = str_replace('K', ucfirst (__(date('l', strtotime($date)))), $dconv);
+        $dconv = str_replace('Q', ucfirst (__(date('F', strtotime($date)))), $dconv);
+        
+        return $dconv;
     }
     
     function ready_to_go_reservation($itemnumber, $payer_email = "", $params = array())
@@ -1497,8 +1603,7 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
         $subject = str_replace('%'.'>', '%', $subject);
             
         if ('html' == $this->get_option('fp_emailformat', CP_APPBOOK_DEFAULT_email_format))
-            $message =  str_replace('%INFO%',$buffer, $message);
-            //$message = str_replace('%INFO%',str_replace("\n","<br />",str_replace('<','&lt;',$buffer)),$message);
+            $message = str_replace('%INFO%',str_replace("\n","<br />",str_replace('<','&lt;',$buffer)),$message);
         else
             $message = str_replace('%INFO%',$buffer,$message);
         $subject = $this->get_option('fp_subject', CP_APPBOOK_DEFAULT_fp_subject);
@@ -1545,13 +1650,10 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
                 $to = $matches[0];
         }
         $to = array_unique ($to);
+           
+        $message = $this->replace_tags($message, $params);
+        $subject = $this->replace_tags($subject, $params); 
         
-        for ($i=0;$i<500;$i++)
-        {
-            $subject = str_replace('%fieldname'.$i.'%',"",$subject);   
-            $message = str_replace('%fieldname'.$i.'%',"",$message);  
-
-        }    
         
         // if is_admin and not required emails end function here
         if (is_admin() && !isset($_POST["sendemails_admin"]))   
@@ -1564,7 +1666,7 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
                     $from_1 = '"'.$from_1.'" <'.$from_1.'>';                  
                 wp_mail(trim($item), $subject, $message,
                     "From: ".$from_1."\r\n". 
-                    ($replyto!=''?"Reply-To: \"$replyto\" <".$replyto.">\r\n":'').
+                    ($replyto!=''?"Reply-To: ".$replyto."\r\n":'').
                     $content_type.
                     "X-Mailer: PHP/" . phpversion(), $attachments);
             }
@@ -1585,37 +1687,16 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
             
             $subject = str_replace('<'.'%', '%', $this->get_option('cu_subject', CP_APPBOOK_DEFAULT_cu_subject));
             $subject = str_replace('%'.'>', '%', $subject);
-            
-            /*---below line is add by nyusoft solution for add user name in mail*/
-            $current_user = wp_get_current_user();
-             
-            $message =  str_replace('%NAME%',$current_user->display_name, $message);
-
-            if ('html' == $this->get_option('cu_emailformat', CP_APPBOOK_DEFAULT_email_format)){ 
-            
-                $message =  str_replace('%INFO%',$buffer_A, $message);
-                /*-----above str_replace is added by nyusoft solution for date and time display in different line in mail default is below*/
-                            //str_replace('%INFO%',str_replace("\n","<br />",str_replace('<','&lt;',htmlspecialchars($buffer_A))).'</pre>',$message); 
-            }
-            else{
-
+            if ('html' == $this->get_option('cu_emailformat', CP_APPBOOK_DEFAULT_email_format))
+                $message = str_replace('%INFO%',str_replace("\n","<br />",str_replace('<','&lt;',$buffer_A)).'</pre>',$message);
+            else
                 $message = str_replace('%INFO%',$buffer_A,$message);
-            }
- 
-            foreach ($params as $item => $value)
-            {
-                $message = str_replace('%'.$item.'%',(is_array($value)?(implode(", ",$value)):($value)),$message);
-                $subject = str_replace('%'.$item.'%',(is_array($value)?(implode(", ",$value)):($value)),$subject);
-            }
-            
+         
             $message = str_replace('%itemnumber%',$itemnumber,$message);
             $subject = str_replace('%itemnumber%',$itemnumber,$subject);
 
-            for ($i=0;$i<500;$i++)
-            {
-                $subject = str_replace('%fieldname'.$i.'%',"",$subject);   
-                $message = str_replace('%fieldname'.$i.'%',"",$message);  
-            }
+            $message = $this->replace_tags($message, $params);
+            $subject = $this->replace_tags($subject, $params); 
 
             if (!strpos($from,">"))
                 $from = '"'.$from.'" <'.$from.'>';                                 
@@ -1689,6 +1770,7 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
         {
             update_option( 'CP_APPB_LOAD_SCRIPTS', ($_POST["ccscriptload"]=="1"?"0":"1") );   
             update_option( 'CP_APPB_CSV_CHARFIX', ($_POST["csvcharautofix"]==""?"":"1") );
+            update_option( 'CP_APPB_CSV_SEPARATOR', ($_POST["csvseparator"]==";"?";":",") );
             if ($_POST["cccharsets"] != '')
             {
                 $target_charset = str_replace('`','``',sanitize_text_field($_POST["cccharsets"]));
@@ -1727,6 +1809,9 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
         
         $this->verify_nonce ($_POST["anonce"], 'cpappb_actions_admin');
         
+        $this->add_field_verify($wpdb->prefix.$this->table_items, 'vs_text_cost');
+        $this->add_field_verify($wpdb->prefix.$this->table_items, 'vs_text_cancel');
+        $this->add_field_verify($wpdb->prefix.$this->table_items, 'vs_text_quantity');
         $this->add_field_verify($wpdb->prefix.$this->table_items, 'calendar_language');
         $this->add_field_verify($wpdb->prefix.$this->table_items, 'date_format');       
         $this->add_field_verify($wpdb->prefix.$this->table_items, 'vs_text_maxapp');
@@ -1781,6 +1866,10 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
                       'vs_text_submitbtn' => sanitize_text_field($_POST['vs_text_submitbtn']),
                       'vs_text_previousbtn' => sanitize_text_field($_POST['vs_text_previousbtn']),
                       'vs_text_nextbtn' => sanitize_text_field($_POST['vs_text_nextbtn']),
+                      
+                      'vs_text_quantity' => sanitize_text_field($_POST['vs_text_quantity']),
+                      'vs_text_cancel' => sanitize_text_field($_POST['vs_text_cancel']),
+                      'vs_text_cost' => sanitize_text_field($_POST['vs_text_cost']),
 
                       'cp_user_access' => serialize($this->sanitize(@$_POST["cp_user_access"])),
                       'cp_user_access_settings' => sanitize_text_field($_POST['cp_user_access_settings']),
@@ -1909,7 +1998,14 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
             $end = count($fields);
             for ($i=0; $i<$end; $i++)
                 if (isset($data[$fields[$i]]) ){
-                    $value[$i] = $data[$fields[$i]];
+                    $d = $data[$fields[$i]];
+                    if (substr($fields[$i],0,strlen('app_status_')) == 'app_status_')
+                    {
+                       $d = $data["apps"][ intval( substr($fields[$i],strlen('app_status_'))-1) ]["cancelled"];
+                       if ($d == '')
+                           $d = __('Approved','appointment-hour-booking');
+                    }
+                    $value[$i] = $d;
                     unset($data[$fields[$i]]);
                 }
 
@@ -1917,10 +2013,19 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
                 if ($k != 'apps' && $k != 'itemnumber' && !in_array(strtolower($k),$fields_exclude))
                 {
                    $fields[] = $k;
+                   if (substr($k,0,strlen('app_status_')) == 'app_status_')
+                   {
+                       $d = $data["apps"][ intval( substr($k,strlen('app_status_'))-1) ]["cancelled"];
+                       if ($d == '')
+                           $d = __('Approved','appointment-hour-booking');
+                   }                  
                    $value[] = $d;
                 }
             $values[] = $value;
         }
+
+        $separator = get_option('CP_APPB_CSV_SEPARATOR',",");
+        if ($separator == '') $separator = ',';
 
         $filename = $this->generateSafeFileName(strtolower($this->get_option('form_name','export'))).'_'.date("m_d_y");
 
@@ -1931,7 +2036,7 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
         for ($i=0; $i<$end; $i++)
         {
             $hlabel = $this->iconv("utf-8", "ISO-8859-1//TRANSLIT//IGNORE", $this->get_form_field_label($fields[$i],$form));
-            echo '"'.str_replace('"','""', $hlabel).'",';
+            echo '"'.str_replace('"','""', $hlabel).'"'.$separator;
         }    
         echo "\n";
         foreach ($values as $item)
@@ -1943,7 +2048,7 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
                 if (is_array($item[$i]))
                     $item[$i] = implode($item[$i],',');
                 $item[$i] = $this->iconv("utf-8", "ISO-8859-1//TRANSLIT//IGNORE", $item[$i]);
-                echo '"'.str_replace('"','""', $item[$i]).'",';
+                echo '"'.str_replace('"','""', trim($item[$i])).'"'.$separator;
             }
             echo "\n";
         }
@@ -1959,7 +2064,7 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
         global $wpdb;
         extract( shortcode_atts( array(
 	    	'calendar' => '',
-	    	'fields' => 'DATE,TIME,SERVICE,paid,email,data,cancelled',
+	    	'fields' => 'DATE,TIME,SERVICE,final_price,paid,email,data,cancelled',
 	    	'from' => "today",
 	    	'to' => "today +30 days",
             'paidonly' => "",
@@ -1975,12 +2080,19 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
         ob_start();
         
         // calculate dates
+        $this->item = intval($this->get_param("cal"));
+        if ($this->get_option('date_format', 'mm/dd/yy') == 'dd/mm/yy')
+        {
+            $from = str_replace('/','.',$from);
+            $to = str_replace('/','.',$to);
+        }
+                
         $from = date("Y-m-d",strtotime($from));
         $to = date("Y-m-d",strtotime($to));
         
         // pre-select time-slots
         $selection = array();
-        $rows = $wpdb->get_results( $wpdb->prepare("SELECT notifyto,posted_data,data FROM ".$wpdb->prefix.$this->table_messages." WHERE ".($calendar?'formid='.intval($calendar).' AND ':'')."time<=%s ORDER BY time DESC LIMIT 0,1000", $to) );
+        $rows = $wpdb->get_results( $wpdb->prepare("SELECT notifyto,posted_data,data FROM ".$wpdb->prefix.$this->table_messages." WHERE ".($calendar?'formid='.intval($calendar).' AND ':'')."time<=%s ORDER BY time DESC LIMIT 0,10000", $to) );
         foreach($rows as $item)
         {        
             $data = unserialize($item->posted_data);
@@ -1989,7 +2101,7 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
                 foreach($data["apps"] as $app)
                     if ($app["date"] >= $from && $app["date"] <= $to && ($status == '-1' || $status == $app["cancelled"]) )
                     {                        
-                        $selection[] = array($app["date"]." ".$app["slot"], $app["date"], $app["slot"], $data, sanitize_email($item->notifyto), $item->data, $app["cancelled"], $app["service"]);
+                        $selection[] = array($app["date"]." ".$app["slot"], $app["date"], $app["slot"], $data, sanitize_email($item->notifyto), $item->data, $app["cancelled"], $app["service"], $app["quant"]);
                     }    
             }
         }
@@ -2012,12 +2124,15 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
         
         $fields = array_values(array_diff ($fields, $fields_exclude));
 
+        $separator = get_option('CP_APPB_CSV_SEPARATOR',",");
+        if ($separator == '') $separator = ',';
+
         // print table        
         for($i=0; $i<count($selection); $i++)
         {
             for($j=0; $j<count($fields); $j++)
             {        
-                if ($j>0) echo ',';
+                if ($j>0) echo $separator;
                 echo '"';             
                 switch ($fields[$j]) {
                     case 'date':
@@ -2031,6 +2146,9 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
                         break;  
                     case 'service':
                         $value = $selection[$i][7];
+                        break;     
+                    case 'quantity':
+                        $value = $selection[$i][8];
                         break;                         
                     case 'cancelled':
                         if ($selection[$i][6] == '') 
@@ -2045,10 +2163,10 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
                         $value = (@$selection[$i][3]['paid']?__('Yes','appointment-hour-booking'):'');
                         break;
                     default:
-                        $value = ($selection[$i][3][$fields[$j]]==''?'&nbsp;':$selection[$i][3][$fields[$j]])."";
+                        $value = ($selection[$i][3][$fields[$j]]==''?'':$selection[$i][3][$fields[$j]])."";
                 } 
                 $value = str_replace('"','""', $value);
-                echo $value;
+                echo trim($value);
                 echo '"';                
             }             
             echo "\n"; 
@@ -2074,12 +2192,24 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
         for ($i=0; $i<$end; $i++)
         {
             $hlabel = $this->iconv("utf-8", "ISO-8859-1//TRANSLIT//IGNORE", $this->get_form_field_label($fields[$i],$form));
-            echo '"'.str_replace('"','""', $hlabel).'",';
+            echo '"'.str_replace('"','""', $hlabel).'"'.$separator;
         }    
         echo "\n";
         echo $buffered_contents;
 
         exit;
+    }
+
+    
+    public function fixurl($base, $param)
+    {
+        if (strpos($base,'?'))
+            return $base."&".$param;
+        else
+		{
+			$base = rtrim($base,"/")."/";
+            return $base."?".$param;
+		}
     }
     
     
@@ -2128,7 +2258,10 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
                                      );
 
         if ($wpdb->num_rows <= 0) // if no rows, return empty
+        {
+            $this->item = $saved_item;
             return '';
+        }
 
         if ($this->item)
         {
@@ -2173,11 +2306,15 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
         }
         update_option('cp_cpappb_last_sent_id_'.$formid, $last_sent_id);
 
+
+        $separator = get_option('CP_APPB_CSV_SEPARATOR',",");
+        if ($separator == '') $separator = ',';
+        
         $end = count($fields);
         for ($i=0; $i<$end; $i++)
         {
             $hlabel = $this->iconv("utf-8", "ISO-8859-1//TRANSLIT//IGNORE", $this->get_form_field_label($fields[$i],$form));
-            $buffer .= '"'.str_replace('"','""', $hlabel).'",';
+            $buffer .= '"'.str_replace('"','""', $hlabel).'"'.$separator;
         }
         $buffer .= "\n";
         foreach ($values as $item)
@@ -2189,7 +2326,7 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
                 if (is_array($item[$i]))
                     $item[$i] = implode($item[$i],',');
                 $item[$i] = $this->iconv("utf-8", "ISO-8859-1//TRANSLIT//IGNORE", $item[$i]);
-                $buffer .= '"'.str_replace('"','""', $item[$i]).'",';
+                $buffer .= '"'.str_replace('"','""', $item[$i]).'"'.$separator;
             }
             $buffer .= "\n";
         }
@@ -2217,7 +2354,7 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
                 {
                     update_option('cp_cpappb_last_sent'.$formid, date("Y-m-d ".(get_option('cp_cpappb_rep_hour', '')<'10'?'0':'').get_option('cp_cpappb_rep_hour', '').":00:00"));
                     $text = '';
-                    $forms = $wpdb->get_results("SELECT id,fp_from_email,form_name,rep_days,rep_hour,rep_emails,rep_subject,rep_emailformat,rep_message,rep_enable FROM ".$wpdb->prefix.$this->table_items." WHERE rep_emails<>'' AND rep_enable='yes'");                    
+                    $forms = $wpdb->get_results("SELECT id,fp_from_email,form_name,rep_days,rep_hour,rep_emails,rep_subject,rep_emailformat,rep_message,rep_enable FROM ".$wpdb->prefix.$this->table_items);  // " WHERE rep_emails<>'' AND rep_enable='yes'"
                     $attachments = array();
                     foreach ($forms as $form)  // for each form with the reports enabled
                     {   
@@ -2277,6 +2414,11 @@ class CP_AppBookingPlugin extends CP_APPBOOK_BaseClass {
     
     protected function iconv($from, $to, $text)
     {
+        $text = trim($text);
+        if ( strlen($text) > 1 && (in_array(substr($text,0,1), array('=','@','+'))) )
+        {
+                $text = chr(9).$text;
+        }        
         if (get_option('CP_APPB_CSV_CHARFIX',"") == "" && function_exists('iconv'))
             return iconv($from, $to, $text);
         else
@@ -2408,10 +2550,10 @@ function _cpappb_extract_tags( $message )
 
 function _cpappb_replace_vars( $fields, $params, $message, $buffer = '', $contentType = 'html', $itemnumber = '' ) 
 {
-	// Lambda functions
-	$arrayReplacementFunction = create_function('&$tags, $tagName, $replacement, &$message', 'if(isset($tags[ $tagName ])){foreach( $tags[ $tagName ] as $tagData ){ $message = str_replace( $tagData[ "node" ], $tagData[ "before" ].$replacement.$tagData[ "after" ], $message );}unset( $tags[ $tagName ] );}');
+	// Lambda functions	
+    $arrayReplacementFunction = function ( &$tags, $tagName, $replacement, &$message ) { if(isset($tags[ $tagName ])){foreach( $tags[ $tagName ] as $tagData ){ $message = str_replace( $tagData[ "node" ], $tagData[ "before" ].$replacement.$tagData[ "after" ], $message );}unset( $tags[ $tagName ] );} };
 	
-	$singleReplacementFunction = create_function('$tagData, $value, &$message', '$message = str_replace( $tagData[ "node" ], $tagData[ "before" ].$value.$tagData[ "after" ],$message );');
+	$singleReplacementFunction = function ( $tagData, $value, &$message ) { $message = str_replace( $tagData[ "node" ], $tagData[ "before" ].$value.$tagData[ "after" ],$message ); };
 	
 	$message = str_replace( '< %', '<%', $message );
     $attachments = array();

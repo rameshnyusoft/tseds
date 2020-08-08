@@ -10,16 +10,38 @@ if( !class_exists( 'CPAPPB_DashboardWidget' ) )
 
         /************* ADDON SYSTEM - ATTRIBUTES AND METHODS *************/
 		protected $addonID = "addon-DashboardWidget-20181221";
-		protected $name = "Dashboard Widget: Upcoming appointments";
+		protected $name = 'Dashboard Widget: Upcoming appointments';
 		protected $description;
         protected $max_image_width = 250;
 
-		public function get_addon_form_settings( $form_id )
+		public function get_addon_settings()
 		{
-			global $wpdb;
-			// Insertion in database			
-			
-		} // end get_addon_form_settings
+			if( isset( $_REQUEST[ 'cpappb_dashboard' ] ) )
+			{	
+				check_admin_referer( 'session_id_ds_'.session_id(), '_cpappb_nonce_dashboard' );
+				update_option( 'cpappb_dashboard_maxitems', trim( intval($_REQUEST[ 'cpappb_dashboard_maxitems' ]) ) );
+			}	
+			?>
+			<form method="post">
+				<div id="metabox_basic_settings" class="postbox" >
+					<h3 class='hndle' style="padding:5px;"><span><?php print __($this->name, 'appointment-hour-booking'); ?></span></h3>
+					<div class="inside"> 
+						<table cellspacing="0" style="width:100%;">
+							<tr>
+								<td style="white-space:nowrap;width:200px;"><?php _e('Maximum items listed', 'appointment-hour-booking');?>:</td>
+								<td>
+									<input type="text" name="cpappb_dashboard_maxitems" value="<?php echo ( ( $key = get_option( 'cpappb_dashboard_maxitems' ) ) !== false ) ? $key : '10'; ?>"  style="width:80%;" />
+								</td>
+							</tr>
+						</table>
+						<input type="submit" name="subbtnds" value="<?php _e('Save settings', 'appointment-hour-booking');?>" />
+					</div>
+					<input type="hidden" name="cpappb_dashboard" value="1" />
+					<input type="hidden" name="_cpappb_nonce_dashboard" value="<?php echo wp_create_nonce( 'session_id_ds_'.session_id() ); ?>" />
+				</div>
+			</form>
+			<?php
+		}
 
 
 
@@ -41,8 +63,8 @@ if( !class_exists( 'CPAPPB_DashboardWidget' ) )
 
 
         public function add_dashboard_widgets() {
-        	wp_add_dashboard_widget('dashboard_widget', 'Appointment Hour Booking: Upcoming appointments', array(&$this, 'pp_DashboardWidget'));
-        }        
+        	wp_add_dashboard_widget('dashboard_widget', __('Appointment Hour Booking: Upcoming appointments', 'appointment-hour-booking'), array(&$this, 'pp_DashboardWidget'));
+        }         
 
         /************************ PRIVATE METHODS *****************************/
 
@@ -60,7 +82,7 @@ if( !class_exists( 'CPAPPB_DashboardWidget' ) )
             extract( shortcode_atts( array(
 	        	'calendar' => '',
 	        	'showdelete' => '0',
-                'columnlabels' => 'TIME,SERVICE,data',
+                'columnlabels' =>  __('Time', 'appointment-hour-booking').",". __('Service', 'appointment-hour-booking').",". __('Data', 'appointment-hour-booking'),
 	        	'columns' => 'TIME,SERVICE,data',
                 'datefrom' => 'today',
                 'dateto' => 'today +1 month',
@@ -70,6 +92,11 @@ if( !class_exists( 'CPAPPB_DashboardWidget' ) )
                 'status' => "-1"
 	        ), $atts ) ); 
             
+            $maxitems = get_option( 'cpappb_dashboard_maxitems' );
+            if ($maxitems == '')
+                $maxitems = 10;
+            else
+                $maxitems = intval($maxitems);
             $buffer = '<div style="font-weight:bold;margin-bottom:3px;">'.__('Next','appointment-hour-booking')." ".$maxitems." ".__('upcoming appointments:','appointment-hour-booking')."</div>";
             wp_enqueue_script( "jquery" );
             
@@ -98,8 +125,7 @@ if( !class_exists( 'CPAPPB_DashboardWidget' ) )
                         if ($app["date"] >= $from && $app["date"] <= $to && ($status == '-1' || $status == $app["cancelled"]) 
 						   && $app["cancelled"] != 'Cancelled' && $app["cancelled"] != 'Cancelled by customer')
                         {                      
-                            $dt= $item->data;  
-                            $selection[] = array($app["date"]." ".$app["slot"], $app["date"], $app["slot"], $data, sanitize_email($item->notifyto),   $dt , $app["cancelled"], $app["service"]);
+                            $selection[] = array($app["date"]." ".$app["slot"], $app["date"], $app["slot"], $data, sanitize_email($item->notifyto), $item->data, $app["cancelled"], $app["service"]);
                         }    
                 }
             }
@@ -175,11 +201,7 @@ if( !class_exists( 'CPAPPB_DashboardWidget' ) )
                             $value = '&nbsp;';
                             break;                         
                         case 'data':
-                            $value = $selection[$i][5];
-                            if($selection[$i][4] != ''){
-                                $value .=  '<p style="font-size: 15px;line-height: 20px;display:block;margin:0;color: #073048;font-weight: 400;"><strong>Email: </strong>'.$selection[$i][4].'</p>';  
-                            }
-                            //substr($selection[$i][5],strpos($selection[$i][5],"\n\n")+2);
+                            $value = esc_html(substr($selection[$i][5],strpos($selection[$i][5],"\n\n")+2));
                             break;    
                         case 'paid':
                             $value = ($selection[$i][3]['paid']?__('Yes','appointment-hour-booking'):'&nbsp;');

@@ -3,7 +3,7 @@
 Plugin Name: Appointment Hour Booking
 Plugin URI: https://apphourbooking.dwbooster.com
 Description: Appointment Hour Booking is a plugin for creating booking forms for appointments with a start time and a defined duration.
-Version: 1.1.77
+Version: 1.2.48
 Author: CodePeople
 Author URI: https://apphourbooking.dwbooster.com
 License: GPL
@@ -20,12 +20,12 @@ define('CP_APPBOOK_DEFAULT_track_IP', true);
 define('CP_APPBOOK_DEFAULT_fp_subject', 'Notification to administrator: Booking request received...');
 define('CP_APPBOOK_DEFAULT_fp_inc_additional_info', 'true');
 define('CP_APPBOOK_DEFAULT_fp_return_page', get_site_url());
-define('CP_APPBOOK_DEFAULT_fp_message', "The following contact message has been sent:\n\n<%INFO%>\n\n");
+define('CP_APPBOOK_DEFAULT_fp_message', "The following booking request has been received:\n\n<%INFO%>\n\n");
 
 define('CP_APPBOOK_DEFAULT_cu_enable_copy_to_user', 'true');
 define('CP_APPBOOK_DEFAULT_cu_user_email_field', 'email');
 define('CP_APPBOOK_DEFAULT_cu_subject', 'Confirmation: Your booking has been received...');
-define('CP_APPBOOK_DEFAULT_cu_message', "Thank you for your message. We will reply you as soon as possible.\n\nThis is a copy of the data sent:\n\n<%INFO%>\n\nBest Regards.");
+define('CP_APPBOOK_DEFAULT_cu_message', "Your appointment is received. We look forward to seeing you then.\n\nThis is a copy of the data sent:\n\n<%INFO%>\n\nBest Regards.");
 define('CP_APPBOOK_DEFAULT_email_format','text');
 
 define('CP_APPBOOK_DEFAULT_vs_use_validation', 'true');
@@ -45,7 +45,7 @@ define('CP_APPBOOK_DEFAULT_cv_enable_captcha', 'true');
 define('CP_APPBOOK_DEFAULT_cv_width', '180');
 define('CP_APPBOOK_DEFAULT_cv_height', '60');
 define('CP_APPBOOK_DEFAULT_cv_chars', '5');
-define('CP_APPBOOK_DEFAULT_cv_font', 'font-1.ttf');
+define('CP_APPBOOK_DEFAULT_cv_font', 'font1');
 define('CP_APPBOOK_DEFAULT_cv_min_font_size', '25');
 define('CP_APPBOOK_DEFAULT_cv_max_font_size', '35');
 define('CP_APPBOOK_DEFAULT_cv_noise', '200');
@@ -220,11 +220,73 @@ function apphourbk_autoptimize_filter_js_exclude($excluded)
                      "jquery.ui.datepicker-th.js,".
                      "jquery.ui.datepicker-uk.js,".
                      "jquery.ui.datepicker-vi.js,".
-                     "jQuery.stringify.js,jquery.validate.js";
+                     "jquery.validate.min.js,jQuery.stringify.js,jquery.validate.js";
 }
 
 
 // code for compatibility with third party scripts
+
+add_filter('litespeed_cache_optimize_js_excludes', 'apphourbk_litespeed_cache_optimize_js_excludes' );
+function apphourbk_litespeed_cache_optimize_js_excludes($options)
+{
+    return  "jquery.ui.datepicker-fr-CA.js\n".
+                     "jquery.ui.datepicker-es_ES.js\n".
+                     "jquery.ui.datepicker-no.js\n".
+                     "jquery.ui.datepicker-he_IL.js\n".
+                     "jquery.ui.datepicker-pt_BR.js\n".
+                     "jquery.ui.datepicker-ro_RO.js\n".
+                     "jquery.ui.datepicker-ru_RU.js\n".
+                     "jquery.ui.datepicker-sk_SK.js\n".
+                     "jquery.ui.datepicker-sl_SI.js\n".
+                     "jquery.ui.datepicker-sr_SR.js\n".
+                     "jquery.ui.datepicker-sv_SE.js\n".
+                     "jquery.ui.datepicker-tr_TR.js\n".
+                     "jquery.ui.datepicker-zh_CN.js\n".
+                     "jquery.ui.datepicker-zh_TW.js\n".
+                     "jquery.ui.datepicker-nl_NL.js\n".
+                     "jquery.ui.datepicker-pl_PL.js\n".
+                     "jquery.ui.datepicker-pt_PT.js\n".
+                     "jquery.ui.datepicker-bg_BG.js\n".
+                     "jquery.ui.datepicker-bs_BA.js\n".
+                     "jquery.ui.datepicker-cs_CZ.js\n".
+                     "jquery.ui.datepicker-da_DK.js\n".
+                     "jquery.ui.datepicker-de_DE.js\n".
+                     "jquery.ui.datepicker-eo_EO.js\n".
+                     "jquery.ui.datepicker-fa_IR.js\n".
+                     "jquery.ui.datepicker-fr_FR.js\n".
+                     "jquery.ui.datepicker-gl_ES.js\n".
+                     "jquery.ui.datepicker-hi_IN.js\n".
+                     "jquery.ui.datepicker-hu_HU.js\n".
+                     "jquery.ui.datepicker-hy_AM.js\n".
+                     "jquery.ui.datepicker-id_ID.js\n".
+                     "jquery.ui.datepicker-it_IT.js\n".
+                     "jquery.ui.datepicker-ka_GE.js\n".
+                     "jquery.ui.datepicker-ko_KR.js\n".
+                     "jquery.ui.datepicker-lt_LT.js\n".
+                     "jquery.ui.datepicker-ms_MY.js\n".
+                     "jquery.ui.datepicker-nb_NO.js\n".
+                     "jquery.ui.datepicker-be_BY.js\n".
+                     "jquery.ui.datepicker-mk_MK.js\n".
+                     "jquery.ui.datepicker-ml_IN.js\n".
+                     "jquery.ui.datepicker-az.js\n".
+                     "jquery.ui.datepicker-af.js\n".
+                     "jquery.ui.datepicker-ar.js\n".
+                     "jquery.ui.datepicker-ca.js\n".
+                     "jquery.ui.datepicker-el.js\n".
+                     "jquery.ui.datepicker-et.js\n".
+                     "jquery.ui.datepicker-eu.js\n".
+                     "jquery.ui.datepicker-fi.js\n".
+                     "jquery.ui.datepicker-hr.js\n".
+                     "jquery.ui.datepicker-ja.js\n".
+                     "jquery.ui.datepicker-lv.js\n".
+                     "jquery.ui.datepicker-sq.js\n".
+                     "jquery.ui.datepicker-ta.js\n".
+                     "jquery.ui.datepicker-th.js\n".
+                     "jquery.ui.datepicker-uk.js\n".
+                     "jquery.ui.datepicker-vi.js\n".
+                     "jquery.validate.min.js\njQuery.stringify.js\njquery.validate.js\njquery.js\n".$options;
+}
+
 add_filter('option_sbp_settings', 'apphourbk_sbp_fix_conflict' );
 function apphourbk_sbp_fix_conflict($option)
 {

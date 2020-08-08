@@ -236,6 +236,18 @@ jQuery(function(){
 	    				<em><?php _e('Set to "No" if special characters appear with question marks "?" in the CSV file.','appointment-hour-booking'); ?></em>
 	    			</td>
 	    		</tr>   
+	    		<tr valign="top">
+	    			<th scope="row">
+	    				<label><?php _e('Field separator for CSV files?','appointment-hour-booking'); ?></label>
+	    			</th>
+	    			<td>
+	    				<select id="csvseparator" name="csvseparator">
+	    					<option <?php if (get_option('CP_APPB_CSV_SEPARATOR',",") == ",") echo 'selected'; ?> value=","><?php _e('comma: ","','appointment-hour-booking'); ?></option>
+                            <option <?php if (get_option('CP_APPB_CSV_SEPARATOR',";") == ";") echo 'selected'; ?> value=";"><?php _e('semicolon: ";"','appointment-hour-booking'); ?></option>
+	    				</select><br>
+	    				<em><?php _e('Change it if you get the CSV columns mixed','appointment-hour-booking'); ?></em>
+	    			</td>
+	    		</tr>                  
 	    	</tbody>
 	    </table>
 	    <input type="submit" value="Update Changes" class="button button-primary" />
@@ -311,6 +323,15 @@ jQuery(function(){
          </div>
         </div>
 
+        <div class="ahb-csssample">
+         <div class="ahb-csssampleheader">
+           <?php _e('Hide the service drop-down:','appointment-hour-booking'); ?>
+         </div>
+         <div class="ahb-csssamplecode">
+           .ahbfield_service { display: none }
+         </div>
+        </div>
+        
         <div class="ahb-csssample">
          <div class="ahb-csssampleheader">
            <?php _e('Make the send button in a hover format:','appointment-hour-booking'); ?>

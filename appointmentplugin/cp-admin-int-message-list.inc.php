@@ -144,14 +144,20 @@ $nonce = wp_create_nonce( 'cpappb_actions_booking' );
         <input type="hidden" name="cal" value="<?php echo $this->item; ?>" />
         <input type="hidden" name="list" value="1" />
 		<nobr><label><?php _e('Search for','appointment-hour-booking'); ?>:</label> <input type="text" name="search" value="<?php echo esc_attr(@$_GET["search"]); ?>">&nbsp;&nbsp;</nobr>
-		<nobr><label><?php _e('From','appointment-hour-booking'); ?>:</label> <input type="text" id="dfrom" name="dfrom" value="<?php echo esc_attr(@$_GET["dfrom"]); ?>" >&nbsp;&nbsp;</nobr>
-		<nobr><label><?php _e('To','appointment-hour-booking'); ?>:</label> <input type="text" id="dto" name="dto" value="<?php echo esc_attr(@$_GET["dto"]); ?>" >&nbsp;&nbsp;</nobr>
+		<nobr><label><?php _e('From','appointment-hour-booking'); ?>:</label> <input autocomplete="off" type="text" id="dfrom" name="dfrom" value="<?php echo esc_attr(@$_GET["dfrom"]); ?>" >&nbsp;&nbsp;</nobr>
+		<nobr><label><?php _e('To','appointment-hour-booking'); ?>:</label> <input autocomplete="off" type="text" id="dto" name="dto" value="<?php echo esc_attr(@$_GET["dto"]); ?>" >&nbsp;&nbsp;</nobr>
 		<nobr><label><?php _e('Item','appointment-hour-booking'); ?>:</label> <select id="cal" name="cal">
-          <option value="0">[<?php _e('All Items','appointment-hour-booking'); ?>]</option>
+          <?php if ($current_user_access) { ?> <option value="0">[<?php _e('All Items','appointment-hour-booking'); ?>]</option><?php } ?>
    <?php
     $myrows = $wpdb->get_results( "SELECT * FROM ".$wpdb->prefix.$this->table_items );
+    $saved_id = $this->item;
     foreach ($myrows as $item)
-         echo '<option value="'.$item->id.'"'.(intval($item->id)==intval($this->item)?" selected":"").'>'.esc_html($item->form_name).'</option>';
+    {
+        $this->setId($item->id);
+        if ($current_user_access || @in_array($current_user->ID, unserialize($this->get_option("cp_user_access",""))))
+            echo '<option value="'.$item->id.'"'.(intval($item->id)==intval($saved_id)?" selected":"").'>'.esc_html($item->form_name).'</option>';
+    }
+    $this->setId($saved_id);
    ?>
     </select></nobr>
        <div style="float:right">
@@ -199,7 +205,7 @@ echo paginate_links(  array(
       <th width="10"><input type="checkbox" name="cpcontrolck" id="cpcontrolck" value="" onclick="cp_markall();"></th>
       <th width="30"><?php _e('ID','appointment-hour-booking'); ?></th>
 	  <th style="text-align:left" width="130"><?php _e('Submission Date','appointment-hour-booking'); ?></th>
-	  <th style="text-align:left"><?php _e('User ID','appointment-hour-booking'); ?></th>
+	  <th style="text-align:left"><?php _e('Email','appointment-hour-booking'); ?></th>
 	  <th style="text-align:left"><?php _e('Message','appointment-hour-booking'); ?></th>
       <th width="130"><?php _e('Paid Status','appointment-hour-booking'); ?></th>
 	  <th  class="cpnopr"><?php _e('Options','appointment-hour-booking'); ?></th>
@@ -221,8 +227,7 @@ echo paginate_links(  array(
         <th><input type="checkbox" name="c<?php echo $i-($current_page-1)*$records_per_page; ?>" value="<?php echo $events[$i]->id; ?>" /></th> 
         <th><?php echo intval($events[$i]->id); ?></th>
 		<td><?php echo $this->format_date(substr($events[$i]->time,0,16)).date(" H:i",strtotime($events[$i]->time)); ?></td>
-    <?php $user_data = get_userdata($events[$i]->whoadded); ?>
-		<td><?php echo $events[$i]->whoadded.' ( '.$user_data->display_name.' )'; //echo sanitize_email($events[$i]->notifyto); ?></td>
+		<td><?php echo sanitize_email($events[$i]->notifyto); ?></td>
 		<td><?php
 		        $data = str_replace("\n","<br />",str_replace('<','&lt;',$events[$i]->data));
 		        foreach ($posted_data as $item => $value)

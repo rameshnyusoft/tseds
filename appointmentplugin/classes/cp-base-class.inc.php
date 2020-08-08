@@ -140,8 +140,8 @@ class CP_APPBOOK_BaseClass {
     
     
 
-    private $option_buffered_item = false;
-    private $option_buffered_id = -1;
+    public $option_buffered_item = false;
+    public $option_buffered_id = -1;
 
     public function get_option ($field, $default_value = '')
     {   
@@ -166,6 +166,12 @@ class CP_APPBOOK_BaseClass {
         $value = apply_filters( 'cpappb_get_option', $value, $field, $this->item );    
         
         return $value;
+    }
+    
+    public function get_option_not_empty($field, $default_value = '')
+    {
+        $value = $this->get_option($field, $default_value);
+        return ($value ? $value : $default_value);
     }
     
        

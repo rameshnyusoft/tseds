@@ -3,7 +3,7 @@ Contributors: codepeople
 Donate link: https://apphourbooking.dwbooster.com/download
 Tags: hour,calendar,service,booking,appointment,schedule,sessions,events,reservation,classes,teaching,training
 Requires at least: 3.0.5
-Tested up to: 5.3
+Tested up to: 5.4
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -45,7 +45,7 @@ Features in commercial versions:
 * Booking form can be connected to **payment process** (Ex: PayPal Standard, PayPal Pro, Stripe, Skrill, Authorize.net, TargetPay/iDEAL, Mollie/iDEAL, SagePay, Redsys)
 * Payments are SCA ready (Strong Customer Authentication), compatible with the new Payment services (PSD 2) - Directive (EU) 
 * **Addons** for integration with external services: reCaptcha, MailChimp, SalesForce, WooCommerce and others
-* **Addons** with additional features: appointment cancellation addon, appointment reminders addon, clickatell and twilio SMS add-ons, signature fields, iCal synchronization, Google Calendar API, ...
+* **Addons** with additional features: appointment cancellation addon, appointment reminders addon, clickatell and twilio SMS add-ons, signature fields, iCal synchronization, Google Calendar API, Zoom Meetings ...
 
 = Appointment Hour Booking can be used for: = 
 
@@ -178,6 +178,11 @@ The styles for the list are located at the end of the file "css/stylepublic.css"
 Clear the browser cache if the list isn't displayed in a correct way (to be sure it loads the updated styles).
 
 You can also add the needed styles into the "Customization area >> Add Custom Styles" (at the bottom of the page that contains the list of calendars):
+
+= Q: Can I track the conversion referral? =
+
+A: Yes, for this purpose you can use the plugin [CP Referrer and Conversion Tracking](https://wordpress.org/plugins/cp-referrer-and-conversions-tracking/) that already includes the automatic integration with this plugin.
+
 
 = Q: Are the forms GDPR compliant? =
 
@@ -744,7 +749,200 @@ Please note that the pro features aren't advised as part of the free plugin in t
 = 1.1.77 =
 * Fixed bug in services index and conflicts with third party plugins
 
+= 1.1.78 =
+* Bug fixes: Date filters in CSV Schedule exports and cost calculations
+
+= 1.1.79 =
+* Bug fixes: Email delivery
+* Now supports appointments in smaller time intervals
+
+= 1.1.80 =
+* Fixed bug in global email reports
+
+= 1.1.81 =
+* Improved time formatting
+
+= 1.1.82 =
+* Fixed cross-day time calculations
+
+= 1.1.83 =
+* Compatibility fix with bootstrap datepicker
+
+= 1.1.84 =
+* Fixed bug in date format dd.mm.yyyy
+
+= 1.1.85 =
+* Autodetection feature for date format
+
+= 1.1.86 =
+* Fixed bug in invalid dates feature
+
+= 1.1.87 =
+* Added CSS style to avoid the conflict with some theme style
+
+= 1.1.88 =
+* Improved CSV / Excel exports
+
+= 1.1.89 =
+* Improved validation interface
+
+= 1.1.90 =
+* Improved antispam rules
+
+= 1.1.91 =
+* Interface improvements
+
+= 1.1.92 =
+* Fixed availability bug
+
+= 1.1.93 =
+* Fixed bug in days without available times
+
+= 1.1.94 =
+* Improved tags structure for further CSS customization
+
+= 1.1.95 =
+* Fixed bug in padding times
+
+= 1.1.96 =
+* More CSV config settings
+
+= 1.1.97 =
+* Fix to status column in booking orders
+
+= 1.1.98 =
+* Improved CSV formatting
+
+= 1.1.99 =
+* New add-ons & docs
+
+= 1.2.05 =
+* Updates to schedule list
+
+= 1.2.06 =
+* PHP 7.x compatibility update
+
+= 1.2.07 =
+* Compatible with WordPress 5.4
+
+= 1.2.09 =
+* Translations update
+
+= 1.2.10 =
+* Cost calculation improvements
+
+= 1.2.11 =
+* Fixed conflict with third party optimization/cache plugins
+
+= 1.2.12 =
+* CSS improvement to avoid conflicts with popular themes
+
+= 1.2.14 =
+* Fixed price display in emails
+
+= 1.2.15 =
+* Update to WordPress editor integration
+
+= 1.2.16 =
+* Support for 24 hours bookings and interface improvements
+
+= 1.2.17 =
+* Prevention of accidental clicks
+
+= 1.2.18 =
+* Fixed price display bug
+
+= 1.2.19 =
+* Admin interface improvements
+
+= 1.2.20 =
+* New options for styling selected time slots
+
+= 1.2.21 =
+* Improved calendar language support
+
+= 1.2.22 =
+* Scripts optimization
+
+= 1.2.23 =
+* More configuration for dashboard widget
+
+= 1.2.24 =
+* Form load speed improvement
+
+= 1.2.25 =
+* Fixed bug in capacity calculation
+
+= 1.2.26 =
+* Captcha improvements
+
+= 1.2.27 =
+* Automatic translation of date formatting
+
+= 1.2.28 =
+* Fix to capacity display
+
+= 1.2.29 =
+* Email notification fix
+
+= 1.2.30 =
+* New cross-day bookings feature
+
+= 1.2.31 =
+* Improved translation options
+
+= 1.2.32 =
+* Fixed date formatting bug in appoitment lists
+
+= 1.2.33 =
+* More data for lists shortcodes
+
+= 1.2.34 =
+* Min-date setting improvements
+
+= 1.2.35 =
+* New conditional tags for emails
+
+= 1.2.36 =
+* Improved booking interface
+
+= 1.2.37 =
+* Fixed bug in fast save button
+
+= 1.2.38 =
+* Fixed typo and improved time picker
+
+= 1.2.39 =
+* Fixed bug in padding features
+
+= 1.2.40 =
+* Better appointment selection interface
+
+= 1.2.41 =
+* Fixed bug in lists
+
+= 1.2.42 =
+* Improved cost calculations
+
+= 1.2.43 =
+* Auto-detect start weekday for schedule calendar
+
+= 1.2.44 =
+* Fix for disabling dates with no more available slots.
+
+= 1.2.45 =
+* Fix for translation plugin
+
+= 1.2.46 =
+* New translation and translation improvements
+
+= 1.2.47 =
+* Fixed captcha bug
+
+= 1.2.48 =
+* Dropdown fields CSS improvements
+
 == Upgrade Notice ==
 
-= 1.1.77 =
-* Fixed bug in services index and conflicts with third party plugins
+= 1.2.48 =
+* Dropdown fields CSS improvements

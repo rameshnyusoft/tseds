@@ -1,5 +1,6 @@
 .clearer{clear:both;}
-
+#fbuilder *,#fbuilder ::after,#fbuilder ::before{box-sizing:border-box;}
+#fbuilder select{-webkit-appearance:menulist}
 #fbuilder{}
 #fbuilder .fields,#fbuilder .fform{padding:5px 0px;}
 #fbuilder .fform h1{margin:5px 0px;padding:0px;}
@@ -82,8 +83,8 @@
 #fbuilder .slots{border:1px solid #888;width:100%;padding:10px;-webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);
 	-moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);
 	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);}
-#fbuilder .slots div{display:inline-block;border:1px solid #005;margin:5px;}
-#fbuilder .slots div a{background: #ededed;box-shadow:none;display:inline-block;padding:5px}
+#fbuilder .slots div{display:inline-block;border:1px solid #005;margin:5px;padding:1px}
+#fbuilder .slots div a{background: #ededed;box-shadow:none;display:inline-block;padding:4px}
 #fbuilder .slots div a:hover{background: #f7f7f7;}
 
 
@@ -113,6 +114,7 @@ margin: 2px;
 .ui-tooltip {padding: 8px;position: absolute;z-index: 9999;border:1px solid #ccc;min-width:300px;background-color:#fff;}
 .adminonly { display:none; }
 #ahbadminedititem .adminonly { display:block; }
+#fbuilder .slots div.ahbmoreinfo{display:none}
 .ahbtooltip{display:none !important;max-width:200px !important;border:1px solid #888;padding:10px;-webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);-moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);}  
 .ahbtooltip{display:block !important;width:auto !important;max-width:500px !important;}
 .notavailable{color:#f00;text-decoration: line-through;}
@@ -126,3 +128,11 @@ margin: 2px;
 
 #fbuilder .cff-dialog-content{width:100%;height:100%;overflow:auto;}
 #fbuilder  .hide{ display:none; }
+.emptyvalue{display:none !important}
+#fbuilder .ui-datepicker-calendar td,#fbuilder .ui-datepicker-calendar th{padding:inherit}
+#fbuilder .slots .service{border:0px}
+#fbuilder .slots .service .service_title{border:0px;display:block}
+#fbuilder .ahb_list_quantity1{display:none}
+#fbuilder .slots .currentSelection{border:2px solid #005;padding:0px;}
+#fbuilder .slots .htmlUsed.currentSelection{border:2px solid #005;padding:0px;}
+#fbuilder table{margin:auto}

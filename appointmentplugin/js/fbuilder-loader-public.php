@@ -1,4 +1,11 @@
-<?php header('Content-Type: application/x-javascript; charset=UTF-8'); ?>
+<?php 
+
+header('Content-Type: application/x-javascript; charset=UTF-8'); 
+
+require 'jQuery.stringify.js';
+require 'jquery.validate.js';
+
+?>
 fbuilderjQuery = (typeof fbuilderjQuery != 'undefined' ) ? fbuilderjQuery : jQuery;
 fbuilderjQuery(function(){
 (function($) {
@@ -41,7 +48,7 @@ fbuilderjQuery(function(){
         // ignore the error
     }
 
-	// Load Control files
+	// Load Control files    
     require 'fbuilder-pro-public.jquery.js';
     try {
         $d = dir( dirname( __FILE__ )."/fields-public" );
@@ -64,7 +71,7 @@ fbuilderjQuery(function(){
         var fcount_tags = 1;
         var fnum = "_"+fcount;
         while (20>fcount || eval("typeof cp_appbooking_fbuilder_config"+fnum+" != 'undefined'"))
-        {
+        {            
             try {
             var cp_appbooking_fbuilder_config = eval("cp_appbooking_fbuilder_config"+fnum);
             while (20>fcount_tags && !$("#fbuilder_"+fcount_tags).length)
@@ -88,7 +95,7 @@ fbuilderjQuery(function(){
 						e.css('top',element.parent().outerHeight(true));
 					}
      		});
-     		} catch (e) {}
+     		} catch (e) { }
 	    	fcount++;
             fcount_tags++;
 	    	fnum = "_"+fcount;

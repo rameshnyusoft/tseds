@@ -123,7 +123,7 @@
 							}
 							if ($("#cp_subbtn"+opt.identifier).html())
 							{
-								bSubmit = '<div class="pbSubmit"><span>'+$("#cp_subbtn"+opt.identifier).html()+'</span></div>';
+								bSubmit = '<div class="pbSubmit">'+$("#cp_subbtn"+opt.identifier).html()+'</div>';
 							}	
 						}
 						$(this).html('<fieldset><legend>'+opt.messages.pageof.replace( /\{\s*\d+\s*\}/, (index+1) ).replace( /\{\s*\d+\s*\}/, (page+1) )+'</legend>'+code+'<div class="pbPrevious">'+opt.messages.previous+'</div><div class="pbNext">'+opt.messages.next+'</div>'+bSubmit+'<div class="clearer"></div></fieldset>');
@@ -165,7 +165,7 @@
 					}
 					if ($("#cp_subbtn"+opt.identifier).html())
 					{
-						$("#fieldlist"+opt.identifier+" .pb"+page).append('<div class="pbSubmit"><span>'+$("#cp_subbtn"+opt.identifier).html()+'</span></div>');
+						$("#fieldlist"+opt.identifier+" .pb"+page).append('<div class="pbSubmit">'+$("#cp_subbtn"+opt.identifier).html()+'</div>');
 					}	
 				}
 							

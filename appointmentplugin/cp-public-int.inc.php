@@ -9,12 +9,10 @@
 <div id="fbuilder">    
     <div id="fbuilder<?php echo '_'.$this->print_counter; ?>">
         <div id="formheader<?php echo '_'.$this->print_counter; ?>"></div>
-        <div id="fieldlist<?php echo '_'.$this->print_counter; ?>">
-          
-        </div>
+        <div id="fieldlist<?php echo '_'.$this->print_counter; ?>"></div>
     </div>
-   
 </div>    
+<div style="display:none">
 <div id="cpcaptchalayer<?php echo '_'.$this->print_counter; ?>" class="cpcaptchalayer">
  <div class="fields" id="field-c0" style="display:none">
     <label></label>
@@ -23,17 +21,15 @@
  </div>
 <?php if (!is_admin() && $this->get_option('cv_enable_captcha', CP_APPBOOK_DEFAULT_cv_enable_captcha) != 'false') { ?>
   <?php _e("Security Code",'appointment-hour-booking'); ?>:<br />
-  <img src="<?php echo $this->get_site_url().'?'.$this->prefix.'_captcha=captcha&ps=_'.$this->print_counter.'&inAdmin=1&width='.$this->get_option('cv_width', CP_APPBOOK_DEFAULT_cv_width).'&height='.$this->get_option('cv_height', CP_APPBOOK_DEFAULT_cv_height).'&letter_count='.$this->get_option('cv_chars', CP_APPBOOK_DEFAULT_cv_chars).'&min_size='.$this->get_option('cv_min_font_size', CP_APPBOOK_DEFAULT_cv_min_font_size).'&max_size='.$this->get_option('cv_max_font_size', CP_APPBOOK_DEFAULT_cv_max_font_size).'&noise='.$this->get_option('cv_noise', CP_APPBOOK_DEFAULT_cv_noise).'&noiselength='.$this->get_option('cv_noise_length', CP_APPBOOK_DEFAULT_cv_noise_length).'&bcolor='.$this->get_option('cv_background', CP_APPBOOK_DEFAULT_cv_background).'&border='.$this->get_option('cv_border', CP_APPBOOK_DEFAULT_cv_border).'&font='.$this->get_option('cv_font', CP_APPBOOK_DEFAULT_cv_font); ?>"  id="captchaimg<?php echo '_'.$this->print_counter; ?>" alt="security code" border="0" class="skip-lazy" />
+  <img src="<?php echo $this->fixurl($this->get_site_url(), $this->prefix.'_captcha=captcha&ps=_'.$this->print_counter.'&inAdmin=1&width='.$this->get_option('cv_width', CP_APPBOOK_DEFAULT_cv_width).'&height='.$this->get_option('cv_height', CP_APPBOOK_DEFAULT_cv_height).'&letter_count='.$this->get_option('cv_chars', CP_APPBOOK_DEFAULT_cv_chars).'&min_size='.$this->get_option('cv_min_font_size', CP_APPBOOK_DEFAULT_cv_min_font_size).'&max_size='.$this->get_option('cv_max_font_size', CP_APPBOOK_DEFAULT_cv_max_font_size).'&noise='.$this->get_option('cv_noise', CP_APPBOOK_DEFAULT_cv_noise).'&noiselength='.$this->get_option('cv_noise_length', CP_APPBOOK_DEFAULT_cv_noise_length).'&bcolor='.$this->get_option('cv_background', CP_APPBOOK_DEFAULT_cv_background).'&border='.$this->get_option('cv_border', CP_APPBOOK_DEFAULT_cv_border).'&font='.$this->get_option('cv_font', CP_APPBOOK_DEFAULT_cv_font)); ?>"  id="captchaimg<?php echo '_'.$this->print_counter; ?>" alt="security code" border="0" class="skip-lazy" />
   <br /><?php _e("Please enter the security code",'appointment-hour-booking'); ?>:<br />
-  <div class="dfield"><input type="text" size="20" name="hdcaptcha_<?php echo $this->prefix; ?>_post" id="hdcaptcha_<?php echo $this->prefix; ?>_post<?php echo '_'.$this->print_counter; ?>" value="" />
+  <div class="dfield"><input type="text" size="20" name="hdcaptcha_<?php echo $this->prefix; ?>_post" id="hdcaptcha_<?php echo $this->prefix; ?>_post<?php echo '_'.$this->print_counter; ?>" value="" autocomplete="off" />
   <div class="cpefb_error message" id="hdcaptcha_error<?php echo '_'.$this->print_counter; ?>" generated="true" style="display:none;position: absolute; left: 0px; top: 25px;"><?php echo esc_attr(__($this->get_option('cv_text_enter_valid_captcha', CP_APPBOOK_DEFAULT_cv_text_enter_valid_captcha),'appointment-hour-booking')); ?></div>
   </div><br />
 <?php } ?><!-- rcadon -->
 </div>
-<?php /*if(is_user_logged_in()){ ?>
+</div>
 <div id="cp_subbtn<?php echo '_'.$this->print_counter; ?>" class="cp_subbtn"><?php if (defined('CPAPPHOURBK_BLOCK_TIMES')) _e('Block selected dates','appointment-hour-booking'); else _e($button_label,'appointment-hour-booking'); ?></div>
- <?php }*/ ?>
-  
 <div style="clear:both;"></div>
 </form>
 <?php if (defined('APBCT_NAME')) { ?>

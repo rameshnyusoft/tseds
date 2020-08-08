@@ -2,25 +2,23 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointment Hour Booking\n"
 "POT-Creation-Date: 2019-01-18 13:54+0100\n"
-"PO-Revision-Date: 2019-09-20 00:14+0200\n"
+"PO-Revision-Date: 2020-07-25 17:07+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.3\n"
+"X-Generator: Poedit 2.3.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-KeywordsList: _e;__;gettext\n"
 "X-Poedit-Basepath: ../../../../../..\n"
-"X-Poedit-SearchPath-1: a-site/wordpress-yosmany/wp-content/plugins/"
-"appointment-hour-booking\n"
+"X-Poedit-SearchPath-1: a-site/wordpress-yosmany/wp-content/plugins/appointment-"
+"hour-booking\n"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/applimit.addon.php:127
-msgid ""
-"The add-on adds support for limiting the number of appointments per user"
-msgstr ""
-"El add-on añade compatibilidad para limitar el número de citas por usuario"
+msgid "The add-on adds support for limiting the number of appointments per user"
+msgstr "El add-on añade compatibilidad para limitar el número de citas por usuario"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/applimit.addon.php:298
 msgid "Number of allowed appointments exceeded."
@@ -105,8 +103,7 @@ msgstr "Opcional: este método de pago + otros métodos de pago (habilitados)"
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/stripe.addon.php:84
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/targetpay.ideal.addon.php:69
 msgid "Optional: This payment method + Other payment methods  + Pay Later "
-msgstr ""
-"Opcional: este método de pago + otros métodos de pago + pagar más tarde"
+msgstr "Opcional: este método de pago + otros métodos de pago + pagar más tarde"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/authnet.addon.php:120
 msgid "Mode:"
@@ -196,11 +193,10 @@ msgid "Fax"
 msgstr "Fax"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/authnet.addon.php:217
-msgid ""
-"The add-on adds support for Authorize.net Server Integration Method payments"
+msgid "The add-on adds support for Authorize.net Server Integration Method payments"
 msgstr ""
-"El complemento agrega compatibilidad con los pagos del método de integración "
-"de Authorize.net Server"
+"El complemento agrega compatibilidad con los pagos del método de integración de "
+"Authorize.net Server"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/authnet.addon.php:339
 msgid "Pay with Authorize.net"
@@ -252,11 +248,9 @@ msgid "To Phone Number"
 msgstr "Enviar a número de teléfono"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/clickatell.addon.php:83
-msgid ""
-"For sending multiple messages, separate the phone numbers by comma symbols."
+msgid "For sending multiple messages, separate the phone numbers by comma symbols."
 msgstr ""
-"Para enviar varios mensajes, separe los números de teléfono por símbolos de "
-"coma."
+"Para enviar varios mensajes, separe los números de teléfono por símbolos de coma."
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/clickatell.addon.php:87
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/clickatell.addon.php:103
@@ -272,8 +266,8 @@ msgid ""
 "It is possible to use the same <a href=\"https://form2email.dwbooster.com/"
 "faq#q81\" target=\"_blank\">special tags</a> than in notifications emails."
 msgstr ""
-"Es posible utilizar las mismas < a href=\"https://form2email.dwbooster.com/"
-"faq # q81\" target=\"_ blank\" >etiquetas especiales</a> que en los correos "
+"Es posible utilizar las mismas < a href=\"https://form2email.dwbooster.com/faq # "
+"q81\" target=\"_ blank\" >etiquetas especiales</a> que en los correos "
 "electrónicos de notificaciones."
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/clickatell.addon.php:94
@@ -285,19 +279,17 @@ msgid "To Phone fields"
 msgstr "A  teléfonos"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/clickatell.addon.php:99
-msgid ""
-"For sending multiple messages, separate the phone fields by comma symbols."
+msgid "For sending multiple messages, separate the phone fields by comma symbols."
 msgstr ""
-"Para enviar varios mensajes, separe los campos del teléfono por símbolos de "
-"coma."
+"Para enviar varios mensajes, separe los campos del teléfono por símbolos de coma."
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/clickatell.addon.php:128
 msgid ""
 "The add-on allows to send notification messages (SMS) via Clickatell after "
 "submitting the form"
 msgstr ""
-"El Add-on permite enviar mensajes de notificación (SMS) a través de "
-"Clickatell después de enviar el formulario"
+"El Add-on permite enviar mensajes de notificación (SMS) a través de Clickatell "
+"después de enviar el formulario"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/coupons.addon.php:107
 msgid "The add-on adds support for coupons / discounts codes"
@@ -309,11 +301,11 @@ msgstr "Cupón"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/frontend-lists.addon.php:80
 msgid ""
-"The add-on allows to displays list (schedule) of bookings grouped by date in "
-"the frontend"
+"The add-on allows to displays list (schedule) of bookings grouped by date in the "
+"frontend"
 msgstr ""
-"El complemento permite mostrar la lista (programación) de las reservas "
-"agrupadas por fecha en el front-end"
+"El complemento permite mostrar la lista (programación) de las reservas agrupadas "
+"por fecha en el front-end"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/frontend-lists.addon.php:158
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-admin-int-schedule.inc.php:76
@@ -364,16 +356,14 @@ msgstr "Descripción de la entrada iCal"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/icalexport.addon.php:151
 msgid "The add-on adds support for exporting iCal files."
-msgstr ""
-"El complemento agrega compatibilidad para la exportación de archivos iCal."
+msgstr "El complemento agrega compatibilidad para la exportación de archivos iCal."
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/icalimport.addon.php:97
 msgid ""
-"The add-on adds support for importing iCal files from external websites/"
-"services"
+"The add-on adds support for importing iCal files from external websites/services"
 msgstr ""
-"El complemento añade compatibilidad para la importación de archivos iCal "
-"desde sitios web/servicios externos"
+"El complemento añade compatibilidad para la importación de archivos iCal desde "
+"sitios web/servicios externos"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/icalimport.addon.php:213
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-main-class.inc.php:1071
@@ -443,11 +433,9 @@ msgid "Create at least a list in your MailChimp account"
 msgstr "Crea al menos una lista en tu cuenta de MailChimp"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/mailchimp.addon.php:190
-msgid ""
-"The add-on creates MailChimp List members with the submitted information"
+msgid "The add-on creates MailChimp List members with the submitted information"
 msgstr ""
-"El complemento crea miembros de la lista de MailChimp con la información "
-"enviada"
+"El complemento crea miembros de la lista de MailChimp con la información enviada"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/mailchimp.addon.php:363
 msgid "Please select..."
@@ -455,8 +443,7 @@ msgstr "Por favor, selecciona..."
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/mollie.addon.php:60
 msgid "Enable iDeal-Mollie? (if enabled PayPal Standard is disabled)"
-msgstr ""
-"Habilitar iDeal-Mollie? (si se habilita PayPal Standard está desactivado)"
+msgstr "Habilitar iDeal-Mollie? (si se habilita PayPal Standard está desactivado)"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/mollie.addon.php:71
 msgid "Mollie API Key"
@@ -507,8 +494,7 @@ msgstr "Pagar con PayPal"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/paypalpro.addon.php:78
 msgid "Enable PayPal Pro? (if enabled PayPal Standard is disabled)"
-msgstr ""
-"¿Habilitar PayPal Pro? (si se habilita PayPal Standard está desactivado)"
+msgstr "¿Habilitar PayPal Pro? (si se habilita PayPal Standard está desactivado)"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/paypalpro.addon.php:89
 msgid "PayPal Pro - API UserName"
@@ -570,8 +556,8 @@ msgstr "País predeterminado"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/paypalpro.addon.php:398
 msgid ""
-"The add-on adds support for PayPal Payment Pro payments to accept credit "
-"cars directly into the website"
+"The add-on adds support for PayPal Payment Pro payments to accept credit cars "
+"directly into the website"
 msgstr ""
 "El complemento agrega soporte para pagos de PayPal Payment Pro para aceptar "
 "coches de crédito directamente en el sitio web"
@@ -617,8 +603,7 @@ msgstr "Clave secreta"
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/recaptcha.addon.php:65
 msgid "The add-on allows to protect the forms with reCAPTCHA service of Google"
 msgstr ""
-"El Add-on permite proteger los formularios con el servicio reCAPTCHA de "
-"Google"
+"El Add-on permite proteger los formularios con el servicio reCAPTCHA de Google"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/recaptcha.addon.php:207
 msgid "Captcha verification is missing."
@@ -634,12 +619,11 @@ msgstr "¿Habilitar TPV?"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/redsys.addon.php:94
 msgid ""
-"Note: If \"Pay Later\" or \"PayPal\" are selected, a radiobutton will appear "
-"in the form to select if the payment will be made with RedSys or not."
+"Note: If \"Pay Later\" or \"PayPal\" are selected, a radiobutton will appear in "
+"the form to select if the payment will be made with RedSys or not."
 msgstr ""
-"Nota: si se seleccionan \"pagar más tarde\" o \"PayPal\", aparecerá un "
-"radiobotón en el formulario para seleccionar si el pago se realizará con "
-"RedSys o no."
+"Nota: si se seleccionan \"pagar más tarde\" o \"PayPal\", aparecerá un radiobotón "
+"en el formulario para seleccionar si el pago se realizará con RedSys o no."
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/redsys.addon.php:96
 msgid "Label for the \"<strong>Pay with RedSys</strong>\" option"
@@ -669,8 +653,7 @@ msgstr "El Add-on añade soporte para los pagos de RedSys TPV"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/reminder.addon.php:125
 msgid "The add-on adds support for reminder notifications"
-msgstr ""
-"El complemento añade compatibilidad con las notificaciones de recordatorio"
+msgstr "El complemento añade compatibilidad con las notificaciones de recordatorio"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/sagepay.addon.php:97
 msgid "Enable SagePay? (if enabled PayPal Standard is disabled)"
@@ -702,8 +685,7 @@ msgstr "Pague con SagePay"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/sagepayments.addon.php:81
 msgid "Enable SagePayments? (if enabled PayPal Standard is disabled)"
-msgstr ""
-"¿Habilitar SagePayments? (si se habilita PayPal Standard está desactivado)"
+msgstr "¿Habilitar SagePayments? (si se habilita PayPal Standard está desactivado)"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/sagepayments.addon.php:92
 msgid "Merchant ID (M_id)"
@@ -774,11 +756,9 @@ msgid "Lead Attributes"
 msgstr "Atributos de cliente potencial"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/salesforce.addon.php:184
-msgid ""
-"The add-on allows create SalesForce leads with the submitted information"
+msgid "The add-on allows create SalesForce leads with the submitted information"
 msgstr ""
-"El complemento permite crear prospectos de SalesForce con la información "
-"enviada"
+"El complemento permite crear prospectos de SalesForce con la información enviada"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/signature.addon.php:109
 msgid "Signature Settings"
@@ -813,8 +793,7 @@ msgstr "Introduzca el nombre del campo que debe ser recolocado por la firma"
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/signature.addon.php:173
 msgid "The add-on allows to replace form fields with \"Signature\" fields"
 msgstr ""
-"El complemento permite reemplazar campos de formulario con campos de \"firma"
-"\""
+"El complemento permite reemplazar campos de formulario con campos de \"firma\""
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/skrill.addon.php:67
 msgid "Enable Skrill Payments?"
@@ -834,11 +813,11 @@ msgstr "Pague con Skrill"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/status_update_emails.addon.php:169
 msgid ""
-"The add-on allows to define emails to be sent when the booking status is "
-"changed from the bookings list"
+"The add-on allows to define emails to be sent when the booking status is changed "
+"from the bookings list"
 msgstr ""
-"El complemento permite definir los correos electrónicos que se enviarán "
-"cuando el estado de la reserva se cambie de la lista de reservas"
+"El complemento permite definir los correos electrónicos que se enviarán cuando el "
+"estado de la reserva se cambie de la lista de reservas"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/stripe.addon.php:78
 msgid "Enable Stripe?"
@@ -929,8 +908,8 @@ msgid ""
 "The add-on applies the timezone conversion to display the time-slots in the "
 "customer timezone"
 msgstr ""
-"El complemento aplica la conversión de zona horaria para mostrar los "
-"intervalos de tiempo en la zona horaria del cliente"
+"El complemento aplica la conversión de zona horaria para mostrar los intervalos "
+"de tiempo en la zona horaria del cliente"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/twiliosms.addon.php:124
 msgid "The add-on adds support for Twilio SMS notifications"
@@ -945,19 +924,18 @@ msgid "Add Custom Media Types"
 msgstr "Agregar tipos de medios personalizados"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/uploads.addon.php:43
-msgid ""
-"Adds the files extensions separated by comma: <strong>svg,xml,zip</strong>"
+msgid "Adds the files extensions separated by comma: <strong>svg,xml,zip</strong>"
 msgstr ""
-"Añade las extensiones de archivos separadas por comas: <strong> SVG, XML, "
-"zip </strong>"
+"Añade las extensiones de archivos separadas por comas: <strong> SVG, XML, zip </"
+"strong>"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/uploads.addon.php:757
 msgid ""
-"The add-on allows to add the uploaded files to the Media Library, and the "
-"support for new mime types"
+"The add-on allows to add the uploaded files to the Media Library, and the support "
+"for new mime types"
 msgstr ""
-"El Add-on permite agregar los archivos cargados a la mediateca, y el soporte "
-"para nuevos tipos MIME"
+"El Add-on permite agregar los archivos cargados a la mediateca, y el soporte para "
+"nuevos tipos MIME"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/webhook.addon.php:67
 msgid "WebHook URL"
@@ -965,16 +943,15 @@ msgstr "URL de WebHook"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/webhook.addon.php:119
 msgid ""
-"The add-on allows put the submitted information to a webhook URL, and "
-"integrate the forms with the Zapier service"
+"The add-on allows put the submitted information to a webhook URL, and integrate "
+"the forms with the Zapier service"
 msgstr ""
-"El Add-on permite poner la información enviada a una URL de webhook, e "
-"integrar los formularios con el servicio Zapier"
+"El Add-on permite poner la información enviada a una URL de webhook, e integrar "
+"los formularios con el servicio Zapier"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/woocommerce.addon.php:26
 msgid "The add-on allows integrate the forms with WooCommerce products"
-msgstr ""
-"El Add-on permite integrar los formularios con los productos WooCommerce"
+msgstr "El Add-on permite integrar los formularios con los productos WooCommerce"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/woocommerce.addon.php:235
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-admin-int-schedule.inc.php:81
@@ -999,11 +976,11 @@ msgstr "Precio mínimo permitido (solo números)"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/woocommerce.addon.php:412
 msgid ""
-"The summary section is optional. It is possible to use the special tags "
-"supported by the notification emails."
+"The summary section is optional. It is possible to use the special tags supported "
+"by the notification emails."
 msgstr ""
-"La sección de resumen es opcional. Es posible utilizar las etiquetas "
-"especiales admitidas por los correos electrónicos de notificación."
+"La sección de resumen es opcional. Es posible utilizar las etiquetas especiales "
+"admitidas por los correos electrónicos de notificación."
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/addons/woocommerce.addon.php:417
 msgid "Activate the summary"
@@ -1064,18 +1041,17 @@ msgstr "Añadir Reserva"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-admin-int-add-booking.inc.php:40
 msgid ""
-"This page is for adding bookings from the administration area. The captcha "
-"and payment process are disabled in order to allow the website manager "
-"easily adding bookings."
+"This page is for adding bookings from the administration area. The captcha and "
+"payment process are disabled in order to allow the website manager easily adding "
+"bookings."
 msgstr ""
-"Esta página es para agregar reservas desde el área de administración. El "
-"CAPTCHA y el proceso de pago están desactivados con el fin de permitir al "
-"administrador del sitio web añadir fácilmente reservas."
+"Esta página es para agregar reservas desde el área de administración. El CAPTCHA "
+"y el proceso de pago están desactivados con el fin de permitir al administrador "
+"del sitio web añadir fácilmente reservas."
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-admin-int-list.inc.php:92
 msgid "Access verification error. Cannot update settings."
-msgstr ""
-"Error de verificación de acceso. No se puede actualizar la configuración."
+msgstr "Error de verificación de acceso. No se puede actualizar la configuración."
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-admin-int-list.inc.php:96
 msgid "License ID updated"
@@ -1290,8 +1266,8 @@ msgid ""
 "Number of times that appears each value. Percent in relation to the total of "
 "submissions."
 msgstr ""
-"Número de veces que aparece cada valor. Porcentaje en relación con el total "
-"de envíos."
+"Número de veces que aparece cada valor. Porcentaje en relación con el total de "
+"envíos."
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-admin-int-report.inc.php:221
 msgid "Date range from"
@@ -1347,9 +1323,9 @@ msgid ""
 "The purpose of this page is to <strong>display the bookings/schedule in a "
 "calendar view</strong>. You can add bookings from the public booking form or"
 msgstr ""
-"El propósito de esta página es <strong> Mostrar las reservas/programación en "
-"una </strong> de vista de calendario. Puede añadir reservas desde el "
-"formulario de reserva público o"
+"El propósito de esta página es <strong> Mostrar las reservas/programación en una "
+"</strong> de vista de calendario. Puede añadir reservas desde el formulario de "
+"reserva público o"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-admin-int-schedule.inc.php:112
 msgid "add bookings from the dashboard"
@@ -1357,13 +1333,13 @@ msgstr "agregar reservas desde el panel"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-admin-int-schedule.inc.php:112
 msgid ""
-"and the bookings will appear in this calendar.<br />For CSV export, print "
-"and filter options switch to the \"<strong>List View</strong>\" with the "
-"button above this text."
+"and the bookings will appear in this calendar.<br />For CSV export, print and "
+"filter options switch to the \"<strong>List View</strong>\" with the button above "
+"this text."
 msgstr ""
 "y las reservas aparecerán en este calendario. < br/> para exportar CSV, las "
-"opciones de impresión y filtro cambian a \"<strong> List View </strong>\" "
-"con el botón encima de este texto."
+"opciones de impresión y filtro cambian a \"<strong> List View </strong>\" con el "
+"botón encima de este texto."
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-admin-int.inc.php:68
 msgid "Save Changes and Return"
@@ -1502,11 +1478,11 @@ msgstr "Confirmación/página de agradecimiento"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-admin-int.inc.php:309
 msgid ""
-"Address / URL of the page where the user will be redirected after submiting "
-"the booking form"
+"Address / URL of the page where the user will be redirected after submiting the "
+"booking form"
 msgstr ""
-"Dirección/URL de la página donde se redireccionará al usuario después de "
-"haber enviado el formulario de reserva"
+"Dirección/URL de la página donde se redireccionará al usuario después de haber "
+"enviado el formulario de reserva"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-admin-int.inc.php:317
 msgid "Default status of new bookings"
@@ -1514,8 +1490,7 @@ msgstr "Estado predeterminado de las nuevas reservas"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-admin-int.inc.php:319
 msgid ""
-"Only \"Approved\" items are taken in account for the availability "
-"verification."
+"Only \"Approved\" items are taken in account for the availability verification."
 msgstr ""
 "Solo los artículos \"aprobados\" se toman en cuenta para la verificación de "
 "disponibilidad."
@@ -1526,8 +1501,8 @@ msgstr "Estado predeterminado de las reservas pagadas"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-admin-int.inc.php:324
 msgid ""
-"If a payment add-on is enabled the booking will be changed to this status "
-"after the payment."
+"If a payment add-on is enabled the booking will be changed to this status after "
+"the payment."
 msgstr ""
 "Si se habilita un complemento de pago, la reserva se cambiará a este estado "
 "después del pago."
@@ -1559,8 +1534,7 @@ msgstr "Etiqueta de la opción \"pagar más tarde\" (si está habilitada)"
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-admin-int.inc.php:443
 msgid "Note: To enable a payment method enable first the related addon."
 msgstr ""
-"Nota: para habilitar un método de pago, habilite primero el add-on "
-"relacionado."
+"Nota: para habilitar un método de pago, habilite primero el add-on relacionado."
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-admin-int.inc.php:446
 msgid "Users with access to the messages list"
@@ -1585,8 +1559,7 @@ msgstr "Enviar correo electrónico \"de\""
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-admin-int.inc.php:484
 msgid "From fixed email address indicated below - Recommended option"
 msgstr ""
-"Desde la dirección de correo electrónico fija indicada abajo-opción "
-"recomendada"
+"Desde la dirección de correo electrónico fija indicada abajo-opción recomendada"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-admin-int.inc.php:485
 msgid "From the email address indicated by the custome"
@@ -1594,27 +1567,25 @@ msgstr "Desde la dirección de correo electrónico indicada por el custome"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-admin-int.inc.php:488
 msgid ""
-"If you select \"from fixed...\" the customer email address will appear in "
-"the \"to\" address when you hit \"reply\", this is the recommended setting "
-"to avoid mail server restrictions."
+"If you select \"from fixed...\" the customer email address will appear in the \"to"
+"\" address when you hit \"reply\", this is the recommended setting to avoid mail "
+"server restrictions."
 msgstr ""
-"Si seleccionas \"desde fijo...\" la dirección de correo electrónico del "
-"cliente aparecerá en la dirección \"a\" cuando golpeas \"responder\", esta "
-"es la configuración recomendada para evitar las restricciones del servidor "
-"de correo."
+"Si seleccionas \"desde fijo...\" la dirección de correo electrónico del cliente "
+"aparecerá en la dirección \"a\" cuando golpeas \"responder\", esta es la "
+"configuración recomendada para evitar las restricciones del servidor de correo."
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-admin-int.inc.php:490
 msgid ""
-"If you select \"from customer email\" then the customer email will appear "
-"also visually when you receive the email, but this isn't supported by all "
-"hosting services, so this\n"
+"If you select \"from customer email\" then the customer email will appear also "
+"visually when you receive the email, but this isn't supported by all hosting "
+"services, so this\n"
 "                option isn't recommended in most cases."
 msgstr ""
-"Si selecciona \"desde el correo electrónico del cliente\", el correo "
-"electrónico del cliente aparecerá también visualmente cuando reciba el "
-"correo electrónico, pero esto no es compatible con todos los servicios de "
-"hospedaje, por lo que esta opción no se recomienda en la mayoría de los "
-"casos."
+"Si selecciona \"desde el correo electrónico del cliente\", el correo electrónico "
+"del cliente aparecerá también visualmente cuando reciba el correo electrónico, "
+"pero esto no es compatible con todos los servicios de hospedaje, por lo que esta "
+"opción no se recomienda en la mayoría de los casos."
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-admin-int.inc.php:496
 msgid "\"From\" email (for fixed \"from\" addresses)"
@@ -1627,36 +1598,34 @@ msgstr "Enviar correo electrónico \"a\""
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-admin-int.inc.php:504
 msgid "To the fixed email(s) address(es) indicated below - Recommended option"
 msgstr ""
-"A la (s) dirección (es) de correo electrónico fija indicada a continuación-"
-"opción recomendada"
+"A la (s) dirección (es) de correo electrónico fija indicada a continuación-opción "
+"recomendada"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-admin-int.inc.php:505
 msgid ""
 "To the email address selected in a form field (ex: captcha image enabled is "
 "recommended in this case)"
 msgstr ""
-"A la dirección de correo electrónico seleccionada en un campo de formulario "
-"(ej: se recomienda la imagen CAPTCHA habilitada en este caso)"
+"A la dirección de correo electrónico seleccionada en un campo de formulario (ej: "
+"se recomienda la imagen CAPTCHA habilitada en este caso)"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-admin-int.inc.php:508
 msgid ""
-"If you select \"To fixed...\" enter the destination emails in the next "
-"field. "
+"If you select \"To fixed...\" enter the destination emails in the next field. "
 msgstr ""
 "Si seleccionas \"to fixed...\" ingresa los emails de destino en el siguiente "
 "campo."
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-admin-int.inc.php:510
 msgid ""
-"If you select \"To email ...in form field\" then add a field like a drop-"
-"down, radio-button or checkbox that contains the email address in the field "
-"value (not needed in the field text but in the internal value)."
+"If you select \"To email ...in form field\" then add a field like a drop-down, "
+"radio-button or checkbox that contains the email address in the field value (not "
+"needed in the field text but in the internal value)."
 msgstr ""
-"Si selecciona \"para enviar por correo electrónico... en el campo de "
-"formulario\", a continuación, agregue un campo como un menú desplegable, "
-"botón de radio o casilla de verificación que contiene la dirección de correo "
-"electrónico en el valor del campo (no es necesario en el texto del campo, "
-"pero en el valor interno)."
+"Si selecciona \"para enviar por correo electrónico... en el campo de formulario"
+"\", a continuación, agregue un campo como un menú desplegable, botón de radio o "
+"casilla de verificación que contiene la dirección de correo electrónico en el "
+"valor del campo (no es necesario en el texto del campo, pero en el valor interno)."
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-admin-int.inc.php:515
 msgid "Destination emails (comma separated)"
@@ -1776,8 +1745,7 @@ msgstr "Siguiente paso-informes >"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-admin-int.inc.php:683
 msgid "Automatic Reports: Send submissions in CSV format via email"
-msgstr ""
-"Informes automáticos: envía envíos en formato CSV por correo electrónico"
+msgstr "Informes automáticos: envía envíos en formato CSV por correo electrónico"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-admin-int.inc.php:687
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-settings.inc.php:133
@@ -1801,8 +1769,8 @@ msgstr "Enviar informe después de esta hora (hora del servidor)"
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-admin-int.inc.php:713
 msgid "Send the report to the following email addresses (comma separated)"
 msgstr ""
-"Enviar el informe a las siguientes direcciones de correo electrónico "
-"(separadas por comas)"
+"Enviar el informe a las siguientes direcciones de correo electrónico (separadas "
+"por comas)"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-admin-int.inc.php:731
 msgid "Email Text (CSV file will be attached with the submissions)"
@@ -1833,8 +1801,8 @@ msgid ""
 "If you don't want to enable add ons now then <strong>continue saving these "
 "settings and publishing the booking form</strong>."
 msgstr ""
-"Si no desea habilitar add ons ahora, <strong> continuar guardando estos "
-"ajustes y publicando el formulario de reserva </strong>."
+"Si no desea habilitar add ons ahora, <strong> continuar guardando estos ajustes y "
+"publicando el formulario de reserva </strong>."
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-admin-int.inc.php:781
 msgid "Free Support"
@@ -1891,12 +1859,11 @@ msgstr "Ver el formulario de reserva publicado"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-publish-wizzard.inc.php:54
 msgid ""
-"Note: If the calendar was published in a new page or post it will be a "
-"'draft', you have to publish the page/post in the future if needed."
+"Note: If the calendar was published in a new page or post it will be a 'draft', "
+"you have to publish the page/post in the future if needed."
 msgstr ""
 "Nota: Si el calendario fue publicado en una nueva página o post será un ' "
-"borrador ', usted tiene que publicar la página/post en el futuro si es "
-"necesario."
+"borrador ', usted tiene que publicar la página/post en el futuro si es necesario."
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-publish-wizzard.inc.php:56
 msgid "Edit the booking form settings and calendar availability"
@@ -1937,11 +1904,10 @@ msgid "Page/Post Title"
 msgstr "Página/título de la publicación"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-publish-wizzard.inc.php:103
-msgid ""
-"Classic way? Just copy and paste the following shortcode into the page/post:"
+msgid "Classic way? Just copy and paste the following shortcode into the page/post:"
 msgstr ""
-"¿Forma clásica? Simplemente copie y pegue el siguiente shortcode en la "
-"página/post:"
+"¿Forma clásica? Simplemente copie y pegue el siguiente shortcode en la página/"
+"post:"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-publish-wizzard.inc.php:111
 msgid "Using Elementor?"
@@ -1959,8 +1925,8 @@ msgstr "¿Utilizas el editor de WordPress clásico u otros editores?"
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-publish-wizzard.inc.php:207
 msgid "You can also publish the form in a post/page, use the dedicated icon"
 msgstr ""
-"También puede publicar el formulario en una publicación/página, utilizar el "
-"icono dedicado"
+"También puede publicar el formulario en una publicación/página, utilizar el icono "
+"dedicado"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-publish-wizzard.inc.php:124
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-publish-wizzard.inc.php:207
@@ -1969,8 +1935,8 @@ msgstr "Insertar "
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-publish-wizzard.inc.php:125
 msgid ""
-"which has been added to your Upload/Insert Menu, just below the title of "
-"your Post/Page"
+"which has been added to your Upload/Insert Menu, just below the title of your "
+"Post/Page"
 msgstr ""
 "que se ha añadido a su menú cargar/insertar, justo debajo del título de su "
 "publicación/página"
@@ -1989,8 +1955,8 @@ msgstr "Nota"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-publish-wizzard.inc.php:208
 msgid ""
-"which has been added to your Upload/Insert Menu, just below the title of "
-"your Post/Page or under the \"+\" icon if using the Gutemberg editor."
+"which has been added to your Upload/Insert Menu, just below the title of your "
+"Post/Page or under the \"+\" icon if using the Gutemberg editor."
 msgstr ""
 "que se ha añadido a su menú cargar/insertar, justo debajo del título de su "
 "publicación/página o bajo el icono \"+\" Si utiliza el editor de Gutemberg."
@@ -2024,11 +1990,11 @@ msgstr "Informes automáticos por correo electrónico"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-settings.inc.php:127
 msgid ""
-"Automatic email reports for <b>ALL forms</b>: Send submissions in CSV format "
-"via email."
+"Automatic email reports for <b>ALL forms</b>: Send submissions in CSV format via "
+"email."
 msgstr ""
-"Informes automáticos de correo electrónico para <b> todos los formularios </"
-"b>: Envíe envíos en formato CSV por correo electrónico."
+"Informes automáticos de correo electrónico para <b> todos los formularios </b>: "
+"Envíe envíos en formato CSV por correo electrónico."
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-settings.inc.php:140
 msgid "days"
@@ -2055,9 +2021,9 @@ msgid ""
 "Note: For setting up a report only for a specific form use the setting area "
 "available for that when editing each form settings"
 msgstr ""
-"Nota: para configurar un informe solo para un formulario específico, utilice "
-"el área de configuración disponible para ello al editar cada configuración "
-"de formulario"
+"Nota: para configurar un informe solo para un formulario específico, utilice el "
+"área de configuración disponible para ello al editar cada configuración de "
+"formulario"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-settings.inc.php:188
 msgid "Important!"
@@ -2065,11 +2031,11 @@ msgstr "¡Importante!"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-settings.inc.php:188
 msgid ""
-"Use this area only if you are experiencing conflicts with third party "
-"plugins, with the theme scripts or with the character encoding."
+"Use this area only if you are experiencing conflicts with third party plugins, "
+"with the theme scripts or with the character encoding."
 msgstr ""
-"Utilice esta área solo si experimenta conflictos con plugins de terceros, "
-"con los scripts de tema o con la codificación de caracteres."
+"Utilice esta área solo si experimenta conflictos con plugins de terceros, con los "
+"scripts de tema o con la codificación de caracteres."
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-settings.inc.php:196
 msgid "Script load method"
@@ -2085,11 +2051,10 @@ msgstr "Directo"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-settings.inc.php:203
 msgid ""
-"Change the script load method if the form doesn't appear in the public "
-"website."
+"Change the script load method if the form doesn't appear in the public website."
 msgstr ""
-"Cambie el método de carga del script si el formulario no aparece en el sitio "
-"web público."
+"Cambie el método de carga del script si el formulario no aparece en el sitio web "
+"público."
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-settings.inc.php:208
 msgid "Character encoding"
@@ -2109,13 +2074,13 @@ msgid ""
 "characters. After updated you need to edit the special characters again."
 msgstr ""
 "Actualice el conjunto de caracteres si va a tener problemas para mostrar "
-"personajes especiales/no latinos. Una vez actualizado, debe volver a editar "
-"los caracteres especiales."
+"personajes especiales/no latinos. Una vez actualizado, debe volver a editar los "
+"caracteres especiales."
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-settings.inc.php:228
 msgid ""
-"Use this area to add custom CSS styles. These styles will be keep safe even "
-"after updating the plugin."
+"Use this area to add custom CSS styles. These styles will be keep safe even after "
+"updating the plugin."
 msgstr ""
 "Utilice esta área para agregar estilos CSS personalizados. Estos estilos se "
 "mantendrán seguros incluso después de actualizar el plugin."
@@ -2160,8 +2125,8 @@ msgstr "Para otros estilos, consulte la sección de diseño en el FAQ:"
 
 #: a-site/wordpress-yosmany/wp-content/plugins/appointment-hour-booking/cp-settings.inc.php:318
 msgid ""
-"Use this area to add custom custom scripts. These scripts will be keep safe "
-"even after updating the plugin."
+"Use this area to add custom custom scripts. These scripts will be keep safe even "
+"after updating the plugin."
 msgstr ""
 "Utilice esta área para agregar scripts personalizados personalizados. Estos "
 "scripts se mantendrán seguros incluso después de actualizar el plugin."
@@ -2189,7 +2154,7 @@ msgstr "Por favor entre al menos {0} caracteres."
 msgid "No more slots available."
 msgstr "No hay mas horas disponibles"
 
-msgid "Selected time isn't longer available. Please select a different time."
+msgid "Selected time is no longer available. Please select a different time."
 msgstr ""
 
 msgid "Cancelled"
@@ -2233,3 +2198,195 @@ msgstr ""
 
 msgid "No appointments found with the selected filters"
 msgstr ""
+
+msgid "Discount code"
+msgstr ""
+
+msgid "Please upload a valid file type"
+msgstr ""
+
+msgid "Every"
+msgstr ""
+
+msgid "Weekly on weekdays"
+msgstr ""
+
+msgid "Weekly on Monday, Wednesday, Friday"
+msgstr ""
+
+msgid "Weekly on Tuesday, Thursday"
+msgstr ""
+
+msgid "weeks"
+msgstr ""
+
+msgid "on day"
+msgstr ""
+
+msgid "on the"
+msgstr ""
+
+msgid "months"
+msgstr ""
+
+msgid "on"
+msgstr ""
+
+msgid "Annually"
+msgstr ""
+
+msgid "years"
+msgstr ""
+
+msgid "Once"
+msgstr ""
+
+msgid "until"
+msgstr ""
+
+msgid "and repeated on"
+msgstr ""
+
+msgid "Starts on"
+msgstr ""
+
+msgid "Ends after a number of occurrences"
+msgstr ""
+
+msgid "day of the week"
+msgstr ""
+
+msgid "day of the month"
+msgstr ""
+
+msgid "Repeat by"
+msgstr ""
+
+msgid "Repeat on"
+msgstr ""
+
+msgid "Repeat every"
+msgstr ""
+
+msgid "Repeats"
+msgstr ""
+
+msgid "Every weekday (Monday to Friday)"
+msgstr ""
+
+msgid "Every Monday, Wednesday, and Friday"
+msgstr ""
+
+msgid "Every Tuesday, and Thursday"
+msgstr ""
+
+msgid "Add available slots"
+msgstr ""
+
+msgid "Jan"
+msgstr ""
+
+msgid "Feb"
+msgstr ""
+
+msgid "Mar"
+msgstr ""
+
+msgid "Apr"
+msgstr ""
+
+msgid "May"
+msgstr ""
+
+msgid "Jun"
+msgstr ""
+
+msgid "Jul"
+msgstr ""
+
+msgid "Aug"
+msgstr ""
+
+msgid "Sep"
+msgstr ""
+
+msgid "Oct"
+msgstr ""
+
+msgid "Nov"
+msgstr ""
+
+msgid "Dec"
+msgstr ""
+
+msgid "first"
+msgstr ""
+
+msgid "second"
+msgstr ""
+
+msgid "third"
+msgstr ""
+
+msgid "fourth"
+msgstr ""
+
+msgid "last"
+msgstr ""
+
+msgid "Repeat"
+msgstr ""
+
+msgid "times"
+msgstr ""
+
+msgid "after"
+msgstr ""
+
+msgid "Ends"
+msgstr ""
+
+msgid "occurrences"
+msgstr ""
+
+msgid "or"
+msgstr ""
+
+msgid "SU"
+msgstr ""
+
+msgid "MO"
+msgstr ""
+
+msgid "TU"
+msgstr ""
+
+msgid "WE"
+msgstr ""
+
+msgid "TH"
+msgstr ""
+
+msgid "FR"
+msgstr ""
+
+msgid "SA"
+msgstr ""
+
+msgid "Online Demo"
+msgstr ""
+
+msgid "I Need Help"
+msgstr ""
+
+msgid "Upgrade Plugin"
+msgstr ""
+
+msgid "Please enter the following security code to confirm the appointment:"
+msgstr "Por favor entre el siguiente código de seguridad para confirmar la reserva:"
+
+msgid "Double Opt-in"
+msgstr "Verificación de email"
+
+msgid "Verify"
+msgstr "Verificar"

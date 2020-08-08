@@ -97,18 +97,21 @@ for ($i=0;$i<$noise;$i++)
 
 switch (@$_GET["font"]) {
     case "font-2.ttf":
+    case "font2":
         $selected_font = "font-2.ttf";
         break;
     case "font-3.ttf":
+    case "font3":
         $selected_font = "font-3.ttf";
         break;
     case "font-4.ttf":
+    case "font4":
         $selected_font = "font-4.ttf";
         break;               
     default:
         $selected_font = "font-1.ttf";    
 }
-
+ 
 $font = dirname( __FILE__ ) . "/". $selected_font;
 
 $font_size = rand($min_size, $max_size);

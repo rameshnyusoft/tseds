@@ -25,13 +25,8 @@ if (!class_exists('CP_cpappbk_Elementor'))
           wp_enqueue_style('cpapphourbk-calendarstyle', plugins_url('/../../css/cupertino/calendar.css', __FILE__));
           wp_enqueue_style('cpapphourbk-publicstyle', plugins_url('/../../css/stylepublic.css', __FILE__));
         
-          wp_deregister_script('query-stringify');
-          wp_register_script('query-stringify', plugins_url('/../../js/jQuery.stringify.js', __FILE__));
-        
-          wp_deregister_script($this->prefix.'_validate_script');
-          wp_register_script($this->prefix.'_validate_script', plugins_url('/../../js/jquery.validate.js', __FILE__));
           wp_enqueue_script( $this->prefix.'_builder_script',
-                 get_site_url( get_current_blog_id() ).'?cp_cpappb_resources=public&nc=1',array("jquery","jquery-ui-core","jquery-ui-datepicker","jquery-ui-widget","jquery-ui-position","jquery-ui-tooltip","query-stringify",$this->prefix."_validate_script"), false, true );          
+                 get_site_url( get_current_blog_id() ).'?cp_cpappb_resources=public&nc=1',array("jquery","jquery-ui-core","jquery-ui-datepicker","jquery-ui-widget","jquery-ui-position","jquery-ui-tooltip"), false, true );          
       }      
     
       /**

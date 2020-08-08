@@ -15,8 +15,8 @@ jQuery(function()
 	(function( blocks, element ) {
         var el = wp.element.createElement,
         source 		= blocks.source,
-	    InspectorControls = wp.editor.InspectorControls,	      
-		category 	= {slug:'appointment-hour-booking', title : 'Appointment Hour Booking'};
+        InspectorControls   = ('blockEditor' in wp) ? wp.blockEditor.InspectorControls : wp.editor.InspectorControls;        
+		var category 	= {slug:'appointment-hour-booking', title : 'Appointment Hour Booking'};
 				
 		var _wp$components = wp.components,
         SelectControl = _wp$components.SelectControl,

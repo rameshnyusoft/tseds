@@ -337,6 +337,7 @@ ahbstartTime();
             $buffer  = "BEGIN:VCALENDAR\n";
             $buffer .= "PRODID:-//CodePeople//Appointment Hour Booking for WordPress//EN\n";
             $buffer .= "VERSION:2.0\n";
+            $buffer .= "X-MS-OLK-FORCEINSPECTOROPEN:TRUE\n";
     
             $icalSettings = $wpdb->get_results(
 						$wpdb->prepare( "SELECT * FROM ".$wpdb->prefix.$this->form_table." WHERE formid=%d", $form_id )

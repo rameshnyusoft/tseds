@@ -113,7 +113,8 @@ $.extend(
 		        str += '<select class="openhours_to" i="'+i+'">';
 		        for (var h=0;h<24;h++)
 		          for (var m=0;m<60;m=m+5)
-		            str += '<option h="'+h+'" m="'+m+'" value="'+((h<10)?"0":"")+h+":"+((m<10)?"0":"")+m+'" '+((openhours[i].h2==h && openhours[i].m2==m)?"selected":"")+'>'+((h<10)?"0":"")+h+":"+((m<10)?"0":"")+m+'</option>';    
+		            str += '<option h="'+h+'" m="'+m+'" value="'+((h<10)?"0":"")+h+":"+((m<10)?"0":"")+m+'" '+((openhours[i].h2==h && openhours[i].m2==m)?"selected":"")+'>'+((h<10)?"0":"")+h+":"+((m<10)?"0":"")+m+'</option>'; 
+		        str += '<option h="0" m="0" value="00:00">00:00</option>';        
 		        str += '</select>';
 		        str += '<a class="choice_add ui-icon ui-icon-circle-plus" i="'+i+'" title="Add another choice."></a><a class="choice_remove ui-icon ui-icon-circle-minus" i="'+i+'" title="Delete this choice."></a></div>';
 		    }
@@ -378,14 +379,14 @@ $.extend(
 		                    suffix = " AM";
 		                }    
 				    }
-					  return (((h<10)?"":"")+h+":"+(m<10?"0":"")+m)+suffix;									
+					  return (((h<10)?"0":"")+h+":"+(m<10?"0":"")+m)+suffix;									
 				}
 				function getSlots(arr, duration, bduration, pa, pb)
 				{
 				    var str = "";
 				    var a1 = new Array();
 				    var minutesStart = 0;
-				    bduration += pa + pb;
+				    //bduration += pa + pb;//
 				    for (var i=0;i<arr.length;i++)
 				    {
 				    	
@@ -603,7 +604,9 @@ $.extend(
 			    str += '<input class="service_capacity" i="'+i+'" type="text" name="sService'+this.name+'C'+i+'" id="sService'+this.name+'C'+i+'" value="'+$.fbuilder.htmlEncode(((parseInt(this.services[i].capacity)>0)?this.services[i].capacity:"1"))+'"/>';
 			    str += '<div><div class="labelahb">Duration</div><div >Padding time before and after</div><div class="clearer"></div></div>';
 			    str += '<select class="service_duration" i="'+i+'" name="sService'+this.name+'D'+i+'" id="sService'+this.name+'D'+i+'">';
-			    for (var j=1;j<=24*12;j++)
+			    for (var j=1;j<=9;j++)
+			        str += '<option value="'+(j)+'" '+((this.services[i].duration==j)?"selected":"")+'>'+(j)+' min</option>';
+			    for (var j=2;j<=24*12;j++)
 			        str += '<option value="'+(5*j)+'" '+((this.services[i].duration==5*j)?"selected":"")+'>'+(5*j)+' min</option>';    
 			    str += '</select>';
 			    str += '<select class="service_paddingbefore" i="'+i+'" name="sService'+this.name+'before'+i+'" id="sService'+this.name+'before'+i+'">';
@@ -649,7 +652,7 @@ $.extend(
 				snumberOfApp += '<option value="'+i+'" '+((i==this.maxNumberOfApp)?"selected":"")+'>'+((i==0)?"Unlimited":i)+'</option>';
 			str += '<div><label>Max number of appointments</label><br /><label><select name="sMaxNumberOfApp" id="sMaxNumberOfApp">'+snumberOfApp+'</select></div>';
 			str += '<div><label>Default date [<a class="helpfbuilder" text="You can put one of the following type of values into this field:\n\nEmpty: Leave empty for current date.\n\nDate: A Fixed date with the same date format indicated in the &quot;Date Format&quot; drop-down field.\n\nNumber: A number of days from today. For example 2 represents two days from today and -1 represents yesterday.\n\nString: A smart text indicating a relative date. Relative dates must contain value (number) and period pairs; valid periods are &quot;y&quot; for years, &quot;m&quot; for months, &quot;w&quot; for weeks, and &quot;d&quot; for days. For example, &quot;+1m +7d&quot; represents one month and seven days from today.">help?</a>]</label><br /><input class="medium" name="sDefaultDate" id="sDefaultDate" value="'+$.fbuilder.htmlEncode(this.defaultDate)+'" /></div>';
-			str += '<div><label>Min date [<a class="helpfbuilder" text="You can put one of the following type of values into this field:\n\nEmpty: No min Date.\n\nDate: A Fixed date with the same date format indicated in the &quot;Date Format&quot; drop-down field.\n\nNumber: A number of days from today. For example 2 represents two days from today and -1 represents yesterday.\n\nString: A smart text indicating a relative date. Relative dates must contain value (number) and period pairs; valid periods are &quot;y&quot; for years, &quot;m&quot; for months, &quot;w&quot; for weeks, &quot;d&quot; for days, and &quot;h&quot; for hours. For example, &quot;+1m +7d&quot; represents one month and seven days from today.">help?</a>]</label><br /><input class="medium" name="sMinDate" id="sMinDate" value="'+$.fbuilder.htmlEncode(this.minDate)+'" /></div>';
+			str += '<div><label>Min date [<a class="helpfbuilder" text="You can put one of the following type of values into this field:\n\nEmpty: No min Date.\n\nDate: A Fixed date with the same date format indicated in the &quot;Date Format&quot; drop-down field.\n\nNumber: A number of days from today. For example 2 represents two days from today and -1 represents yesterday.\n\nString: A smart text indicating a relative date. Relative dates must contain value (number) and period pairs; valid periods are &quot;y&quot; for years, &quot;m&quot; for months, &quot;w&quot; for weeks, &quot;d&quot; for days, and &quot;h&quot; for hours. For example, &quot;+1m +7d&quot; represents one month and seven days from today.\n\nMixed: Useful to set a relative number of days with a fixed hour for example for allowing bookings up to one day before at 17:00 hours: 1@17:00   ... the number before the @ is the relative number of days and the value after the @ is the fixed hour. Other example, up to 2 days before at noon: 2@12:00">help?</a>]</label><br /><input class="medium" name="sMinDate" id="sMinDate" value="'+$.fbuilder.htmlEncode(this.minDate)+'" /></div>';
 			str += '<div><label>Max date [<a class="helpfbuilder" text="You can put one of the following type of values into this field:\n\nEmpty: No max Date.\n\nDate: A Fixed date with the same date format indicated in the &quot;Date Format&quot; drop-down field.\n\nNumber: A number of days from today. For example 2 represents two days from today and -1 represents yesterday.\n\nString: A smart text indicating a relative date. Relative dates must contain value (number) and period pairs; valid periods are &quot;y&quot; for years, &quot;m&quot; for months, &quot;w&quot; for weeks, and &quot;d&quot; for days. For example, &quot;+1m +7d&quot; represents one month and seven days from today.">help?</a>]</label><br /><input class="medium" name="sMaxDate" id="sMaxDate" value="'+$.fbuilder.htmlEncode(this.maxDate)+'" /></div>';
             str += '<div><label>Invalid Dates [<a class="helpfbuilder" text="To define some dates as invalid, enter the dates with the format: mm/dd/yyyy separated by comma; for example: 12/31/2014,02/20/2014 or by hyphen for intervals; for example: 12/20/2014-12/28/2014 ">help?</a>]</label><br /><input class="medium" name="sInvalidDates" id="sInvalidDates" value="'+$.fbuilder.htmlEncode(this.invalidDates)+'" /></div>';
             str += '<div><input type="checkbox" name="sShowDropdown" id="sShowDropdown" '+((this.showDropdown)?"checked":"")+'/><label>Show Dropdown Year and Month</label><div id="divdropdownRange" style="display:'+((this.showDropdown)?"":"none")+'">Year Range [<a class="helpfbuilder" text="The range of years displayed in the year drop-down: either relative to today\'s year (&quot;-nn:+nn&quot;), absolute (&quot;nnnn:nnnn&quot;), or combinations of these formats (&quot;nnnn:-nn&quot;)">help?</a>]: <input type="text" name="sDropdownRange" id="sDropdownRange" value="'+$.fbuilder.htmlEncode(this.dropdownRange)+'"/></div></div>';

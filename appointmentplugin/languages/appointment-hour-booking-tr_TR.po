@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointment Hour Booking\n"
 "POT-Creation-Date: 2019-01-18 14:39+0100\n"
-"PO-Revision-Date: 2019-09-20 00:13+0200\n"
+"PO-Revision-Date: 2020-06-03 11:15+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: tr_TR\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Basepath: ..\n"
-"X-Generator: Poedit 2.2.3\n"
+"X-Generator: Poedit 2.3.1\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;_e;__\n"
 "X-Poedit-SearchPath-0: .\n"
 
@@ -1686,7 +1686,7 @@ msgstr ""
 # RevTran=Security Code:
 #: cp-public-int.inc.php:27
 msgid "Security Code"
-msgstr "Güvenlik Kodu:"
+msgstr "Güvenlik Kodu"
 
 #: cp-publish-wizzard.inc.php:3
 msgid "Publish Appointment Hour Booking Form"
@@ -1998,7 +1998,7 @@ msgstr ""
 msgid "No more slots available."
 msgstr ""
 
-msgid "Selected time isn't longer available. Please select a different time."
+msgid "Selected time is no longer available. Please select a different time."
 msgstr ""
 
 msgid "Cancelled"
@@ -2041,4 +2041,187 @@ msgid "Send notification emails for this booking"
 msgstr ""
 
 msgid "No appointments found with the selected filters"
+msgstr ""
+
+msgid "Discount code"
+msgstr ""
+
+msgid "Please upload a valid file type"
+msgstr ""
+
+msgid "Every"
+msgstr ""
+
+msgid "Weekly on weekdays"
+msgstr ""
+
+msgid "Weekly on Monday, Wednesday, Friday"
+msgstr ""
+
+msgid "Weekly on Tuesday, Thursday"
+msgstr ""
+
+msgid "weeks"
+msgstr ""
+
+msgid "on day"
+msgstr ""
+
+msgid "on the"
+msgstr ""
+
+msgid "months"
+msgstr ""
+
+msgid "on"
+msgstr ""
+
+msgid "Annually"
+msgstr ""
+
+msgid "years"
+msgstr ""
+
+msgid "Once"
+msgstr ""
+
+msgid "until"
+msgstr ""
+
+msgid "and repeated on"
+msgstr ""
+
+msgid "Starts on"
+msgstr ""
+
+msgid "Ends after a number of occurrences"
+msgstr ""
+
+msgid "day of the week"
+msgstr ""
+
+msgid "day of the month"
+msgstr ""
+
+msgid "Repeat by"
+msgstr ""
+
+msgid "Repeat on"
+msgstr ""
+
+msgid "Repeat every"
+msgstr ""
+
+msgid "Repeats"
+msgstr ""
+
+msgid "Every weekday (Monday to Friday)"
+msgstr ""
+
+msgid "Every Monday, Wednesday, and Friday"
+msgstr ""
+
+msgid "Every Tuesday, and Thursday"
+msgstr ""
+
+msgid "Add available slots"
+msgstr ""
+
+msgid "Jan"
+msgstr ""
+
+msgid "Feb"
+msgstr ""
+
+msgid "Mar"
+msgstr ""
+
+msgid "Apr"
+msgstr ""
+
+msgid "May"
+msgstr ""
+
+msgid "Jun"
+msgstr ""
+
+msgid "Jul"
+msgstr ""
+
+msgid "Aug"
+msgstr ""
+
+msgid "Sep"
+msgstr ""
+
+msgid "Oct"
+msgstr ""
+
+msgid "Nov"
+msgstr ""
+
+msgid "Dec"
+msgstr ""
+
+msgid "first"
+msgstr ""
+
+msgid "second"
+msgstr ""
+
+msgid "third"
+msgstr ""
+
+msgid "fourth"
+msgstr ""
+
+msgid "last"
+msgstr ""
+
+msgid "Repeat"
+msgstr ""
+
+msgid "times"
+msgstr ""
+
+msgid "after"
+msgstr ""
+
+msgid "Ends"
+msgstr ""
+
+msgid "occurrences"
+msgstr ""
+
+msgid "or"
+msgstr ""
+
+msgid "SU"
+msgstr ""
+
+msgid "MO"
+msgstr ""
+
+msgid "TU"
+msgstr ""
+
+msgid "WE"
+msgstr ""
+
+msgid "TH"
+msgstr ""
+
+msgid "FR"
+msgstr ""
+
+msgid "SA"
+msgstr ""
+
+msgid "Online Demo"
+msgstr ""
+
+msgid "I Need Help"
+msgstr ""
+
+msgid "Upgrade Plugin"
 msgstr ""

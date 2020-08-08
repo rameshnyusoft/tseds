@@ -247,6 +247,7 @@ label {font-weight:600;}
 .button-primary2 { background-color: #AADDFF !important; }
 .button-primary3 { background-color: #CCFFFF !important; }
 
+.ahbsmallpadding1  td, .ahbsmallpadding1  tr, .ahbsmallpadding1  th { margin: 0px !important; padding:4px !important; } 
 
 /*
 #facceptance{
